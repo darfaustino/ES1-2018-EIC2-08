@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class Home {
 
@@ -8,24 +9,32 @@ public class Home {
 	
 	private	JFrame launcher;
 
-Home(){
+	public Home(){
+	try {
+		init();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	}
 
-	init();
-}
 
-
-private void init() {
+private void init() throws IOException {
 	
 	//SettingsJFrame
-	JFrame launcher = new JFrame("BOM DIA ACADEMIA!");
-	launcher.setVisible(true);
-	launcher.setSize(800, 600);
+	launcher = new JFrame("BOM DIA ACADEMIA!");
 	launcher.setResizable(false);
 	launcher.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 	launcher.setLayout(new BorderLayout());
+	launcher.setVisible(true);
 	
 	//Background
-	launcher.setContentPane(new JLabel(new ImageIcon("images\\background.png")));
+	Background background=new Background("images/background.png");
+	background.setLayout(new BorderLayout());
+	background.setPreferredSize(new Dimension(800,600));
+	launcher.add(background);
+	//launcher.setContentPane(new JLabel(new ImageIcon("images\\background.png")));
+	
 	
 	//Imagens
 	JLabel logo=new JLabel(new ImageIcon("images\\logo.png"));
@@ -33,18 +42,92 @@ private void init() {
 	JLabel signup=new JLabel(new ImageIcon("images\\signup.png"));
 	
 	
-	launcher.setLayout(new GridLayout(2,1));
-	JPanel t= new JPanel();
+	JPanel t= new JPanel(new GridLayout(2,1));
 	t.setOpaque(false);
-	t.setLayout(new BorderLayout());
-	launcher.add(logo);
-	launcher.add(t);
-	//t.add(login, BorderLayout.NORTH);
-	t.add(signup, BorderLayout.SOUTH);
 	t.add(login, BorderLayout.NORTH);
+	t.add(signup, BorderLayout.SOUTH);
+	
+	
+	background.add(logo, BorderLayout.PAGE_START);
+	background.add(t, BorderLayout.CENTER);
+	
+	//t.add(login, BorderLayout.NORTH);
+	
 	//Dar Refresh
-	launcher.setSize(799,599);
-	launcher.setSize(800,600);
+	
+	//Add MouseListeners
+	launcher.setSize(800, 600);
+//	launcher.pack();
+	
+	login.addMouseListener(new MouseListener() {
+		
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+			new Login(launcher);
+			
+		}
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+	});
+	
+	signup.addMouseListener(new MouseListener() {
+		
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent e) {
+			
+			new SignUp(launcher);
+			
+		}
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	});
+	
 }
 
 

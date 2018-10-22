@@ -1,6 +1,26 @@
 import javax.swing.*;
-	import java.awt.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+import java.awt.*;
 	import java.awt.event.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 	
 public class SignUp {
@@ -12,23 +32,17 @@ public class SignUp {
 		private JButton btn1;
 		private JPasswordField p1;
 		
-		SignUp(){
-
+		public SignUp(JFrame launcher2){
+			this.launcher=launcher2;
 			init();
 		}
 
 
 		private void init() {
-			
-			//SettingsJFrame
-			JFrame launcher = new JFrame("BOM DIA ACADEMIA!");
-			launcher.setVisible(true);
-			launcher.setSize(800, 600);
-			launcher.setResizable(false);
-			launcher.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-			launcher.setLayout(new BorderLayout());
+		
 			
 			//Background
+			launcher.getContentPane().removeAll();
 			launcher.setContentPane(new JLabel(new ImageIcon("images\\background.png")));
 			
 			//Imagens
@@ -102,14 +116,6 @@ public class SignUp {
 			  signform.add(email_txt);
 			  signform.add(btn1);
 
-		 
-
-			  
-			  
-			  
-
-			
-			
 			
 			launcher.add(logo);
 			launcher.add(signform);
@@ -117,22 +123,56 @@ public class SignUp {
 			//Dar Refresh
 			launcher.setSize(799,599);
 			launcher.setSize(800,600);
+			
+			
+			btn1.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					
+					
+					SaveXML(email_txt.getText(), p1.getPassword(), tf1.getText());
+					
+				}
+			});;
 		}
 
 
+	public void SaveXML(String email, char[] password, String name){
+		try {
+		File inputFile = new File("config.xml");
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder;
+		dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(inputFile);
+		
 
-
-
-
-
-
-
-		public static void main(String args[]){
-		    new SignUp();
+		Element rootElement = doc.createElement("ISCTEAccounts");
+		doc.appendChild(rootElement);
+        
+		 Element newElement1 = doc.createElement("Account");
+         newElement1.setAttribute("Email", email);
+         newElement1.setAttribute("Name", name );
+         newElement1.setAttribute("Password",new String(password));
+         rootElement.appendChild(newElement1);
+               
+         
+         Transformer transformer = TransformerFactory.newInstance().newTransformer();
+         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+         StreamResult result = new StreamResult(new FileOutputStream("config.xml"));
+         DOMSource source = new DOMSource(doc);
+         transformer.transform(source, result);
+         System.out.println("Saved");
+         
+         
+		} catch (ParserConfigurationException | IOException | TransformerFactoryConfigurationError | TransformerException | SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-
-
-
-
-		}
+		
+	}
+		
+		
+		
+		
+}

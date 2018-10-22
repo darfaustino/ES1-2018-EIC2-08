@@ -9,23 +9,17 @@ public class Login {
 	private JButton btn1;
 	private JPasswordField p1;
 	
-	Login(){
-
+	public Login(JFrame laucher){
+		this.launcher=laucher;
 		init();
 	}
 
 
 	private void init() {
 		
-		//SettingsJFrame
-		JFrame launcher = new JFrame("BOM DIA ACADEMIA!");
-		launcher.setVisible(true);
-		launcher.setSize(800, 600);
-		launcher.setResizable(false);
-		launcher.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		launcher.setLayout(new BorderLayout());
 		
 		//Background
+		launcher.getContentPane().removeAll();
 		launcher.setContentPane(new JLabel(new ImageIcon("images\\background.png")));
 		
 		//Imagens
@@ -65,14 +59,7 @@ public class Login {
 		  loginform.add(p1);
 		  loginform.add(btn1);
 
-	 
 
-		  
-		  
-		  
-
-		
-		
 		
 		launcher.add(logo);
 		launcher.add(loginform);
@@ -81,19 +68,6 @@ public class Login {
 		launcher.setSize(799,599);
 		launcher.setSize(800,600);
 	}
-
-
-
-
-
-
-
-
-
-	public static void main(String args[]){
-	    new Login();
-	}
-
 
 
 
