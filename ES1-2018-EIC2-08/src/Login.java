@@ -41,6 +41,47 @@ public class Login {
 		  tf1 = new JTextField();
 		  p1 = new JPasswordField();
 		  btn1 = new JButton("Login");
+		  JLabel text=new JLabel("Não tem conta, registe-se");
+		 JButton here=new JButton("<HTML><FONT color=\"#000099\"><U>aqui</U></FONT></HTML>");
+		 here.setBorderPainted(false);
+		 here.setOpaque(false);
+		 here.setBackground(Color.WHITE);
+		 text.setBounds(120, 400, 200, 30);
+		 here.setBounds(232, 400, 100, 30);
+		 
+		 here.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				new SignUp(launcher);
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		 
 		  btn1.setCursor(cur);
 		  
 		  login.setBounds(35,20,400,400);
@@ -58,6 +99,8 @@ public class Login {
 		  loginform.add(l2);
 		  loginform.add(p1);
 		  loginform.add(btn1);
+		  loginform.add(text);
+		  loginform.add(here);
 
 
 		

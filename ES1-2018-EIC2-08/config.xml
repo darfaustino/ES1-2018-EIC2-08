@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ISCTEAccounts>
-<Account Email="gmide@iscte-iul.pt" Name="Gonvas" Password="123olaola"/>
+<Account Email="vasuvaus@hotmail.com" Name="acfacs" Password="oyafsfoyuva">
+<EmailAccount Email="uabspiua@hotmail.com" Password="meh"/>
+</Account>
 </ISCTEAccounts><ISCTEAccounts>
-<Account Email="darfo@iscte-iul.pt" Name="Diogo Faustino" Password="aaaaa"/>
+<Account Email="darfo@iscte-iul.pt" Name="Diogo Faustino" Password="meh">
+<EmailAccount Email="darfo@iscte-iul.pt" Password="meh"/>
+</Account>
 </ISCTEAccounts>

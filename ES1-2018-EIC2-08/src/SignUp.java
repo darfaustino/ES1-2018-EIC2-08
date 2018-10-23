@@ -82,7 +82,7 @@ public class SignUp {
 			  p1 = new JPasswordField();
 			  
 			  
-			  btn1 = new JButton("Submit");
+			  btn1 = new JButton("Next");
 			  btn1.setCursor(cur);
 			  
 			  signup.setBounds(35,-50,400,400);
@@ -130,15 +130,15 @@ public class SignUp {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					
+					openMailForm(email_txt.getText(), p1.getPassword(), tf1.getText());
 					
-					SaveXML(email_txt.getText(), p1.getPassword(), tf1.getText());
 					
 				}
 			});;
 		}
 
 
-	public void SaveXML(String email, char[] password, String name){
+	public void SaveXML(String Mainemail, char[] Mainpassword, String name, String email, char[] password){
 		try {
 		File inputFile = new File("config.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -151,10 +151,15 @@ public class SignUp {
 		doc.appendChild(rootElement);
         
 		 Element newElement1 = doc.createElement("Account");
-         newElement1.setAttribute("Email", email);
+         newElement1.setAttribute("Email", Mainemail);
          newElement1.setAttribute("Name", name );
-         newElement1.setAttribute("Password",new String(password));
+         newElement1.setAttribute("Password",new String(Mainpassword));
          rootElement.appendChild(newElement1);
+         
+         Element mail=doc.createElement("EmailAccount");
+         mail.setAttribute("Email", email);
+         mail.setAttribute("Password", new String(password));
+         newElement1.appendChild(mail);
                
          
          Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -169,6 +174,67 @@ public class SignUp {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	
+	
+	public void openMailForm(String mainemail, char[] mainpassword, String name){
+		
+		//ClearForm
+		launcher.getContentPane().removeAll();
+		launcher.setContentPane(new JLabel(new ImageIcon("images\\background.png")));
+		
+		//DesignMail
+		JLabel logo=new JLabel(new ImageIcon("images\\logo.png"));
+		JLabel signup=new JLabel(new ImageIcon("images\\signup.png"));
+		
+		launcher.setLayout(new GridLayout(1,2));
+		JPanel signform= new JPanel();
+		signform.setOpaque(false);
+		signform.setLayout(null);
+		
+		  l2 = new JLabel("Password");  
+		  l4= new JLabel("Email");
+		  JTextField email_txt=new JTextField();
+		  p1 = new JPasswordField();
+		  btn1=new JButton("Concluido!");
+		  
+		  signup.setBounds(35,-50,400,400);
+		  l2.setForeground(Color.black);
+		  p1.setBounds(120, 290, 200, 30);
+		  l4.setForeground(Color.black);
+		  
+		
+		  l2.setBounds(50, 290, 200, 30);
+		  l4.setBounds(50, 250, 200, 30);
+		  email_txt.setBounds(120, 250, 200, 30);			 
+		  btn1.setBounds(160, 330, 100, 30);
+		  
+		  signform.add(signup);
+		  signform.add(l2);
+		  signform.add(p1);
+		  signform.add(l4);
+		  signform.add(email_txt);
+		  signform.add(btn1);
+		  
+		  	launcher.add(logo);
+			launcher.add(signform);
+		
+			//Listener
+			
+			btn1.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					SaveXML(mainemail, mainpassword, name, email_txt.getText(), p1.getPassword());
+					
+				}
+			});
+			
+			//Dar Refresh
+			launcher.setSize(799,599);
+			launcher.setSize(800,600);
 		
 	}
 		

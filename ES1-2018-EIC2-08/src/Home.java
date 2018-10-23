@@ -57,7 +57,7 @@ private void init() throws IOException {
 	
 	//Add MouseListeners
 	launcher.setSize(800, 600);
-//	launcher.pack();
+	launcher.pack();
 	
 	login.addMouseListener(new MouseListener() {
 		
