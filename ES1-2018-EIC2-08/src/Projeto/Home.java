@@ -1,4 +1,6 @@
+package Projeto;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -136,6 +138,11 @@ private void init() throws IOException {
 
 
 
+
+
+public JFrame getLauncher() {
+	return launcher;
+}
 
 
 public static void main(String args[]){

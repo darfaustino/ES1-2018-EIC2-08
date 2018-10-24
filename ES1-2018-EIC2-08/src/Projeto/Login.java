@@ -1,4 +1,6 @@
+package Projeto;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -110,6 +112,36 @@ public class Login {
 		//Dar Refresh
 		launcher.setSize(799,599);
 		launcher.setSize(800,600);
+	}
+
+
+	public JFrame getLauncher() {
+		return launcher;
+	}
+
+
+	public JLabel getL1() {
+		return l1;
+	}
+
+
+	public JLabel getL2() {
+		return l2;
+	}
+
+
+	public JTextField getTf1() {
+		return tf1;
+	}
+
+
+	public JButton getBtn1() {
+		return btn1;
+	}
+
+
+	public JPasswordField getP1() {
+		return p1;
 	}
 
 

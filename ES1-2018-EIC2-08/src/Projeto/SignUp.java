@@ -1,3 +1,4 @@
+package Projeto;
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,7 +28,7 @@ public class SignUp {
 	
 
 		private	JFrame launcher;
-		private JLabel  l1, l2, l3, l4, l5;
+		private JLabel  l1, l2, l3, l4;
 		private JTextField tf1;
 		private JButton btn1;
 		private JPasswordField p1;
@@ -236,6 +237,46 @@ public class SignUp {
 			launcher.setSize(799,599);
 			launcher.setSize(800,600);
 		
+	}
+
+
+	public JFrame getLauncher() {
+		return launcher;
+	}
+
+
+	public JLabel getL1() {
+		return l1;
+	}
+
+
+	public JLabel getL2() {
+		return l2;
+	}
+
+
+	public JLabel getL3() {
+		return l3;
+	}
+
+
+	public JLabel getL4() {
+		return l4;
+	}
+
+
+	public JTextField getTf1() {
+		return tf1;
+	}
+
+
+	public JButton getBtn1() {
+		return btn1;
+	}
+
+
+	public JPasswordField getP1() {
+		return p1;
 	}
 		
 		
