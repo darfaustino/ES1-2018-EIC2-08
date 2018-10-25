@@ -286,7 +286,7 @@ public class SignUp {
 		return btn1;
 	}
 
-
+	
 	public JPasswordField getP1() {
 		return p1;
 	}

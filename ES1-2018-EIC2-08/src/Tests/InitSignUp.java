@@ -63,7 +63,54 @@ public class InitSignUp {
 		assertEquals(330, l3Y);
 		assertEquals("Gender", gender);
 		
+		//JLabel4
 		
+				int l4width=sign.getL4().getWidth();
+				int l4height=sign.getL4().getHeight();
+				int l4X=sign.getL4().getX();
+				int l4Y= sign.getL4().getY();
+				String email=sign.getL4().getText();
+				assertEquals(200, l4width);
+				assertEquals(30, l4height);
+				assertEquals(50, l4X);
+				assertEquals(390, l4Y);
+				assertEquals("Email", email);
+				
+				//TextField 1
+				
+				int tf1width=sign.getTf1().getWidth();
+				int tf1height=sign.getTf1().getHeight();
+				int tf1X=sign.getTf1().getX();
+				int tf1Y= sign.getTf1().getY();
+				assertEquals(200, tf1width);
+				assertEquals(30, tf1height);
+				assertEquals(120, tf1X);
+				assertEquals(210, tf1Y);
+				
+				
+				//Button1
+				
+				int btn1width=sign.getBtn1().getWidth();
+				int btn1height=sign.getBtn1().getHeight();
+				int btn1X=sign.getBtn1().getX();
+				int btn1Y= sign.getBtn1().getY();
+				assertEquals(100, btn1width);
+				assertEquals(30, btn1height);
+				assertEquals(160, btn1X);
+				assertEquals(430, btn1Y);
+				
+				//PasswordField1
+				
+				int p1width=sign.getP1().getWidth();
+				int p1height=sign.getP1().getHeight();
+				int p1X=sign.getP1().getX();
+				int p1Y= sign.getP1().getY();
+				assertEquals(200, p1width);
+				assertEquals(30, p1height);
+				assertEquals(120, p1X);
+				assertEquals(270, p1Y);
+				
+				
 		
 	}
 
