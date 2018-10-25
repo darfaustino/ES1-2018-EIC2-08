@@ -7,10 +7,17 @@ import java.io.IOException;
 
 public class Home {
 
+	/**
+	 * Initial window class.
+	 */
 	
-	
-	private	JFrame launcher;
+	public	JFrame launcher;
 
+	/**
+	 * Constructor, calls method init() and builds the app main window, where you can navigate to login or signup.
+	 * @param launcher
+	 */
+	
 	public Home(){
 	try {
 		init();
@@ -20,8 +27,15 @@ public class Home {
 	}
 	}
 
+	/**
+	 * Launches and builds the app main window.
+	 * Initiates the frame components (JLabels,JTextFields,	JPasswordField, and JButtons).
+	 * Adds an actionlistener to the buttons.
+	 * Puts everything in the correct positions.
+	 * @throws IOException	 
+	 */
 
-private void init() throws IOException {
+	public void init() throws IOException {
 	
 	//SettingsJFrame
 	launcher = new JFrame("BOM DIA ACADEMIA!");
@@ -138,12 +152,18 @@ private void init() throws IOException {
 
 
 
-
+	/**
+	 * Gets the JFrame that serves as launcher of the window.
+	 * @return launcher
+	 */
 
 public JFrame getLauncher() {
 	return launcher;
 }
 
+/**
+ * Starts the app. 
+ */
 
 public static void main(String args[]){
     new Home();

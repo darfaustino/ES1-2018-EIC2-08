@@ -5,19 +5,38 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Login {
-	private	JFrame launcher;
+	
+	/**
+	 * Login window.
+	 */
+	
+	public	JFrame launcher;
 	private JLabel  l1, l2;
 	private JTextField tf1;
 	private JButton btn1;
 	private JPasswordField p1;
 	
-	public Login(JFrame laucher){
-		this.launcher=laucher;
+	
+	/**
+	 * Constructor, calls method init() and builds the login window.
+	 * @param launcher
+	 */
+	
+	
+	public Login(JFrame launcher){
+		this.launcher=launcher;
 		init();
 	}
 
 
-	private void init() {
+	/**
+	 * Launches and builds login window
+	 * Initiates the frame components (JLabels,JTextFields,	JPasswordField, and JButtons).
+	 * Adds an actionlistener to the button.
+	 * Puts everything in the correct positions.
+	 */
+	
+	public void init() {
 		
 		
 		//Background
@@ -114,32 +133,52 @@ public class Login {
 		launcher.setSize(800,600);
 	}
 
-
+/**
+ * Gets the JFrame that serves as launcher of the window.
+ * @return launcher
+ */
 	public JFrame getLauncher() {
 		return launcher;
 	}
 
-
+	/**
+	 * Gets the JLabel l1.
+	 * @return l1
+	 */
 	public JLabel getL1() {
 		return l1;
 	}
 
+	/**
+	 * Gets the JLabel l2.
+	 * @return l2
+	 */
 
 	public JLabel getL2() {
 		return l2;
 	}
 
+	/**
+	 * Gets the JTextField tf1.
+	 * @return tf1
+	 */
 
 	public JTextField getTf1() {
 		return tf1;
 	}
 
-
+	/**
+	 * Gets the JButton btn1
+	 * @return btn1
+	 */
 	public JButton getBtn1() {
 		return btn1;
 	}
 
-
+	/**
+	 * Gets the JPasswordField p1
+	 * @return p1
+	 */
 	public JPasswordField getP1() {
 		return p1;
 	}
