@@ -11,8 +11,15 @@ public class OpenMailForm {
 	@Test
 	public void test() {
 	
+		
+		
 		Home home=new Home();
 		SignUp sign=new SignUp(home.getLauncher());
+		String mail = "test@iscte-iul.pt";
+		char[] pass = new char[5];
+		pass = "test1".toCharArray();
+		String name = "Test";
+		sign.openMailForm(mail, pass, name);
 		
 		//Jlabel2
 		
