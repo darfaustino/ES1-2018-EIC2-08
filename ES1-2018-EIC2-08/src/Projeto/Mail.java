@@ -19,12 +19,12 @@ public class Mail {
 		LoginMail();
 	}
 
-	private static  void LoginMail() {
+	public static  void LoginMail() {
 		try {
 		String host="pop.gmail.com";
 		String mailstore="pop3";
-		String username="tehfiskk@gmail.com";
-		String password= "";
+		String username="insertmail@gmail.com";
+		String password= "Insert pass";
 		
 //		Properties props=new Properties();
 //		props.setProperty("mail.imaps.host", "imap.gmail.com");
@@ -98,8 +98,9 @@ public class Mail {
 	      Message[] messages = emailFolder.getMessages();
 	      System.out.println("messages.length---" + messages.length);
 
-	      for (int i = 0, n = 2; i < n; i++) {
+	      for (int i = 0, n = 10; i < n; i++) {
 	         Message message = messages[i];
+	         System.out.println(username);
 	         System.out.println("---------------------------------");
 	         System.out.println("Email Number " + (i + 1));
 	         System.out.println("Subject: " + message.getSubject());
@@ -122,7 +123,7 @@ public class Mail {
 		
 	      }
 	
-	private static String getTextFromMessage(Message message) throws MessagingException, IOException {
+	public static String getTextFromMessage(Message message) throws MessagingException, IOException {
 	    String result = "";
 	    if (message.isMimeType("text/plain")) {
 	        result = message.getContent().toString();
@@ -133,7 +134,8 @@ public class Mail {
 	    return result;
 	}
 	
-	private static String getTextFromMimeMultipart(
+	
+	public static String getTextFromMimeMultipart(
 	        MimeMultipart mimeMultipart)  throws MessagingException, IOException{
 	    String result = "";
 	    int count = mimeMultipart.getCount();
