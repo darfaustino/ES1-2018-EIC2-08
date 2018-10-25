@@ -187,7 +187,7 @@ public class SignUp {
 		
 		//DesignMail
 		JLabel logo=new JLabel(new ImageIcon("images\\logo.png"));
-		JLabel signup=new JLabel(new ImageIcon("images\\signup.png"));
+		JLabel signup=new JLabel(new ImageIcon("images\\signupemail.png"));
 		
 		launcher.setLayout(new GridLayout(1,2));
 		JPanel signform= new JPanel();
@@ -202,14 +202,14 @@ public class SignUp {
 		  
 		  signup.setBounds(35,-50,400,400);
 		  l2.setForeground(Color.black);
-		  p1.setBounds(120, 290, 200, 30);
+		  p1.setBounds(120, 320, 200, 30);
 		  l4.setForeground(Color.black);
 		  
-		
-		  l2.setBounds(50, 290, 200, 30);
-		  l4.setBounds(50, 250, 200, 30);
-		  email_txt.setBounds(120, 250, 200, 30);			 
-		  btn1.setBounds(160, 330, 100, 30);
+		  p1.setBounds(120, 320, 200, 30);
+		  l2.setBounds(50, 320, 200, 30);
+		  l4.setBounds(50, 280, 200, 30);
+		  email_txt.setBounds(120, 280, 200, 30);			 
+		  btn1.setBounds(160, 360, 100, 30);
 		  
 		  signform.add(signup);
 		  signform.add(l2);
