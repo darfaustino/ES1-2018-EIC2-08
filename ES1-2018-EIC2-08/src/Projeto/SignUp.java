@@ -139,17 +139,29 @@ public class SignUp {
 		}
 
 
-	public void SaveXML(String Mainemail, char[] Mainpassword, String name, String email, char[] password){
+	public static void SaveXML(String Mainemail, char[] Mainpassword, String name, String email, char[] password){
 		try {
 		File inputFile = new File("config.xml");
+		Document doc;
+		Element rootElement;
+		if(inputFile.exists()){
+			System.out.println("existe");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
 		dBuilder = dbFactory.newDocumentBuilder();
-        Document doc = dBuilder.parse(inputFile);
-		
+         doc = dBuilder.parse(inputFile);
+         rootElement=doc.getDocumentElement();
+        		 
+		}else{
+			 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		     DocumentBuilder dBuilder;
+			 dBuilder = dbFactory.newDocumentBuilder();
+		     doc = dBuilder.newDocument();
+		     rootElement = doc.createElement("ISCTEAccounts");
+		     doc.appendChild(rootElement);
+		}
 
-		Element rootElement = doc.createElement("ISCTEAccounts");
-		doc.appendChild(rootElement);
+		
         
 		 Element newElement1 = doc.createElement("Account");
          newElement1.setAttribute("Email", Mainemail);
