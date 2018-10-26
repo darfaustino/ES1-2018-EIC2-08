@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="ES1-2018-EIC2-08/src"/>
-	<classpathentry kind="lib" path="C:/Users/gonca_000/Downloads/twitter.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Goncalo/Documents/UNIVERSIDADE/3ºAno/Engenharia de Software I/restFB/restfb-2.11.0_maven.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Goncalo/Downloads/jsoup-1.11.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Goncalo/Downloads/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Goncalo/Downloads/twitter4j-4.0.7/lib/twitter4j-core-4.0.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
