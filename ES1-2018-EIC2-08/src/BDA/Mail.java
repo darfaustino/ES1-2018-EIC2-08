@@ -11,6 +11,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
+import javax.swing.DefaultListModel;
 
 /**
  * 
@@ -25,11 +26,11 @@ public class Mail {
 	 * It creates a store with the email account, fetches and prints 20 mails of the inbox.
 	 * Closes the store and the inbox.
 	 */
-	public static  void LoginMail() {
+	public static DefaultListModel<Email> LoginMail() {
 		try {
 		
 		String username="darfo@iscte-iul.pt";
-		String password= "Masterzombie1998";
+		String password= "EngenhariaSoftware98";
         String host = "pop3.live.com";
 
         Properties props = new Properties();
@@ -50,22 +51,45 @@ public class Mail {
 
 	      // retrieve the messages from the folder in an array and print it
 	      Message[] messages = emailFolder.getMessages();
+	      DefaultListModel<Email> emails=new DefaultListModel<Email>();
+	      int i=0;
+	      for(Message m: messages){
+	    	  if(m.getFrom()[0].toString().contains("iscte")){
+	    		  emails.addElement(new Email(m));
+	    		  i++;
+	    	  }
+	    	  if(i==20){
+	    		  break;
+	    	  }
+	    	  
+	      }
+	      
+	      
+	      
+	      /*
 	      System.out.println("messages.length---" + messages.length);
 
 	      for (int i = 0, n = 20; i < n; i++) {
 	         Message message = messages[i];
+	         
+	         if(message.getFrom()[0].toString().contains("iscte")){
 	         System.out.println(username);
 	         System.out.println("---------------------------------");
 	         System.out.println("Email Number " + (i + 1));
 	         System.out.println("Subject: " + message.getSubject());
 	         System.out.println("From: " + message.getFrom()[0]);
 	         System.out.println("Text: " + getTextFromMessage( message));
+	         }else{
+	        	 n++;
+	         }
+	         
 
-	      }
+	      }*/
 
 	      //close the store and folder objects
-	      emailFolder.close(false);
-	      store.close();
+	     // emailFolder.close(false);
+	      //store.close();
+	      return emails;
 
 	      } catch (NoSuchProviderException e) {
 	         e.printStackTrace();
@@ -74,6 +98,7 @@ public class Mail {
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
+		return null;
 		
 	      }
 	/**

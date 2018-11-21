@@ -1,8 +1,19 @@
 package BDA;
 import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Login {
 	
@@ -62,6 +73,52 @@ public class Login {
 		  tf1 = new JTextField();
 		  p1 = new JPasswordField();
 		  btn1 = new JButton("Login");
+		  btn1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String email=tf1.getText();
+				char[] pass=p1.getPassword();
+				
+				File file = new File("config.xml");
+				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dBuilder;
+				try {
+					dBuilder = dbFactory.newDocumentBuilder();
+					Document doc = dBuilder.parse(file);
+					doc.getDocumentElement().normalize();
+
+					NodeList list = doc.getChildNodes().item(0).getChildNodes();
+					for (int count = 0; count < list.getLength(); count++) {
+
+						Node tempNode = list.item(count);
+
+						if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
+
+							if (tempNode.hasAttributes()) {
+
+								if (((Element) tempNode).getAttribute("Email").equals(email)
+										&& ((Element) tempNode).getAttribute("Password").equals(new String(pass))) {
+									System.out.println("Logged In");
+									launcher.dispose();
+									new MainTimeline();
+									Mail.LoginMail();
+									
+								}
+
+							}
+
+						}
+
+					}
+					
+				} catch (ParserConfigurationException | SAXException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+				
+		});
 		  JLabel text=new JLabel("Não tem conta, registe-se");
 		 JButton here=new JButton("<HTML><FONT color=\"#000099\"><U>aqui</U></FONT></HTML>");
 		 here.setBorderPainted(false);
