@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
-public class Email {
+public class Email implements Comparable<Email>{
 
 	private Message msm;
 	private String subject;
@@ -23,13 +23,37 @@ public class Email {
 			e.printStackTrace();
 		}
 	}
+	
+	public Date getTimestamp() {
+		return timestamp;
+	}
+
+	
+
+
+	public Message getMsm() {
+		return msm;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public String getFrom() {
+		return from;
+	}
 
 	@Override
 	public String toString() {
-		
-			return "Email: "+ subject +"From: "+ from;
-		
-		
+		return "<html> Email: "+ subject +"<br/>From: "+ from+ "<br/>Date:"+timestamp;
+	}
+	
+	
+
+	@Override
+	public int compareTo(Email o) {
+		// TODO Auto-generated method stub
+		return o.getTimestamp().compareTo(getTimestamp());
 	}
 	
 	

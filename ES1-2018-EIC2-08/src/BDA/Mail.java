@@ -1,5 +1,7 @@
 package BDA;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Properties;
 
 import javax.mail.BodyPart;
@@ -31,61 +33,44 @@ public class Mail {
 		
 		String username="darfo@iscte-iul.pt";
 		String password= "EngenhariaSoftware98";
-        String host = "pop3.live.com";
+        String host = "outlook.office365.com";
 
         Properties props = new Properties();
-        props.put("mail.pop3.host", host);
-        props.put("mail.pop3.user", username);
-        props.put("mail.pop3.port", 995);
+        props.put("mail.imap.host", host);
+        props.put("mail.imap.user", username);
+        props.put("mail.imap.port", 993);
         props.put("mail.debug", "true");
-        props.put("mail.pop3.socketFactory.class","javax.net.ssl.SSLSocketFactory");
-        props.put("mail.pop3.socketFactory.fallback", "false");
-        props.put("mail.pop3.socketFactory.port", "995");
+        props.put("mail.imap.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+        props.put("mail.imap.socketFactory.fallback", "false");
+        props.put("mail.imap.socketFactory.port", "993");
         Session session = Session.getInstance(props);
-        Store store = session.getStore("pop3");
-        store.connect(host, 995, username, password);
+        Store store = session.getStore("imap");
+        store.connect(host, 993, username, password);
         
 	      //create the folder object and open it
 	      Folder emailFolder = store.getFolder("INBOX");
 	      emailFolder.open(Folder.READ_ONLY);
 
 	      // retrieve the messages from the folder in an array and print it
-	      Message[] messages = emailFolder.getMessages();
-	      DefaultListModel<Email> emails=new DefaultListModel<Email>();
-	      int i=0;
+	      Message[] messages = emailFolder.getMessages((emailFolder.getMessageCount()-20),(emailFolder.getMessageCount()));
+	      
+	      ArrayList<Email> order=new ArrayList<Email>();
+	      
 	      for(Message m: messages){
 	    	  if(m.getFrom()[0].toString().contains("iscte")){
-	    		  emails.addElement(new Email(m));
-	    		  i++;
+	    	  order.add(new Email(m));
 	    	  }
-	    	  if(i==20){
-	    		  break;
-	    	  }
-	    	  
+	    	 
 	      }
 	      
+	      Collections.sort(order);
+	      DefaultListModel<Email> emails=new DefaultListModel<Email>();
 	      
-	      
-	      /*
-	      System.out.println("messages.length---" + messages.length);
-
-	      for (int i = 0, n = 20; i < n; i++) {
-	         Message message = messages[i];
-	         
-	         if(message.getFrom()[0].toString().contains("iscte")){
-	         System.out.println(username);
-	         System.out.println("---------------------------------");
-	         System.out.println("Email Number " + (i + 1));
-	         System.out.println("Subject: " + message.getSubject());
-	         System.out.println("From: " + message.getFrom()[0]);
-	         System.out.println("Text: " + getTextFromMessage( message));
-	         }else{
-	        	 n++;
-	         }
-	         
-
-	      }*/
-
+	      for(Email e: order){
+	    		  emails.addElement(e);
+	    		 
+	      }
+	     
 	      //close the store and folder objects
 	     // emailFolder.close(false);
 	      //store.close();

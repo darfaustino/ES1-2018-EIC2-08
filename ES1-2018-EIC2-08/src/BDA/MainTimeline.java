@@ -3,6 +3,8 @@ package BDA;
 import javax.mail.Message;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -64,17 +66,29 @@ public void init() throws IOException {
 	background.add(twitter,c);
 	
 	JList<Email> emails=new JList<Email>(Mail.LoginMail());
-	//System.out.println(Mail.LoginMail());
-	//emails.setFixedCellHeight(50);
-	//emails.setFixedCellWidth(230);
-//	emails.setBorder(new EmptyBorder(10,5, 10, 0));
+	System.out.println(Mail.LoginMail().size());
+	((DefaultListCellRenderer)emails.getCellRenderer()).setOpaque(false);
+	emails.setFixedCellHeight(70);
+	emails.setBorder(new EmptyBorder(10,5, 10, 0));
 	emails.setOpaque(false);
-	emails.setPreferredSize(new Dimension(240,480));
+
+	emails.addListSelectionListener( new ListSelectionListener() {
+		
+		@Override
+		public void valueChanged(ListSelectionEvent e) {
+			
+			if (emails.getSelectedValue() != null && !e.getValueIsAdjusting()) {
+				Email selectedValue = emails.getSelectedValue();
+				new EmailSingular(selectedValue);
+			}
+		}
+	});
 	
 	
 	JScrollPane scroll=new JScrollPane(emails);
-	scroll.setPreferredSize(new Dimension(240,480));
-	//scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	scroll.setOpaque(false);
+	scroll.getViewport().setOpaque(false);
+	scroll.setPreferredSize(new Dimension(250,500));
 	email.add(scroll);
 	
 	
