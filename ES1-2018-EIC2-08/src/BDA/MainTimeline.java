@@ -7,6 +7,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.restfb.types.Post;
+import twitter4j.TwitterException;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -16,7 +17,7 @@ public class MainTimeline {
 
 public	JFrame launcher;
 	
-public MainTimeline(){
+public MainTimeline() throws TwitterException{
 	try {
 		init();
 	} catch (IOException e) {
@@ -25,7 +26,7 @@ public MainTimeline(){
 	}
 }	
 
-public void init() throws IOException {
+public void init() throws IOException, TwitterException {
 	
 	//SettingsJFrame
 	launcher = new JFrame("BOM DIA ACADEMIA!");
@@ -121,7 +122,31 @@ public void init() throws IOException {
 	scroll2.setPreferredSize(new Dimension(250,500));
 	facebook.add(scroll2);
 	
+	TwitterApp t= new TwitterApp();
+	JList <T> tweets=new JList<T>(t.getTimeline());
+	((DefaultListCellRenderer)emails.getCellRenderer()).setOpaque(false);
+	tweets.setFixedCellHeight(70);
+	tweets.setBorder(new EmptyBorder(10,5, 10, 0));
+	tweets.setOpaque(false);
+
+	tweets.addListSelectionListener( new ListSelectionListener() {
+		
+		@Override
+		public void valueChanged(ListSelectionEvent e) {
+			
+			if (emails.getSelectedValue() != null && !e.getValueIsAdjusting()) {
+				T selectedValue = tweets.getSelectedValue();
+				new Tweet(t, selectedValue);
+			}
+		}
+	});
 	
+	
+	JScrollPane scroll3=new JScrollPane(emails);
+	scroll3.setOpaque(false);
+	scroll3.getViewport().setOpaque(false);
+	scroll3.setPreferredSize(new Dimension(250,500));
+	tweets.add(scroll3);
 	
 	
 	launcher.add(background);
@@ -132,7 +157,7 @@ public void init() throws IOException {
 
  }
 
-public static void main(String args[]){
+public static void main(String args[]) throws TwitterException{
     new MainTimeline();
 }
 
