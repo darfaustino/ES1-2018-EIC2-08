@@ -81,6 +81,11 @@ public class Login {
 			public void actionPerformed(ActionEvent e) {
 				String email=tf1.getText();
 				char[] pass=p1.getPassword();
+				String ftoken="";
+				String ttoken="";
+				String username="";
+				String password="";
+				
 				
 				File file = new File("config.xml");
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -101,15 +106,39 @@ public class Login {
 
 								if (((Element) tempNode).getAttribute("Email").equals(email)
 										&& ((Element) tempNode).getAttribute("Password").equals(new String(pass))) {
-									System.out.println("Logged In");
-									launcher.dispose();
+									NodeList childs=tempNode.getChildNodes();
+									for(int i=0; i<childs.getLength(); i++){
+										Node temp=childs.item(i);
+									
+										if(temp.hasAttributes()){
+											if(((Element) temp).hasAttribute("Facebook")){
+												ftoken=((Element) temp).getAttribute("Facebook");
+											}
+											if(((Element) temp).hasAttribute("Twitter")){
+												ttoken=((Element) temp).getAttribute("Twitter");
+												System.out.println(ttoken);
+											}
+											if(((Element) temp).hasAttribute("Email") && ((Element) temp).hasAttribute("Password")){
+												username=((Element) temp).getAttribute("Email");
+												password=((Element) temp).getAttribute("Password");
+											}
+											
+										}
+									}
+									
 									try {
-										new MainTimeline();
+										
+										Facebook face=new Facebook(ftoken);
+										String[] tokens=ttoken.split(";");
+										System.out.println(tokens);
+										TwitterApp twitter=new TwitterApp(tokens[0], tokens[1], tokens[2], tokens[3]);
+										launcher.dispose();
+										new MainTimeline(face, twitter, username, password);
 									} catch (TwitterException e1) {
 										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
-									Mail.LoginMail();
+									break;
 									
 								}
 

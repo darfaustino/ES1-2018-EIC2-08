@@ -12,7 +12,7 @@ public class T {
 
 		@Override
 		public String toString() {
-			return name + " : " + text ;
+			return "<html> Tweet: <br/>" + text ;
 		}
 		
 		

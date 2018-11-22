@@ -33,15 +33,15 @@ public final class TwitterApp {
 	 * 
 	 */
 
-	public TwitterApp() {
+	public TwitterApp(String AuthConsumerKey, String AuthConsumerSecret, String AuthAccessToken, String AuthAccessTokenSecret){
 		
 		try {
 
 			ConfigurationBuilder cb = new ConfigurationBuilder();
-			cb.setDebugEnabled(true).setOAuthConsumerKey("W1f0VvgWPfT8OBqVxvy4Mw")
-					.setOAuthConsumerSecret("zKH2yAtRyefwsgOO8h8Szc4kru68iEm95QmIG7svw")
-					.setOAuthAccessToken("36481851-VhzByC4f9MSsZES1QZQ4e4iBvA9bWGLyv9HKFpy7c")
-					.setOAuthAccessTokenSecret("OahDuXF2Lhl5xlNYALhYZir6xSflAxKP9Zh89T05po");
+			cb.setDebugEnabled(true).setOAuthConsumerKey(AuthConsumerKey)
+					.setOAuthConsumerSecret(AuthConsumerSecret)
+					.setOAuthAccessToken(AuthAccessToken)
+					.setOAuthAccessTokenSecret(AuthAccessTokenSecret);
 
 			TwitterFactory tf = new TwitterFactory(cb.build());
 			twitter = tf.getInstance();	

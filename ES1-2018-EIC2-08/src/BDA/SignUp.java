@@ -17,6 +17,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
+import JUnitTests.Twitter_initTwitter;
+
 import java.awt.*;
 	import java.awt.event.*;
 import java.io.File;
@@ -177,6 +179,12 @@ public class SignUp {
 
 	public static void SaveXML(String Mainemail, char[] Mainpassword, String name, String email, char[] password){
 		try {
+			
+		String facetoken="EAADoYhkS7RcBAEKHnrBd4T60iYQZCm1jfrK4xpq1quSDLCcQW7tAOXIw5TiK26A1MVZBTCV2jcijb8"
+				+ "cdV1BtMuSZCOBdYRcDAMINHo7j4ws6F76RZC1uWuK18sZAZAZCSl99RXPJERm8okjSfMptfZCUKCc40KjUeEdtMi0a23ZCFJQZDZD";
+
+		String twittertoken="W1f0VvgWPfT8OBqVxvy4Mw;zKH2yAtRyefwsgOO8h8Szc4kru68iEm95QmIG7svw;36481851-VhzByC4f9MSsZES1QZQ4e4iBvA9bWGLyv9HKFpy7c;OahDuXF2Lhl5xlNYALhYZir6xSflAxKP9Zh89T05po";
+			
 		File inputFile = new File("config.xml");
 		Document doc;
 		Element rootElement;
@@ -209,7 +217,14 @@ public class SignUp {
          mail.setAttribute("Email", email);
          mail.setAttribute("Password", new String(password));
          newElement1.appendChild(mail);
-               
+         
+         Element facebook=doc.createElement("Facebook");
+         facebook.setAttribute("Facebook", facetoken);
+         newElement1.appendChild(facebook);
+         
+         Element twitter=doc.createElement("Twitter");
+         twitter.setAttribute("Twitter", twittertoken);
+         newElement1.appendChild(twitter);      
          
          Transformer transformer = TransformerFactory.newInstance().newTransformer();
          transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -217,6 +232,7 @@ public class SignUp {
          DOMSource source = new DOMSource(doc);
          transformer.transform(source, result);
          System.out.println("Saved");
+      
          
          
 		} catch (ParserConfigurationException | IOException | TransformerFactoryConfigurationError | TransformerException | SAXException e) {
@@ -286,6 +302,7 @@ public class SignUp {
 					
 					if(email_txt.getText().contains("@iscte-iul.pt")){
 						SaveXML(mainemail, mainpassword, name, email_txt.getText(), p1.getPassword());
+						new Login(launcher);
 						}else{
 							if(p1.getPassword().length==0){
 								JOptionPane.showMessageDialog(new JFrame(), "You must insert a password");

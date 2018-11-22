@@ -33,12 +33,12 @@ public class Mail {
 	/**
 	 * It creates a store with the email account, fetches and prints 20 mails of the inbox.
 	 * Closes the store and the inbox.
+	 * @param password 
+	 * @param username 
 	 */
-	public static DefaultListModel<Email> LoginMail() {
+	public static DefaultListModel<Email> LoginMail(String username, String password) {
 		try {
-		
-		String username="darfo@iscte-iul.pt";
-		String password= "EngenhariaSoftware98";
+	
         String host = "outlook.office365.com";
 
         Properties props = new Properties();
@@ -102,12 +102,8 @@ public class Mail {
 			  String host = "outlook.office365.com";
 
 		        Properties props = new Properties();
-		        props.put("mail.imap.host", host);
-		        props.put("mail.imap.port", "993");
+		        
 		        props.put("mail.debug", "true");
-		        props.put("mail.imap.socketFactory.class","javax.net.ssl.SSLSocketFactory");
-		        props.put("mail.imap.socketFactory.fallback", "false");
-		        props.put("mail.imap.socketFactory.port", "993");
 		        props.put("mail.smtp.auth", "true");
 		        props.put("mail.smtp.starttls.enable", "true");
 		        props.put("mail.smtp.host", host);
@@ -164,7 +160,7 @@ public class Mail {
 	 * @throws IOException error reading the Message
 	 */
 	
-/*
+
 	
 	
 	public static String getTextFromMimeMultipart(
@@ -222,19 +218,39 @@ public class Mail {
 		}
 
 return null;
-}*/
+}
 		
 		public static String getTextFromMessage(Message message) throws IOException, MessagingException {
 		    String result = "";
-		    if (message.isMimeType("text/plain")) {
+		    if (message.isMimeType("text/*")) {
 		        result = message.getContent().toString();
 		    } else if (message.isMimeType("multipart/*")) {
 		        MimeMultipart mimeMultipart = (MimeMultipart) message.getContent();
 		        result = getTextFromMimeMultipart(mimeMultipart);
-		    }
+		    }else 
+				if (message.isMimeType("multipart/alternative")) {
+					// prefer html text over plain text
+					Multipart mp = (Multipart) message.getContent();
+					String text = null;
+					for (int i = 0; i < mp.getCount(); i++) {
+						Part bp = mp.getBodyPart(i);
+						if (bp.isMimeType("text/plain")) {
+							if (text == null)
+								text = getText(bp);
+							continue;
+						} else if (bp.isMimeType("text/html")) {
+							String s = getText(bp);
+							if (s != null)
+								return s;
+						} else {
+							return getTextFromMessage((Message)bp);
+						}
+					}
+				}
+					
 		    return result;
 		}
-
+/*
 		private static String getTextFromMimeMultipart(
 		        MimeMultipart mimeMultipart) throws IOException, MessagingException {
 
@@ -267,5 +283,5 @@ return null;
 		        result = getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
 		    }
 		    return result;
-		}
+		}*/
 }

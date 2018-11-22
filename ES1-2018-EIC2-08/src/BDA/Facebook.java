@@ -23,16 +23,15 @@ import com.restfb.types.User;
 	
 public class Facebook {
 	
-	String accessToken;
-	FacebookClient fbClient;
+	private String accessToken;
+	private FacebookClient fbClient;
 
 	/**
 	 * Constructor, it initializes both attributes: the access token and the Facebook Client.
 	 */
 	
-	public Facebook(){
-		accessToken="EAADoYhkS7RcBAEKHnrBd4T60iYQZCm1jfrK4xpq1quSDLCcQW7tAOXIw5TiK26A1MVZBTCV2jcijb8"
-				+ "cdV1BtMuSZCOBdYRcDAMINHo7j4ws6F76RZC1uWuK18sZAZAZCSl99RXPJERm8okjSfMptfZCUKCc40KjUeEdtMi0a23ZCFJQZDZD"; //expira 21/12/2018
+	public Facebook(String acessToken){
+		this.accessToken=acessToken; //expira 21/12/2018
 		fbClient = new DefaultFacebookClient(accessToken);
 	}
 	/*
@@ -123,13 +122,4 @@ public class Facebook {
 		System.out.println("-------------\nNº of Results: " + counter);
 		
 	}
-	
-	public static void main(String[] args) {
-		Facebook fb=new Facebook();
-		fb.useExtendedAccessToken();
-		fb.getTimeLinePosts();
-		fb.getUserInformation();	
-		fb.getLikedPages();
-	}
-
 }
