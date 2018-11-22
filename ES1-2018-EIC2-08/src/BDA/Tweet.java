@@ -1,7 +1,6 @@
 package BDA;
 
 import javax.swing.*;
-
 import twitter4j.TwitterException;
 import java.awt.*;
 import java.awt.event.*;
@@ -33,21 +32,64 @@ public class Tweet {
 		launcher.setVisible(true);
 		
 		//Background
-		Background background=new Background("images/twittersingular.png");
+		Background background=new Background("images/backtweet.png");
 		background.setLayout(new GridBagLayout());
 		background.setPreferredSize(new Dimension(800,600));
 
+		GridBagConstraints c=new GridBagConstraints();
+		
+		JLabel r=new JLabel(new ImageIcon("images/btnret.png"));
+		r.setPreferredSize(new Dimension(300,70));
+		c.gridx=0;
+		c.gridy=2;
+		c.insets=new Insets(15, 0, 0, 0);
+		background.add(r,c);
+		r.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				
+				try {
+					twitter.retweet(t);
+				} catch (TwitterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		JPanel tweet= new JPanel();
 		tweet.setPreferredSize(new Dimension(730,380));
-//	 	GridBagConstraints c=new GridBagConstraints();
-//	 	c.gridx=0;
-//	 	c.gridy=0;
-//	 	c.gridheight=2;
-//	 	c.insets=new Insets(80, 0,0,0);
-		
-		
-		
-		
+	 	c.gridx=0;
+	 	c.gridy=0;
+	 	c.gridheight=2;
+	 	c.insets=new Insets(80, 0,0,0);
 		tweet.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel = new JLabel(t.name);
@@ -57,30 +99,9 @@ public class Tweet {
 		text.append(t.text);
 		text.setEditable(false);
 		tweet.add(text, BorderLayout.CENTER);
-
-		
-
-//		JButton b = new JButton ("Retweet");
-//		b.addActionListener(new ActionListener() { 
-//			  public void actionPerformed(ActionEvent e) { 
-//			    try {
-//					twitter.retweet(t);
-//				} catch (TwitterException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//			  } 
-//			} );
-//		
-//		
-		
-		
-		background.add(tweet);
-//		background.add(b);
 	
-		
-		
-		
+		background.add(tweet,c);
+
 		launcher.add(background);
 		launcher.setSize(800, 600);
 		launcher.pack();
