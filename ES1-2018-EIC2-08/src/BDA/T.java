@@ -1,8 +1,8 @@
 package BDA;
 
 public class T {
-		String name;
-		String text;
+		public String name;
+		public String text;
 		
 		public T(String name, String text) {
 			super();

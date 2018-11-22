@@ -53,7 +53,7 @@ public class TwitterTimeline {
 		tweets=new JList<T>(t.getTimeline());
 		
 		((DefaultListCellRenderer) tweets.getCellRenderer()).setOpaque(false);
-		tweets.setFixedCellHeight(70);
+		tweets.setFixedCellHeight(60);
 		tweets.setBorder(new EmptyBorder(10, 5, 10, 0));
 		tweets.setOpaque(false);
 		tweets.setPreferredSize(new Dimension(240, 600));

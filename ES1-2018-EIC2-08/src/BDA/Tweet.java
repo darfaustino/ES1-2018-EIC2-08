@@ -37,41 +37,46 @@ public class Tweet {
 		background.setLayout(new GridBagLayout());
 		background.setPreferredSize(new Dimension(800,600));
 
-		GridBagConstraints c = new GridBagConstraints();
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridheight = 2;
-		c.insets = new Insets(80, 0, 0, 0);
-
-		JPanel text = new JPanel();
-		text.setPreferredSize(new Dimension(730, 380));
-		background.add(text, c);
-
-		JTextPane area = new JTextPane();
-		area.setContentType("text/html");
-		area.setPreferredSize(new Dimension(720, 380));
-
-		area.setText("User: " + t.name + "</b> <br><br> <br/>" + t.text);
-
-		text.add(area);
-
-		JButton b = new JButton ("Retweet");
-		b.addActionListener(new ActionListener() { 
-			  public void actionPerformed(ActionEvent e) { 
-			    try {
-					twitter.retweet(t);
-				} catch (TwitterException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			  } 
-			} );
+		JPanel tweet= new JPanel();
+		tweet.setPreferredSize(new Dimension(730,380));
+//	 	GridBagConstraints c=new GridBagConstraints();
+//	 	c.gridx=0;
+//	 	c.gridy=0;
+//	 	c.gridheight=2;
+//	 	c.insets=new Insets(80, 0,0,0);
 		
 		
 		
 		
-		background.add(text,c);
-		background.add(b);
+		tweet.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel = new JLabel(t.name);
+		tweet.add(lblNewLabel, BorderLayout.NORTH);
+		
+		JTextArea text = new JTextArea();
+		text.append(t.text);
+		text.setEditable(false);
+		tweet.add(text, BorderLayout.CENTER);
+
+		
+
+//		JButton b = new JButton ("Retweet");
+//		b.addActionListener(new ActionListener() { 
+//			  public void actionPerformed(ActionEvent e) { 
+//			    try {
+//					twitter.retweet(t);
+//				} catch (TwitterException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//			  } 
+//			} );
+//		
+//		
+		
+		
+		background.add(tweet);
+//		background.add(b);
 	
 		
 		
