@@ -1,24 +1,36 @@
 package BDA;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
 public class Email implements Comparable<Email>{
 
 	private Message msm;
 	private String subject;
 	private String from;
+	private String body;
 	private Date timestamp;
 	
 	public Email(Message msm) {
 		try {
 			this.msm = msm;
 			subject=msm.getSubject();
-			from=msm.getFrom()[0].toString();
+			from= MimeUtility.decodeText(msm.getFrom()[0].toString());
+			body=Mail.getTextFromMessage(this.msm);
 			this.timestamp = msm.getReceivedDate();
 		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -41,6 +53,12 @@ public class Email implements Comparable<Email>{
 
 	public String getFrom() {
 		return from;
+	}
+
+	
+	
+	public String getBody() {
+		return body;
 	}
 
 	@Override

@@ -49,13 +49,9 @@ public class EmailSingular {
 		area.setContentType("text/html");
 		area.setPreferredSize(new Dimension(720,380));
 		
-		try {
-			area.setText("Email: "+ email.getSubject() +"<br/>From: "+ email.getFrom()+ "<br/>Date:"+email.getTimestamp()+ "</b> <br><br> <br/>"+ Mail.getTextFromMessage(email.getMsm()));
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		text.add(area);
+		area.setText("<html> Email: "+ email.getSubject() +"<br/>From: "+ email.getFrom()+ "<br/>Date:"+email.getTimestamp()+ "<br/>"+ email.getBody());
+		JScrollPane scroll =new JScrollPane(area);
+		text.add(scroll);
 		
 		
 		JLabel r=new JLabel(new ImageIcon("images/responder.png"));
@@ -64,6 +60,41 @@ public class EmailSingular {
 		c.gridy=2;
 		c.insets=new Insets(15, 0, 0, 0);
 		background.add(r,c);
+		
+		r.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				
+				new GuiResponse(launcher, email);
+				
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		
 		launcher.add(background);

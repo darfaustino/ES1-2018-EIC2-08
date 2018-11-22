@@ -1,0 +1,112 @@
+package BDA;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class GuiResponse {
+
+	private JFrame launcher;
+	private Email email;
+	
+	public GuiResponse(JFrame launcher, Email email) {
+		this.launcher = launcher;
+		this.email=email;
+		init();
+	}
+
+	private void init() {
+		// TODO Auto-generated method stub
+		
+		launcher.getContentPane().removeAll();
+		launcher.setContentPane(new JLabel(new ImageIcon("images\\emailsingular.png")));
+		launcher.setLayout(new GridLayout(1,0));
+		
+		
+		JPanel form=new JPanel();
+		form.setPreferredSize(new Dimension(600, 600));
+		form.setLayout(null);
+		form.setOpaque(false);
+		
+		JLabel to=new JLabel("To:");
+		JLabel assunto=new JLabel("Assunto:");
+		JLabel message=new JLabel("Message:");
+		JLabel enviar=new JLabel(new ImageIcon("images/enviar.png"));
+		enviar.setPreferredSize(new Dimension(300,70));
+		
+		JTextField textto=new JTextField();
+		JTextField textass=new JTextField();
+		JTextArea messagetext=new JTextArea();
+		
+		
+		enviar.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				
+				
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				Mail.SendMail(email.getMsm(), messagetext.getText());
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
+		to.setBounds(90, 100, 20, 30);
+		assunto.setBounds(60, 150, 100, 30);
+		message.setBounds(60, 200, 120, 30);
+		
+		textass.setBounds(130, 150, 620, 40);
+		messagetext.setBounds(130, 200, 620, 250);
+		enviar.setBounds(450, 500, 300, 70);
+		
+		
+		form.add(assunto);
+		form.add(to);
+		form.add(message);
+		form.add(textass);
+		form.add(messagetext);
+		form.add(enviar);
+		launcher.add(form);
+		launcher.setSize(799,599);
+		launcher.setSize(800,600);
+		
+		
+	}
+	
+	
+	
+}

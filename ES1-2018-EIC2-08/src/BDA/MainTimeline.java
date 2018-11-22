@@ -79,6 +79,7 @@ public void init() throws IOException {
 			
 			if (emails.getSelectedValue() != null && !e.getValueIsAdjusting()) {
 				Email selectedValue = emails.getSelectedValue();
+				System.out.println("Body:"+ selectedValue.getBody());
 				new EmailSingular(selectedValue);
 			}
 		}
