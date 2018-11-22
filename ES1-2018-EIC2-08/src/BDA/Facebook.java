@@ -1,6 +1,10 @@
 package BDA;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
@@ -31,34 +35,39 @@ public class Facebook {
 				+ "cdV1BtMuSZCOBdYRcDAMINHo7j4ws6F76RZC1uWuK18sZAZAZCSl99RXPJERm8okjSfMptfZCUKCc40KjUeEdtMi0a23ZCFJQZDZD"; //expira 21/12/2018
 		fbClient = new DefaultFacebookClient(accessToken);
 	}
-	
+	/*
 	/**
 	 * Connects the Facebook Client with the posts of the user's time line.
 	 * Scrolls through all the posts of all the pages of the user's time line.
-	 * Filters the posts: they must have something written and have the word "esta" also written there.
+	 * Filters the posts: they must have something written and have the word "ISCTE" also written there.
 	 * Counts each post and filtered post.
 	 * Prints the number, id, time when it was created and message of each filtered post.
 	 * Prints the number of filtered and total number of posts covered.
+	 * @return 
 	 */
-	public void getTimeLinePosts(){
+	public DefaultListModel<FacePost> getTimeLinePosts(){
 		Connection<Post> result = fbClient.fetchConnection("me/feed", Post.class);
 		System.out.println("\nPosts:");
 		int counter = 0;
 		int counterTotal = 0;
+		DefaultListModel<FacePost> lista= new DefaultListModel<FacePost>();
 		for (List<Post> page : result) {
 			for (Post aPost : page) {
-				// Filters only posts that contain the word "esta"
-				if (aPost.getMessage() != null && aPost.getMessage().contains("esta")) {
+				// Filters only posts that contain the word "ISCTE"
+				if (aPost.getMessage() != null /*&& aPost.getMessage().contains("ISCTE")*/) {
 					System.out.println("---- Post " + counter + " ----");
 					System.out.println("Id: " + "fb.com/" + aPost.getId());
 					System.out.println("Message: " + aPost.getMessage());
 					System.out.println("Created: " + aPost.getCreatedTime());
+					System.out.println("From: " + aPost.getStory());
+					lista.addElement((new FacePost(aPost, counter)));
 					counter++;
 				}
 				counterTotal++;
 			}
 		}
 		System.out.println("-------------\nNº of Results: " + counter + "/" + counterTotal);
+		return lista;
 	}
 	
 

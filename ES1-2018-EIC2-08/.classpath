@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/Diogo/Downloads/javax.mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Diogo/Downloads/jsoup-1.11.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Diogo/Downloads/twitter4j-4.0.7/lib/twitter4j-core-4.0.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Goncalo/Downloads/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Goncalo/Downloads/jsoup-1.11.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Goncalo/Downloads/twitter4j-4.0.7/lib/twitter4j-core-4.0.7.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/Diogo/Downloads/restfb-2.11.0.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Goncalo/Documents/UNIVERSIDADE/3ºAno/1ºsemestre/Engenharia de Software I/restFB/restfb-2.11.0_maven.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

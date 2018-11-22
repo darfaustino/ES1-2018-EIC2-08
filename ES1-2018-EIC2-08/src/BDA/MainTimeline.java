@@ -6,6 +6,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.restfb.types.Post;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -50,6 +52,7 @@ public void init() throws IOException {
 	background.add(email,c);
 	
 	JPanel facebook= new JPanel();
+	facebook.setOpaque(false);
 	facebook.setPreferredSize(new Dimension(245,490));
 	c.gridx=1;
 	c.gridy=0;
@@ -91,6 +94,35 @@ public void init() throws IOException {
 	scroll.getViewport().setOpaque(false);
 	scroll.setPreferredSize(new Dimension(250,500));
 	email.add(scroll);
+	
+	
+	Facebook face= new Facebook();
+	JList<FacePost> facePosts=new JList<FacePost>(face.getTimeLinePosts());//filtro retirado pra teste
+	((DefaultListCellRenderer)facePosts.getCellRenderer()).setOpaque(false);
+	facePosts.setFixedCellHeight(70);
+	facePosts.setBorder(new EmptyBorder(10,5, 10, 0));
+	facePosts.setOpaque(false);
+
+	facePosts.addListSelectionListener( new ListSelectionListener() {
+		
+		@Override
+		public void valueChanged(ListSelectionEvent e) {
+			
+			if (facePosts.getSelectedValue() != null && !e.getValueIsAdjusting()) {
+				FacePost selectedValue = facePosts.getSelectedValue();
+				new FacebookPost(selectedValue);
+			}
+		}
+	});
+	
+	
+	JScrollPane scroll2=new JScrollPane(facePosts);
+	scroll2.setOpaque(false);
+	scroll2.getViewport().setOpaque(false);
+	scroll2.setPreferredSize(new Dimension(250,500));
+	facebook.add(scroll2);
+	
+	
 	
 	
 	launcher.add(background);
