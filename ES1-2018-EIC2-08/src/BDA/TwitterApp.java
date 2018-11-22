@@ -10,7 +10,6 @@ package BDA;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
-
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -20,10 +19,12 @@ import twitter4j.conf.ConfigurationBuilder;
 public final class TwitterApp {
 
 	/**
-	 * Represents all posts in this page.
+	 * Represents the twitter.
 	 */
 	public static Twitter twitter;
-	public static  List<Status> statuses;
+	/**
+	 * Represents all posts in this page.
+	 */
 	static DefaultListModel<T> tweets;
 	
 	
@@ -43,7 +44,8 @@ public final class TwitterApp {
 					.setOAuthAccessTokenSecret("OahDuXF2Lhl5xlNYALhYZir6xSflAxKP9Zh89T05po");
 
 			TwitterFactory tf = new TwitterFactory(cb.build());
-			twitter = tf.getInstance();		
+			twitter = tf.getInstance();	
+			tweets= new DefaultListModel<T>();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -57,9 +59,8 @@ public final class TwitterApp {
 	 * @throws TwitterException catches a Twitter Exception.
 	 *  @return a list of tweets
 	 */
-	public static DefaultListModel<T> getTimeline() throws TwitterException {
-		statuses = twitter.getHomeTimeline();
-		tweets= new DefaultListModel<T>();
+	public  DefaultListModel<T> getTimeline() throws TwitterException {
+		List <Status> statuses = twitter.getHomeTimeline();
 		for (Status status : statuses) {
 			T x = new T (status.getUser().getName(), status.getText());
 			tweets.addElement(x);
@@ -75,19 +76,19 @@ public final class TwitterApp {
 	 * @param s is the name of the user.
 	 * 
 	 */
-	public static void searchForUser(String s) {
-		int counter = 0;
-		int counterTotal = 0;
-		for (Status status : statuses) {
-			if (status.getUser().getName() != null && status.getUser().getName().contains(s)) {
-				System.out.println(status.getUser().getName() + ":" + status.getText());
-				counter++;
-			}
-			counterTotal++;
-		}
-		System.out.println("-------------\nNº of Results: " + counter + "/" + counterTotal);
-
-	}
+//	public static void searchForUser(String s) {
+//		int counter = 0;
+//		int counterTotal = 0;
+//		for (Status status : statuses) {
+//			if (status.getUser().getName() != null && status.getUser().getName().contains(s)) {
+//				System.out.println(status.getUser().getName() + ":" + status.getText());
+//				counter++;
+//			}
+//			counterTotal++;
+//		}
+//		System.out.println("-------------\nNº of Results: " + counter + "/" + counterTotal);
+//
+//	}
 	
 	
 	/** Retweet

@@ -62,6 +62,7 @@ public void init() throws IOException, TwitterException {
 	background.add(facebook,c);
 	
 	JPanel twitter= new JPanel();
+	twitter.setOpaque(false);
 	twitter.setPreferredSize(new Dimension(245,490));
 	c.gridx=2;
 	c.gridy=0;
@@ -124,7 +125,7 @@ public void init() throws IOException, TwitterException {
 	
 	TwitterApp t= new TwitterApp();
 	JList <T> tweets=new JList<T>(t.getTimeline());
-	((DefaultListCellRenderer)emails.getCellRenderer()).setOpaque(false);
+	((DefaultListCellRenderer)tweets.getCellRenderer()).setOpaque(false);
 	tweets.setFixedCellHeight(70);
 	tweets.setBorder(new EmptyBorder(10,5, 10, 0));
 	tweets.setOpaque(false);
@@ -134,7 +135,7 @@ public void init() throws IOException, TwitterException {
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			
-			if (emails.getSelectedValue() != null && !e.getValueIsAdjusting()) {
+			if (tweets.getSelectedValue() != null && !e.getValueIsAdjusting()) {
 				T selectedValue = tweets.getSelectedValue();
 				new Tweet(t, selectedValue);
 			}
@@ -142,11 +143,11 @@ public void init() throws IOException, TwitterException {
 	});
 	
 	
-	JScrollPane scroll3=new JScrollPane(emails);
+	JScrollPane scroll3=new JScrollPane(tweets);
 	scroll3.setOpaque(false);
 	scroll3.getViewport().setOpaque(false);
 	scroll3.setPreferredSize(new Dimension(250,500));
-	tweets.add(scroll3);
+	twitter.add(scroll3);
 	
 	
 	launcher.add(background);

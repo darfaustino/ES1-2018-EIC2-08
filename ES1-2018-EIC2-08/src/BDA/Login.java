@@ -10,6 +10,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import twitter4j.TwitterException;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -101,7 +103,12 @@ public class Login {
 										&& ((Element) tempNode).getAttribute("Password").equals(new String(pass))) {
 									System.out.println("Logged In");
 									launcher.dispose();
-									new MainTimeline();
+									try {
+										new MainTimeline();
+									} catch (TwitterException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
 									Mail.LoginMail();
 									
 								}
