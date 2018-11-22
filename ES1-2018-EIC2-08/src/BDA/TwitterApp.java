@@ -8,6 +8,9 @@ package BDA;
 
 
 import java.util.List;
+
+import javax.swing.DefaultListModel;
+
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -19,7 +22,9 @@ public final class TwitterApp {
 	/**
 	 * Represents all posts in this page.
 	 */
-	public static List<Status> statuses;
+	public static Twitter twitter;
+	public static  List<Status> statuses;
+	static DefaultListModel<T> tweets;
 	
 	
 	/**
@@ -38,10 +43,7 @@ public final class TwitterApp {
 					.setOAuthAccessTokenSecret("OahDuXF2Lhl5xlNYALhYZir6xSflAxKP9Zh89T05po");
 
 			TwitterFactory tf = new TwitterFactory(cb.build());
-			Twitter twitter = tf.getInstance();
-			
-			statuses = twitter.getHomeTimeline();
-			
+			twitter = tf.getInstance();		
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -53,13 +55,18 @@ public final class TwitterApp {
 	
 	/** List of latest tweets from user's home timeline.
 	 * @throws TwitterException catches a Twitter Exception.
+	 *  @return a list of tweets
 	 */
-	public static void getTimeline() throws TwitterException {
-		System.out.println("Showing home timeline.");
+	public static DefaultListModel<T> getTimeline() throws TwitterException {
+		statuses = twitter.getHomeTimeline();
+		tweets= new DefaultListModel<T>();
 		for (Status status : statuses) {
-			System.out.println(status.getUser().getName() + ":" + status.getText());
-			System.out.println("-------------------------");
-		}
+			T x = new T (status.getUser().getName(), status.getText());
+			tweets.addElement(x);
+		}	
+					
+		return tweets;
+		
 	}
 	
 
@@ -81,19 +88,16 @@ public final class TwitterApp {
 		System.out.println("-------------\nNº of Results: " + counter + "/" + counterTotal);
 
 	}
-
-
-	/** Testing time line and search for user.
-	 * @param args not used.
+	
+	
+	/** Retweet
+	 * @param tweet to retweet.
 	 */
-	public static void main(String[] args) {
-		try {
-			getTimeline();
-		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		searchForUser("NAMI");
+	
+	public void retweet(T s) throws TwitterException {
+		Status status = twitter.updateStatus("Retweet:  " + s.name + ":" + s.text);
+		System.out.println("Successfully updated the status to [" + status.getText() + "].");
 	}
+	
 }
-    
+
