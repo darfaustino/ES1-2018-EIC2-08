@@ -10,11 +10,31 @@ import twitter4j.TwitterException;
 import java.awt.*;
 import java.io.IOException;
 
+
+/**Represents the twitter time line's Frame.
+ * 
+ * 
+ */
+
 public class TwitterTimeline {
+	/**
+	 * Represents the frame.
+	 */
 	public	JFrame launcher;
+	/**
+	 * Represents the tweet's list.
+	 */
 	JList <T> tweets;
+	/**
+	 * Represents the twitter.
+	 */
 	TwitterApp t;
 	
+	
+	/**
+	 * Class constructor, creates a frame with the tweets posted recently.
+	 * 
+	 */
 	public TwitterTimeline() throws TwitterException{
 		try {
 			init();
@@ -24,6 +44,10 @@ public class TwitterTimeline {
 		}
 	}	
 
+	/**
+	 * Frame's creation and customization.
+	 * 
+	 */
 	public void init() throws IOException, TwitterException {
 		
 		//SettingsJFrame
@@ -49,7 +73,7 @@ public class TwitterTimeline {
 		background.add(twitter,c);
 		
 		
-		t= new TwitterApp();
+		t= new TwitterApp(null, null, null, null); 
 		tweets=new JList<T>(t.getTimeline());
 		
 		((DefaultListCellRenderer) tweets.getCellRenderer()).setOpaque(false);
@@ -83,6 +107,11 @@ public class TwitterTimeline {
 		
 
 	 }
+	
+	/**
+	 * Starts the time line.
+	 * @param args is not used. 
+	 */
 	public static void main(String args[]) throws TwitterException{
 	    new TwitterTimeline();
 

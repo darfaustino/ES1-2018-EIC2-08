@@ -6,11 +6,30 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
+/**Represents the tweet's Frame.
+ * 
+ * 
+ */
+
 public class Tweet {
+	/**
+	 * Represents the frame.
+	 */
 	public	JFrame launcher;
+	/**
+	 * Represents the tweet.
+	 */
 	T t;
+	/**
+	 * Represents the twitter.
+	 */
 	TwitterApp twitter;
 	
+	
+	/**
+	 * Class constructor, creates a frame with the tweet.
+	 * 
+	 */
 	public Tweet(TwitterApp twitter, T t){
 		this.twitter=twitter;
 		this.t=t;
@@ -21,7 +40,10 @@ public class Tweet {
 			e.printStackTrace();
 		}
 	}	
-
+	/**
+	 * Frame's creation and customization.
+	 * 
+	 */
 	public void init() throws IOException {
 		
 		//SettingsJFrame
