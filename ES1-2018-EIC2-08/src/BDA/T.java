@@ -18,8 +18,9 @@ public class T {
 		
 
 		/**
-		 * Class constructor, creates a Tweet with a user and a text.
-		 * 
+		 * Constructor, creates a Tweet with a user and a text.
+		 * @param name name given
+		 * @param text tweet given text
 		 */
 		
 		public T(String name, String text) {

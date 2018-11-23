@@ -27,7 +27,9 @@ public class Tweet {
 	
 	
 	/**
-	 * Class constructor, creates a frame with the tweet.
+	 * Constructor, creates a frame with the tweet.
+	 * @param twitter represents twitter
+	 * @param t tweet
 	 * 
 	 */
 	public Tweet(TwitterApp twitter, T t){
@@ -42,7 +44,7 @@ public class Tweet {
 	}	
 	/**
 	 * Frame's creation and customization.
-	 * 
+	 * @throws IOException Some error occurred
 	 */
 	public void init() throws IOException {
 		

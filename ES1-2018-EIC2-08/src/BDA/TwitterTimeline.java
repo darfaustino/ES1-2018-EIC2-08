@@ -32,8 +32,8 @@ public class TwitterTimeline {
 	
 	
 	/**
-	 * Class constructor, creates a frame with the tweets posted recently.
-	 * 
+	 * Constructor, creates a frame with the tweets posted recently.
+	 * @throws TwitterException error 
 	 */
 	public TwitterTimeline() throws TwitterException{
 		try {
@@ -46,7 +46,8 @@ public class TwitterTimeline {
 
 	/**
 	 * Frame's creation and customization.
-	 * 
+	 * @throws IOException error I/O
+	 * @throws TwitterException twitter exception
 	 */
 	public void init() throws IOException, TwitterException {
 		
@@ -111,6 +112,7 @@ public class TwitterTimeline {
 	/**
 	 * Starts the time line.
 	 * @param args is not used. 
+	 * @throws TwitterException twitter exception
 	 */
 	public static void main(String args[]) throws TwitterException{
 	    new TwitterTimeline();

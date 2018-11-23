@@ -16,8 +16,7 @@ public class EmailTimeline {
 	public	JFrame launcher;
 	
 	/**
-	 * Contructor, It calls the method init and creates the EmailTimeline GUI
-	 * @throws IOException I/O exception of some sort has occurred
+	 * Contructor, It calls the method init and creates the EmailTimeline GUI.
 	 */
 	
 	public EmailTimeline(){

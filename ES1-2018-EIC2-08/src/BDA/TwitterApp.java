@@ -29,8 +29,11 @@ public final class TwitterApp {
 	
 	
 	/**
-	 * Class constructor, creates a TwitterFactory with all the informations we have about the tokens that we gave.
-	 * 
+	 * Constructor, creates a TwitterFactory with all the informations we have about the tokens that we gave.
+	 * @param AuthConsumerKey consumer key
+	 * @param AuthConsumerSecret secret consumer key
+	 * @param AuthAccessToken access token
+	 * @param AuthAccessTokenSecret secret token
 	 */
 
 	public TwitterApp(String AuthConsumerKey, String AuthConsumerSecret, String AuthAccessToken, String AuthAccessTokenSecret){
@@ -92,7 +95,8 @@ public final class TwitterApp {
 	
 	
 	/** Retweet
-	 * @param tweet to retweet.
+	 * @param s tweet to retweet.
+	 * @throws TwitterException error
 	 */
 	
 	public void retweet(T s) throws TwitterException {

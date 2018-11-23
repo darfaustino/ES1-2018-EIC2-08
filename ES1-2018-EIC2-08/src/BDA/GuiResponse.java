@@ -59,6 +59,7 @@ public class GuiResponse {
 		form.setOpaque(false);
 		
 		JLabel to=new JLabel("To:");
+		JLabel email1=new JLabel(email.getFrom());
 		JLabel assunto=new JLabel("Assunto:");
 		JLabel message=new JLabel("Message:");
 		JLabel enviar=new JLabel(new ImageIcon("images/enviar.png"));
@@ -107,6 +108,7 @@ public class GuiResponse {
 		
 		
 		to.setBounds(90, 100, 20, 30);
+		email1.setBounds(130, 90, 600, 50);
 		assunto.setBounds(60, 150, 100, 30);
 		message.setBounds(60, 200, 120, 30);
 		
@@ -121,6 +123,7 @@ public class GuiResponse {
 		form.add(textass);
 		form.add(messagetext);
 		form.add(enviar);
+		form.add(email1);
 		launcher.add(form);
 		launcher.setSize(799,599);
 		launcher.setSize(800,600);

@@ -209,8 +209,8 @@ public class Mail {
 	 * It retrieves the Message content inside a Part. 
 	 * @param p Given Part
 	 * @return The part's content
-	 * @throws MessagingException
-	 * @throws IOException
+	 * @throws MessagingException Some Message exception occurred
+	 * @throws IOException Some I/O Exception occurred
 	 */
 	
 	public static String getText(Part p) throws MessagingException, IOException {

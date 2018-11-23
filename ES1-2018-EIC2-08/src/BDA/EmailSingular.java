@@ -22,7 +22,6 @@ public class EmailSingular {
 	/**
 	 * Contructor, it call the methods necessary to create the GUI to show a email.
 	 * @param email email to show.
-	 * @throws  I/O exception of some sort has occurred
 	 */
 	public EmailSingular(Email email){
 		try {
