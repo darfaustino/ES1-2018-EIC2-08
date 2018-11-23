@@ -28,6 +28,7 @@ public class Login {
 	private JTextField tf1;
 	private JButton btn1;
 	private JPasswordField p1;
+	private boolean Found;
 	
 	
 	/**
@@ -85,6 +86,8 @@ public class Login {
 				String ttoken="";
 				String username="";
 				String password="";
+				Found=false;
+				
 				
 				
 				File file = new File("config.xml");
@@ -107,6 +110,7 @@ public class Login {
 								if (((Element) tempNode).getAttribute("Email").equals(email)
 										&& ((Element) tempNode).getAttribute("Password").equals(new String(pass))) {
 									NodeList childs=tempNode.getChildNodes();
+									Found=true;
 									for(int i=0; i<childs.getLength(); i++){
 										Node temp=childs.item(i);
 									
@@ -125,27 +129,30 @@ public class Login {
 											
 										}
 									}
-									
-									try {
-										
-										Facebook face=new Facebook(ftoken);
-										String[] tokens=ttoken.split(";");
-										System.out.println(tokens);
-										TwitterApp twitter=new TwitterApp(tokens[0], tokens[1], tokens[2], tokens[3]);
-										launcher.dispose();
-										new MainTimeline(face, twitter, username, password);
-									} catch (TwitterException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
 									break;
 									
 								}
-
 							}
 
 						}
 
+					}
+					if(Found){
+						try {
+							
+							Facebook face=new Facebook(ftoken);
+							String[] tokens=ttoken.split(";");
+							System.out.println(tokens);
+							TwitterApp twitter=new TwitterApp(tokens[0], tokens[1], tokens[2], tokens[3]);
+							launcher.dispose();
+							new MainTimeline(face, twitter, username, password);
+						} catch (TwitterException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}else{
+						JOptionPane.showMessageDialog(new JFrame(), "Error! Login Failed, please try gain!");
+						
 					}
 					
 				} catch (ParserConfigurationException | SAXException | IOException e1) {

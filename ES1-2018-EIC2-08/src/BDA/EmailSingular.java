@@ -71,7 +71,7 @@ public class EmailSingular {
 		area.setEditable(false);
 		area.setPreferredSize(new Dimension(720,380));
 		
-		area.setText("<html> Email: "+ email.getSubject() +"<br/> <html>From: "+ email.getFrom()+ "<br/>Date:"+email.getTimestamp()+ "<br/><html>"+ email.getBody());
+		area.setText("<html> Email: "+ email.getSubject() +"<br/> <html>From: "+ email.getFrom()+ "<br/>Date:"+email.getTimestamp()+ "<br/><br/><br/><br/><html>"+ email.getBody());
 		
 		JScrollPane scroll =new JScrollPane(area);
 		scroll.setPreferredSize(new Dimension(720,380));
