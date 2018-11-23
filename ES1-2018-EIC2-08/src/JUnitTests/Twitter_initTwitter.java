@@ -17,10 +17,10 @@ public class Twitter_initTwitter {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		assertNotNull(cb);
 		
-		cb.setDebugEnabled(true).setOAuthConsumerKey("W1f0VvgWPfT8OBqVxvy4Mw")
-		.setOAuthConsumerSecret("zKH2yAtRyefwsgOO8h8Szc4kru68iEm95QmIG7svw")
-		.setOAuthAccessToken("36481851-VhzByC4f9MSsZES1QZQ4e4iBvA9bWGLyv9HKFpy7c")
-		.setOAuthAccessTokenSecret("OahDuXF2Lhl5xlNYALhYZir6xSflAxKP9Zh89T05po");
+		cb.setDebugEnabled(true).setOAuthConsumerKey("djruORHuSHJcsJW060wtuGowg")
+		.setOAuthConsumerSecret("LzofRAO9R7a8sZIDofWXoix6gtXiS43MzFsrFrlqiIeKo66Ly5")
+		.setOAuthAccessToken("1063486441114820608-2pujB6rSntopZvEd6ENTrt3gOPspgv")
+		.setOAuthAccessTokenSecret("DTB1yFxV0pelfd9BlbBbYar6GE34rbGHA6ceDBs0beCnd");
 
 		
 		TwitterFactory tf = new TwitterFactory(cb.build());
