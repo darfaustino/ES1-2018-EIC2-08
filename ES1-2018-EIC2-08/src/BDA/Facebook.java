@@ -28,21 +28,26 @@ public class Facebook {
 
 	/**
 	 * Constructor, it initializes both attributes: the access token and the Facebook Client.
+	 * 
+	 * @param acessToken	The name of the string that is going to be the accessToken.
 	 */
 	
 	public Facebook(String acessToken){
 		this.accessToken=acessToken; //expira 21/12/2018
 		fbClient = new DefaultFacebookClient(accessToken);
 	}
-	/*
+	
 	/**
 	 * Connects the Facebook Client with the posts of the user's time line.
+	 * Creates a DefaultListModel.
 	 * Scrolls through all the posts of all the pages of the user's time line.
 	 * Filters the posts: they must have something written and have the word "ISCTE" also written there.
 	 * Counts each post and filtered post.
 	 * Prints the number, id, time when it was created and message of each filtered post.
+	 * Adds the filtered posts to the DefaultListModel.
 	 * Prints the number of filtered and total number of posts covered.
-	 * @return 
+	 * 
+	 * @return 		Returns the DefaultListModel that contains the filtered posts.
 	 */
 	public DefaultListModel<FacePost> getTimeLinePosts(){
 		Connection<Post> result = fbClient.fetchConnection("me/feed", Post.class);

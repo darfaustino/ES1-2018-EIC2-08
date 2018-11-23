@@ -33,7 +33,6 @@ public class Face_getTimeLinePosts {
 		Connection<Post> result = fbClient.fetchConnection("me/feed", Post.class);
 		assertNotNull( result);
 		
-		System.out.println("\nPosts:");
 		int counter = 0;
 		int counterTotal = 0;
 		DefaultListModel<FacePost> lista= new DefaultListModel<FacePost>();
@@ -46,19 +45,13 @@ public class Face_getTimeLinePosts {
 					assertNotNull( aPost.getMessage());
 					//assertTrue(aPost.getMessage().contains("ISCTE"));
 					
-					System.out.println("---- Post " + counter + " ----");
-					System.out.println("Id: " + "fb.com/" + aPost.getId());
-					System.out.println("Message: " + aPost.getMessage());
-					System.out.println("Created: " + aPost.getCreatedTime());
-					System.out.println("From: " + aPost.getStory());
 					lista.addElement((new FacePost(aPost, counter)));
 					assertNotNull(lista.elementAt(counter));
 					counter++;
 				}
 				counterTotal++;
 			}
-		}
-		System.out.println("-------------\nNº of Results: " + counter + "/" + counterTotal);	
+		}	
 	}
 
 }

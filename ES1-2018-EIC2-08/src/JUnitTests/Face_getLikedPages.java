@@ -29,22 +29,15 @@ public class Face_getLikedPages {
 		Connection<Page> result = fbClient.fetchConnection("me/likes", Page.class);
 		assertNotNull( result);
 		
-		System.out.println("\nPosts:");
 		int counter = 0;
 		for (List<Page> feedPage : result) {
 			assertNotNull( feedPage);
 			
 			for (Page page : feedPage) {
 				assertNotNull( page);
-				
-				System.out.println("---- Page " + counter + " ----");
-				System.out.println("Name: "+ page.getName());
-				System.out.println("Id: " + "fb.com/" + page.getId());
-				System.out.println("Number of Likes: " + page.getLikesCount());
 				counter++;	
 			}
 		}
-		System.out.println("-------------\nNº of Results: " + counter);
 	}
 
 }

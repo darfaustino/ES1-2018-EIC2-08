@@ -7,9 +7,21 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
+	/** 
+ 	* Facebook Post.
+ 	*
+ 	*/
+	
 public class FacebookPost {
-	public	JFrame launcher;
+	
 	private FacePost face;
+	
+	/**
+	 * Constructor, it initializes the Facebook and tries to start the GUI.
+	 * When the GUI is started it will show the id, message, story and creation date of a post from Facebook.
+	 * 
+	 * @param f		The name of the Facebook that is on the FacebookPost.
+	 */
 	
 	public FacebookPost(FacePost f){
 		try {
@@ -20,11 +32,28 @@ public class FacebookPost {
 			e.printStackTrace();
 		}
 	}	
+	
+	/**
+	 * 
+	 * @return 		Return the FacePost of FacebookPost.
+	 */
+	
+	public FacePost getFacePost(){
+		return face;
+	}
 
-	public void init() throws IOException {
+	/**
+	 * Launches and builds the FacebookPost GUI.
+	 * Initiates the frame and its components (JLabel,JScrollPane,Background, JPanel, and JTextPane).
+	 * Puts everything in the correct positions. 
+	 * 
+	 * @throws IOException		If the Background image is not found.
+	 */
+	
+	private void init() throws IOException {
 		
 		//SettingsJFrame
-				launcher = new JFrame("BOM DIA ACADEMIA!");
+				JFrame launcher = new JFrame("BOM DIA ACADEMIA!");
 				launcher.setResizable(false);
 				launcher.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 				launcher.setLayout(new BorderLayout());
@@ -65,7 +94,5 @@ public class FacebookPost {
 				launcher.add(background);
 				launcher.setSize(800, 600);
 				launcher.pack();
-
-
 	 }	
 }

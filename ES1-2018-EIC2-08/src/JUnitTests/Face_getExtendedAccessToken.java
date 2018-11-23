@@ -36,9 +36,6 @@ public class Face_getExtendedAccessToken {
 		
 		fbClient = new DefaultFacebookClient(accessToken);
 		assertNotNull( fbClient);
-		
-		System.out.println("ExtendedAccessToken: " + extendedAccessToken.getAccessToken());
-		System.out.println("Expires: " + extendedAccessToken.getExpires());
 	}
 
 }

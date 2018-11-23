@@ -25,13 +25,6 @@ public class Face_getUserInformation {
 	public void testGetUserInformation() {
 		User me = fbClient.fetchObject("me", User.class);
 		assertNotNull( me);
-		
-		System.out.println("Facebook:");
-		System.out.println("Id: " + me.getId());
-		System.out.println("Name: " + me.getName());
-		System.out.println("Email: " + me.getEmail());
-		System.out.println("Home town: " + me.getHometownName());
-		//...me.get...
 	}
 
 }

@@ -9,9 +9,21 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
+	/** 
+	 * Facebook TimeLine.
+	 *
+	 */
+
 public class FacebookTimeline {
-	public	JFrame launcher;
+	
 	private Facebook face;
+	
+	/**
+	 * Constructor, it initializes the Facebook and tries to start the GUI.
+	 * When the GUI is started it will show a list of posts from Facebook.
+	 * 
+	 * @param f		The name of the Facebook that is on the FacebookTimeline.
+	 */
 	
 	public FacebookTimeline(Facebook f){
 		face=f;
@@ -22,11 +34,31 @@ public class FacebookTimeline {
 			e.printStackTrace();
 		}
 	}	
+	
+	/**
+	 * 
+	 * @return		Returns the Facebook of the FacebookTimeline.
+	 */
+	
+	public Facebook getFacebook(){
+		return face;
+	}
 
-	public void init() throws IOException {
+	/**
+	 * Launches and builds the FacebookTimeline GUI.
+	 * Initiates the frame and its components (JLabel,JScrollPane,Background, JPanel, and JList).
+	 * Adds a ListSelectionListener to the JList.
+	 * Puts everything in the correct positions. 
+	 * 
+	 * @throws IOException		If the Background image is not found.
+	 */
+	
+	
+	
+	private void init() throws IOException {
 		
 		//SettingsJFrame
-		launcher = new JFrame("BOM DIA ACADEMIA!");
+		JFrame launcher = new JFrame("BOM DIA ACADEMIA!");
 		launcher.setResizable(false);
 		launcher.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 		launcher.setLayout(new BorderLayout());
