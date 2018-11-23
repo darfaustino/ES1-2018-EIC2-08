@@ -23,7 +23,7 @@ public class Login {
 	 * Login window.
 	 */
 	
-	public	JFrame launcher;
+	private	JFrame launcher;
 	private JLabel  l1, l2;
 	private JTextField tf1;
 	private JButton btn1;
@@ -45,11 +45,11 @@ public class Login {
 	/**
 	 * Launches and builds login window
 	 * Initiates the frame components (JLabels,JTextFields,	JPasswordField, and JButtons).
-	 * Adds an actionlistener to the button.
+	 * Adds an actionlistener to the button, which can login the Email, Facebook and Twitter if the respective account exists.
 	 * Puts everything in the correct positions.
 	 */
 	
-	public void init() {
+	private void init() {
 		
 		
 		//Background

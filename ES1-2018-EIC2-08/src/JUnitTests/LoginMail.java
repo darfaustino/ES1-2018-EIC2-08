@@ -5,8 +5,11 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import javax.swing.DefaultListModel;
+
 import org.junit.Test;
 
+import BDA.Email;
 import BDA.Mail;
 
 public class LoginMail {
@@ -15,11 +18,11 @@ public class LoginMail {
 	public void test() {
 		
 		String email="darfo@iscte-iul.pt";
-		ByteArrayOutputStream sink = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(sink, true));
-		Mail.LoginMail();
-		String emails=new String(sink.toByteArray());
-		assertTrue(emails.contains(email));
+		String pass="EngenhariaSoftware98";
+		
+		DefaultListModel<Email> mail=Mail.LoginMail(email, pass);
+		assertEquals(20, mail.size()-1);
+		
 	}
 
 }

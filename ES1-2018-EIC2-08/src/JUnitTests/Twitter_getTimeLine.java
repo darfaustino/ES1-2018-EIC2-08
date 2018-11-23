@@ -18,7 +18,7 @@ public class Twitter_getTimeLine {
 	
 	@Test
 	public void test() {
-		TwitterApp ta=new TwitterApp();
+		TwitterApp ta=new TwitterApp("W1f0VvgWPfT8OBqVxvy4Mw","zKH2yAtRyefwsgOO8h8Szc4kru68iEm95QmIG7svw", "36481851-VhzByC4f9MSsZES1QZQ4e4iBvA9bWGLyv9HKFpy7c","OahDuXF2Lhl5xlNYALhYZir6xSflAxKP9Zh89T05po");
 		DefaultListModel<T> test= new DefaultListModel <T> ();
 		try {
 			test = ta.getTimeline();

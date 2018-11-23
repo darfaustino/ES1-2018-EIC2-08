@@ -7,6 +7,7 @@ import java.io.IOException;
 
 /**
  * 
+ * Main App class.
  * 
  * @author Goncalo Duarte
  * @author Diogo Faustino

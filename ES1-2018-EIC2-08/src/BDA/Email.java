@@ -9,6 +9,15 @@ import javax.mail.MessagingException;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
+/**
+ * 
+ * @author Diogo
+ *
+ *Class that represents the object Email in the App
+ *
+ *
+ */
+
 public class Email implements Comparable<Email>{
 
 	private Message msm;
@@ -16,6 +25,15 @@ public class Email implements Comparable<Email>{
 	private String from;
 	private String body;
 	private Date timestamp;
+	
+	/**
+	 * Constructor, receives a Message as a parameter and copies the message subject, body and whom is from.
+	 * It creates the object Email.  
+	 * @param msm Message received.
+	 * @throws MessagingException It founds a problem in the Message
+	 * @throws UnsupportedEncodingException It can´t decode the Message.getFrom().
+	 * @throws IOException  I/O exception of some sort has occurred.
+	 */
 	
 	public Email(Message msm) {
 		try {
@@ -36,36 +54,57 @@ public class Email implements Comparable<Email>{
 		}
 	}
 	
+	/**
+	 * Gets the Timestamp of the Email.
+	 * @return timestamp
+	 */
+	
 	public Date getTimestamp() {
 		return timestamp;
 	}
 
 	
-
+	/**
+	 * Gets the original Message from the Email.
+	 * @return the Message in the Email.
+	 */
 
 	public Message getMsm() {
 		return msm;
 	}
+	
+	/**
+	 * Gets the Subject of the Email
+	 * @return the subject of the Email
+	 */
 
 	public String getSubject() {
 		return subject;
 	}
 
+	
+	/**
+	 * Gets address of the Email
+	 * @return the address of the Email
+	 */
 	public String getFrom() {
 		return from;
 	}
 
 	
-	
+	/**
+	 * Gets the body content of the Email
+	 * @return the mail body.
+	 */
 	public String getBody() {
 		return body;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "<html> Email: "+ subject +"<br/>From: "+ from+ "<br/>Date:"+timestamp;
 	}
-	
 	
 
 	@Override

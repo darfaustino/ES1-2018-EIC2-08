@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -13,10 +14,22 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+/**
+ * Class that opens Email Response Form. 
+ * @author Diogo
+ *
+ */
+
 public class GuiResponse {
 
 	private JFrame launcher;
 	private Email email;
+	
+	/**
+	 * Contructor, it initiates the frame and builds the Email Response Form GUI.
+	 * @param launcher frame to be initiated;
+	 * @param email  the Email which you want to respond.
+	 */
 	
 	public GuiResponse(JFrame launcher, Email email) {
 		this.launcher = launcher;
@@ -24,6 +37,14 @@ public class GuiResponse {
 		init();
 	}
 
+	
+	/**
+	 * Launches and builds the Email Response Window.
+	 * Initiates the frame components (JLabels,JTextPanes, JPanels , JTextField ).
+	 * Adds an MouseListener to the JLabel.
+	 * Puts everything in the correct positions. 
+	 */
+	
 	private void init() {
 		// TODO Auto-generated method stub
 		
@@ -105,6 +126,15 @@ public class GuiResponse {
 		launcher.setSize(800,600);
 		
 		
+	}
+	
+	/**
+	 * Gets the JFrame that serves as launcher of the window.
+	 * @return launcher
+	 */
+
+	public JFrame getLauncher() {
+		return launcher;
 	}
 	
 	

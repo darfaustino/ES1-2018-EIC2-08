@@ -13,12 +13,27 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
+
+/**
+ * Class that represents the app's MainTimiline with access to the Email, Facebook and Twitter Timeline and to its respective contents
+ * @author Diogo
+ *
+ */
+
 public class MainTimeline {
 
-public	JFrame launcher;
+private JFrame launcher;
 private Facebook face;
 private TwitterApp twitterapp;
 	
+/**
+ * Contructor, initiates the GUI and displays the content.
+ * @param face Given Facebook access
+ * @param twitter Given Twitter access
+ * @param username Given Account Outlook Email
+ * @param password Given Account Outlook Password
+ * @throws TwitterException problem in the Twitter
+ */
 public MainTimeline(Facebook face, TwitterApp twitter, String username, String password) throws TwitterException{
 	try {
 		this.face=face;
@@ -29,9 +44,19 @@ public MainTimeline(Facebook face, TwitterApp twitter, String username, String p
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-}	
+}
 
-public void init(String username, String password) throws IOException, TwitterException {
+/**
+ * It creates the Gui with all its Features.
+ * Displays various Emails, Tweets and Facebook posts
+ * Gives acess to every Email, Tweets and Facebook posts displayed in the GUI
+ * @param username Given email account
+ * @param password Given email account's password
+ * @throws IOException Some I/O exception occurred.
+ * @throws TwitterException Some Twitter Exception occurred.
+ */
+
+private void init(String username, String password) throws IOException, TwitterException {
 	
 	//SettingsJFrame
 	launcher = new JFrame("BOM DIA ACADEMIA!");
@@ -77,14 +102,7 @@ public void init(String username, String password) throws IOException, TwitterEx
 	
 	JList<Email> emails=new JList<Email>();
 	
-	new Thread(new Runnable() {
-		
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			emails.setModel(Mail.LoginMail(username, password));
-		}
-	}).start();
+	
 	((DefaultListCellRenderer)emails.getCellRenderer()).setOpaque(false);
 	emails.setFixedCellHeight(70);
 	emails.setBorder(new EmptyBorder(10,5, 10, 0));
@@ -108,8 +126,29 @@ public void init(String username, String password) throws IOException, TwitterEx
 	scroll.setOpaque(false);
 	scroll.getViewport().setOpaque(false);
 	scroll.setPreferredSize(new Dimension(250,490));
-	email.add(scroll);
+	//email.add(scroll);
 	
+new Thread(new Runnable() {
+		
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			JTextPane load=new JTextPane();
+			load.setEditable(false);
+			load.setOpaque(false);
+			load.setText("Loading...");
+			load.setPreferredSize(new Dimension(100,50));
+			email.add(load);
+			DefaultListModel<Email> mail=Mail.LoginMail(username, password);
+			email.remove(load);
+			
+			emails.setModel(mail);
+			email.add(scroll);
+			launcher.revalidate();
+			launcher.repaint();
+			
+		}
+	}).start();
 	
 	JList<FacePost> facePosts=new JList<FacePost>(face.getTimeLinePosts());//filtro retirado pra teste
 	((DefaultListCellRenderer)facePosts.getCellRenderer()).setOpaque(false);
@@ -166,9 +205,18 @@ public void init(String username, String password) throws IOException, TwitterEx
 	launcher.add(background);
 	launcher.setSize(800, 600);
 	launcher.pack();
-	
-	
 
  }
+
+/**
+ * Gets the JFrame that serves as launcher of the window.
+ * @return launcher
+ */
+
+public JFrame getLauncher() {
+	return launcher;
+}
+
+
 
 }

@@ -7,10 +7,23 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
+/**
+ * 
+ * Class that updates the JFrame of the App and shows a singular email's content.
+ * @author Diogo
+ *
+ */
+
 public class EmailSingular {
-	public	JFrame launcher;
+	
+	private	JFrame launcher;
 	private Email email;
 	
+	/**
+	 * Contructor, it call the methods necessary to create the GUI to show a email.
+	 * @param email email to show.
+	 * @throws  I/O exception of some sort has occurred
+	 */
 	public EmailSingular(Email email){
 		try {
 			this.email=email;
@@ -20,8 +33,16 @@ public class EmailSingular {
 			e.printStackTrace();
 		}
 	}	
+	
+	/**
+	 * Launches and builds the email window.
+	 * Initiates the frame components (JLabels,JTextPane).
+	 * Adds an MouseListener to the JLabel.
+	 * Puts everything in the correct positions. 
+	 * @throws IOException I/O exception of some sort has occurred
+	 */
 
-	public void init() throws IOException {
+	private void init() throws IOException {
 		
 		//SettingsJFrame
 		launcher = new JFrame("BOM DIA ACADEMIA!");
@@ -47,6 +68,7 @@ public class EmailSingular {
 		
 		JTextPane area=new JTextPane();
 		area.setContentType("text/html");
+		area.setEditable(false);
 		area.setPreferredSize(new Dimension(720,380));
 		
 		area.setText("<html> Email: "+ email.getSubject() +"<br/> <html>From: "+ email.getFrom()+ "<br/>Date:"+email.getTimestamp()+ "<br/><html>"+ email.getBody());
@@ -104,9 +126,16 @@ public class EmailSingular {
 		launcher.pack();
 
 	 }
-	/*
-	public static void main(String args[]){
-	    new EmailSingular();
 
-	}*/
+	/**
+	 * Gets the JFrame that serves as launcher of the window.
+	 * @return launcher
+	 */
+	
+	public JFrame getLauncher() {
+		return launcher;
 	}
+	
+	
+	
+}

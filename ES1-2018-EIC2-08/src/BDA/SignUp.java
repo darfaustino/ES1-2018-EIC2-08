@@ -170,6 +170,7 @@ public class SignUp {
 		 * It checks if a file named "config.xml" exists.
 		 * If exists, it adds a new child Node("Account") to the file with the info of a new created account.
 		 * If not, it creates the file, creates a ParentNode("ISCTEAccounts") and adds a new  child Node("Account") to the file with the info of a new created account.
+		 * Also adds 2 child Node ("Facebook") and ("Twitter") to the Parent Node ("Account") with the respective access token in the Attributes.
 		 * @param Mainemail The User's Login mail of the BDA application.
 		 * @param Mainpassword The User's Login password of the BDA application.
 		 * @param name The User's name.
