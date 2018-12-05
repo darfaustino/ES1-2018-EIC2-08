@@ -21,7 +21,7 @@ public class LoginMail {
 		String pass="EngenhariaSoftware98";
 		
 		DefaultListModel<Email> mail=Mail.LoginMail(email, pass);
-		assertEquals(20, mail.size()-1);
+		assertEquals(20, mail.size());
 		
 	}
 

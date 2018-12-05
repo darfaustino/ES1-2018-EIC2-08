@@ -144,7 +144,7 @@ public final class TwitterApp {
 		}
 	}
 	
-	private static void BackupTweets(){
+	public static void BackupTweets(){
 		
 		
 		try {

@@ -150,7 +150,7 @@ public class Facebook {
 		
 	}
 	
-	private ArrayList<FacePost> PostsList(){
+	public ArrayList<FacePost> PostsList(){
 		Connection<Post> result = fbClient.fetchConnection("me/feed", Post.class);
 		int counter = 0;
 		int counterTotal = 0;
@@ -238,7 +238,7 @@ public class Facebook {
         	
         	public static DefaultListModel<FacePost> FetchFromBackup(){
         		
-        		DefaultListModel<FacePost> emails = new DefaultListModel<FacePost>();
+        		DefaultListModel<FacePost> posts = new DefaultListModel<FacePost>();
         		try {
 
         			File file = new File("config.xml");
@@ -262,7 +262,7 @@ public class Facebook {
         						Node m=elist.item(i);
         						
         						if (m.getNodeType() == Node.ELEMENT_NODE && m.getNodeName().equals("Post")) {
-        						emails.addElement(new FacePost(((Element) m).getAttribute("Id"), ((Element) m).getAttribute("Message"), ((Element) m).getAttribute("Story"), ((Element) m).getAttribute("Date")));
+        						posts.addElement(new FacePost(((Element) m).getAttribute("Id"), ((Element) m).getAttribute("Message"), ((Element) m).getAttribute("Story"), ((Element) m).getAttribute("Date")));
         					}
         					}
         					
@@ -274,7 +274,7 @@ public class Facebook {
         			// TODO Auto-generated catch block
         			e.printStackTrace();
         		}
-        		return emails;
+        		return posts;
         	}
 	
 }

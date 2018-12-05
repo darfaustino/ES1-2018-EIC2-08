@@ -43,13 +43,13 @@ public class Tweet_init {
 		assertNotNull(r);
 		
 //      JLabel name	
-		JLabel lblNewLabel = new JLabel(s.name);
-		assertTrue(lblNewLabel.getText().equals(s.name));
+		JLabel lblNewLabel = new JLabel(s.getName());
+		assertTrue(lblNewLabel.getText().equals(s.getName()));
 		
 //      JArea text
 		JTextArea text = new JTextArea();
-		text.append(s.text);
-		assertTrue(text.getText().equals(s.text));
+		text.append(s.getText());
+		assertTrue(text.getText().equals(s.getText()));
 		
 	}
 

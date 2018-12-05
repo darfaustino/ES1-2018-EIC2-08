@@ -292,7 +292,7 @@ public class Mail {
 	}
 	
 	
-	private static void BackupMail(ArrayList<Email> list1){
+	public static void BackupMail(ArrayList<Email> list1){
 	
 			try {
 				

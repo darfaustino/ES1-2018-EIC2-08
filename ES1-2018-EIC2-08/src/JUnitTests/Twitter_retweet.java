@@ -20,7 +20,7 @@ public class Twitter_retweet {
 		assertNotNull(t);
 		Status status=null;
 		try {
-			status = TwitterApp.twitter.updateStatus("Retweet:  " + t.name + ":" + t.text);
+			status = TwitterApp.twitter.updateStatus("Retweet:  " + t.getName() + ":" + t.getText());
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
