@@ -28,6 +28,10 @@ private TwitterApp twitterapp;
 private boolean isFaceOn;
 private boolean isMailOn;
 private boolean isTwitterOn;
+private JList<FacePost> facePosts;
+private JList <T> tweets;
+private JList<Email> emails;
+private DefaultListModel<Email> mail;
 
 	
 /**
@@ -87,7 +91,7 @@ private void init(String username, String password) throws IOException, TwitterE
 	email.setPreferredSize(new Dimension(245,525));
 	GridBagConstraints c=new GridBagConstraints();
 	c.gridx=0;
-	c.gridy=0;
+	c.gridy=1;
 	c.insets=new Insets(70, 0,0,0);
 	c.gridheight=3;
 	background.add(email,c);
@@ -96,7 +100,7 @@ private void init(String username, String password) throws IOException, TwitterE
 	facebook.setOpaque(false);
 	facebook.setPreferredSize(new Dimension(245,525));
 	c.gridx=1;
-	c.gridy=0;
+	c.gridy=1;
 	c.gridheight=3;
 	c.insets=new Insets(70,15,0,15);
 	background.add(facebook,c);
@@ -105,12 +109,13 @@ private void init(String username, String password) throws IOException, TwitterE
 	twitter.setOpaque(false);
 	twitter.setPreferredSize(new Dimension(245,525));
 	c.gridx=2;
-	c.gridy=0;
+	c.gridy=1;
 	c.gridheight=3;
 	c.insets=new Insets(70, 0,0,0);
 	background.add(twitter,c);
 	
-	JList<Email> emails=new JList<Email>();
+	//JList<Email> emails;
+	emails=new JList<Email>();
 	
 	
 	((DefaultListCellRenderer)emails.getCellRenderer()).setOpaque(false);
@@ -149,7 +154,7 @@ new Thread(new Runnable() {
 			load.setText("Loading...");
 			load.setPreferredSize(new Dimension(100,50));
 			email.add(load);
-			DefaultListModel<Email> mail;
+			
 			System.out.println(isMailOn);
 			if(isMailOn){
 				
@@ -167,7 +172,7 @@ new Thread(new Runnable() {
 		}
 	}).start();
 	
-	JList<FacePost> facePosts;
+	//JList<FacePost> facePosts;
 	System.out.println(isFaceOn);
 	System.out.println(isTwitterOn);
 	if(isFaceOn && face!=null){
@@ -200,7 +205,7 @@ new Thread(new Runnable() {
 	scroll2.setPreferredSize(new Dimension(250,490));
 	facebook.add(scroll2);
 	
-	JList <T> tweets;
+	//JList <T> tweets;
 	
 	if(isTwitterOn && twitterapp!=null){
 		tweets=new JList<T>(twitterapp.getTimeline());
@@ -225,6 +230,7 @@ new Thread(new Runnable() {
 		}
 	});
 	
+	//
 	
 	JScrollPane scroll3=new JScrollPane(tweets);
 	scroll3.setOpaque(false);
@@ -232,6 +238,44 @@ new Thread(new Runnable() {
 	scroll3.setPreferredSize(new Dimension(250,490));
 	twitter.add(scroll3);
 	
+	
+	//Atualizar conteudo
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	JButton but= new JButton("Atualizar");
+	
+	 but.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        	if(isTwitterOn && twitterapp!=null){
+	        		try {
+						tweets=new JList<T>(twitterapp.getTimeline());
+					} catch (TwitterException e1) {
+						e1.printStackTrace();
+					}
+	        	}
+	        	if(isFaceOn && face!=null){
+	       		 facePosts=new JList<FacePost>(face.getTimeLinePosts());
+	       	} 	
+	        	if(isMailOn){
+					
+					 mail=Mail.LoginMail(username, password);
+				}
+	        	emails.setModel(mail);
+	        }
+	    } );
+	 
+	
+	
+		
+		but.setPreferredSize(new Dimension(50,20));
+		c.gridx=0;
+		c.gridy=0;
+		c.gridheight=1;
+		c.insets=new Insets(10,10,0,0);
+		background.add(but,c);
+		
+	 
+		
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	launcher.add(background);
 	launcher.setSize(800, 600);
@@ -243,6 +287,9 @@ new Thread(new Runnable() {
  * Gets the JFrame that serves as launcher of the window.
  * @return launcher
  */
+
+
+
 
 public JFrame getLauncher() {
 	return launcher;
