@@ -25,6 +25,10 @@ public class MainTimeline {
 private JFrame launcher;
 private Facebook face;
 private TwitterApp twitterapp;
+private boolean isFaceOn;
+private boolean isMailOn;
+private boolean isTwitterOn;
+
 	
 /**
  * Contructor, initiates the GUI and displays the content.
@@ -34,17 +38,23 @@ private TwitterApp twitterapp;
  * @param password Given Account Outlook Password
  * @throws TwitterException problem in the Twitter
  */
-public MainTimeline(Facebook face, TwitterApp twitter, String username, String password) throws TwitterException{
+public MainTimeline(Facebook face, TwitterApp twitter, String username, String password, boolean f, boolean t) throws TwitterException{
 	try {
 		this.face=face;
 		this.twitterapp=twitter;
+		this.isFaceOn=f;
+		this.isTwitterOn=t;
+		this.isMailOn=Mail.isMailOnline();
 		init(username, password);
+		
 		
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 }
+
+
 
 /**
  * It creates the Gui with all its Features.
@@ -139,9 +149,16 @@ new Thread(new Runnable() {
 			load.setText("Loading...");
 			load.setPreferredSize(new Dimension(100,50));
 			email.add(load);
-			DefaultListModel<Email> mail=Mail.LoginMail(username, password);
-			email.remove(load);
+			DefaultListModel<Email> mail;
+			System.out.println(isMailOn);
+			if(isMailOn){
+				
+				 mail=Mail.LoginMail(username, password);
+			}else{
+				 mail=Mail.FetchFromBackup();
+			}
 			
+			email.remove(load);
 			emails.setModel(mail);
 			email.add(scroll);
 			launcher.revalidate();
@@ -150,7 +167,15 @@ new Thread(new Runnable() {
 		}
 	}).start();
 	
-	JList<FacePost> facePosts=new JList<FacePost>(face.getTimeLinePosts());//filtro retirado pra teste
+	JList<FacePost> facePosts;
+	System.out.println(isFaceOn);
+	System.out.println(isTwitterOn);
+	if(isFaceOn && face!=null){
+		 facePosts=new JList<FacePost>(face.getTimeLinePosts());//filtro retirado pra teste
+	}else{
+		 facePosts=new JList<FacePost>(Facebook.FetchFromBackup());
+	}
+	
 	((DefaultListCellRenderer)facePosts.getCellRenderer()).setOpaque(false);
 	facePosts.setFixedCellHeight(70);
 	facePosts.setBorder(new EmptyBorder(10,5, 10, 0));
@@ -175,8 +200,14 @@ new Thread(new Runnable() {
 	scroll2.setPreferredSize(new Dimension(250,490));
 	facebook.add(scroll2);
 	
-
-	JList <T> tweets=new JList<T>(twitterapp.getTimeline());
+	JList <T> tweets;
+	
+	if(isTwitterOn && twitterapp!=null){
+		tweets=new JList<T>(twitterapp.getTimeline());
+	}else{
+		tweets=new JList<T>(TwitterApp.FetchFromBackup());
+	}
+	
 	((DefaultListCellRenderer)tweets.getCellRenderer()).setOpaque(false);
 	tweets.setFixedCellHeight(70);
 	tweets.setBorder(new EmptyBorder(10,5, 10, 0));
@@ -216,6 +247,7 @@ new Thread(new Runnable() {
 public JFrame getLauncher() {
 	return launcher;
 }
+
 
 
 

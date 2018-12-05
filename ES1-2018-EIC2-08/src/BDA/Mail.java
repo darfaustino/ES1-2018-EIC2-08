@@ -1,5 +1,9 @@
 package BDA;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Properties;
@@ -20,6 +24,23 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.swing.DefaultListModel;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  * 
@@ -29,7 +50,10 @@ import javax.swing.DefaultListModel;
 
 public class Mail {
 	
-
+	
+	
+	
+	
 	/**
 	 * It logins a OutLook email account, fetches and saves the most recent 20 emails of the inbox.
 	 * @param password Account password
@@ -71,6 +95,7 @@ public class Mail {
 	      }
 	      
 	      Collections.sort(order);
+	      BackupMail(order);
 	      DefaultListModel<Email> emails=new DefaultListModel<Email>();
 	      
 	      for(Email e: order){
@@ -249,6 +274,114 @@ public class Mail {
 		}
 
 		return null;
+	}
+	
+	public  static boolean isMailOnline(){
+		try {
+			
+		Socket socket=new Socket();
+		int port = 80;
+        InetSocketAddress socketAddress = new InetSocketAddress("outlook.office365.com", port);
+		socket.connect(socketAddress, 3000);
+		return true;
+		} catch (IOException e) {
+			
+			return false;
+			
+		}
+	}
+	
+	
+	private static void BackupMail(ArrayList<Email> list1){
+	
+			try {
+				
+			File file = new File("config.xml");
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder;
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(file);
+			Element root=doc.getDocumentElement();
+			
+				NodeList list = doc.getChildNodes().item(0).getChildNodes();
+				for (int count = 0; count < list.getLength(); count++) {
+
+					Node tempNode = list.item(count);
+					if(tempNode.getNodeName().equals("Mail")){
+						System.out.println("found");
+						tempNode.getParentNode().removeChild(tempNode);
+					}
+				}
+				
+				Element mail=doc.createElement("Mail");
+				root.appendChild(mail);
+				
+				for(Email e:list1){
+					Element email=doc.createElement("Email");
+					email.setAttribute("Subject", e.getSubject());
+					email.setAttribute("Body", e.getBody());
+					email.setAttribute("From", e.getFrom());
+					email.setAttribute("Date", String.valueOf(e.getTimestamp().getTime()));
+					mail.appendChild(email);
+				}
+			
+			 Transformer transformer = TransformerFactory.newInstance().newTransformer();
+	         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+	         StreamResult result = new StreamResult(new FileOutputStream("config.xml"));
+	         DOMSource source = new DOMSource(doc);
+	         transformer.transform(source, result);
+	         System.out.println("Backup");
+			
+			
+			
+			
+		
+		} catch (ParserConfigurationException | SAXException | IOException | TransformerFactoryConfigurationError | TransformerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	
+	public static DefaultListModel<Email> FetchFromBackup(){
+		
+		DefaultListModel<Email> emails = new DefaultListModel<Email>();
+		try {
+
+			File file = new File("config.xml");
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder;
+
+			dBuilder = dbFactory.newDocumentBuilder();
+
+			Document doc = dBuilder.parse(file);
+			doc.getDocumentElement().normalize();
+
+			NodeList list = doc.getChildNodes().item(0).getChildNodes();
+			for (int count = 0; count < list.getLength(); count++) {
+
+				Node tempNode = list.item(count);
+				
+				if(tempNode.getNodeName().equals("Mail")){
+					
+					NodeList elist=tempNode.getChildNodes();
+					for(int i=0; i<elist.getLength(); i++){
+						Node m=elist.item(i);
+						
+						if (m.getNodeType() == Node.ELEMENT_NODE && m.getNodeName().equals("Email")) {
+						emails.addElement(new Email(((Element) m).getAttribute("Subject"), ((Element) m).getAttribute("From"), ((Element) m).getAttribute("Body"), ((Element) m).getAttribute("Date")));
+					}
+					}
+					
+				}
+				
+			}
+
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return emails;
 	}
 		
 

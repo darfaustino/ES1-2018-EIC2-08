@@ -7,9 +7,32 @@ package BDA;
  */
 
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -49,6 +72,7 @@ public final class TwitterApp {
 			TwitterFactory tf = new TwitterFactory(cb.build());
 			twitter = tf.getInstance();	
 			tweets= new DefaultListModel<T>();
+			BackupTweets();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -100,9 +124,120 @@ public final class TwitterApp {
 	 */
 	
 	public void retweet(T s) throws TwitterException {
-		Status status = twitter.updateStatus("Retweet:  " + s.name + ":" + s.text);
+		Status status = twitter.updateStatus("Retweet:  " + s.getName() + ":" + s.getText());
 		System.out.println("Successfully updated the status to [" + status.getText() + "].");
 	}
+	
+	
+	public  static boolean isTwitterOnline(){
+		try {
+			
+		Socket socket=new Socket();
+		int port = 80;
+        InetSocketAddress socketAddress = new InetSocketAddress("twitter.com", port);
+		socket.connect(socketAddress, 3000);
+		return true;
+		} catch (IOException e) {
+			
+			return false;
+			
+		}
+	}
+	
+	private static void BackupTweets(){
+		
+		
+		try {
+			ArrayList<T> list1=new ArrayList<T>();
+		List <Status> statuses = twitter.getHomeTimeline();
+		for (Status status : statuses) {
+			T x = new T (status.getUser().getName(), status.getText());
+			list1.add(x);
+		}
+			
+		File file = new File("config.xml");
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder;
+		dBuilder = dbFactory.newDocumentBuilder();
+		Document doc = dBuilder.parse(file);
+		Element root=doc.getDocumentElement();
+		
+			NodeList list = doc.getChildNodes().item(0).getChildNodes();
+			for (int count = 0; count < list.getLength(); count++) {
+
+				Node tempNode = list.item(count);
+				if(tempNode.getNodeName().equals("Twitter")){
+					System.out.println("found");
+					tempNode.getParentNode().removeChild(tempNode);
+				}
+			}
+			
+			Element twitter=doc.createElement("Twitter");
+			root.appendChild(twitter);
+			
+			for(T e:list1){
+				Element tweet=doc.createElement("Tweet");
+				tweet.setAttribute("Username", e.getName());
+				tweet.setAttribute("Text", e.getText());
+				twitter.appendChild(tweet);
+			}
+		
+		 Transformer transformer = TransformerFactory.newInstance().newTransformer();
+         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+         StreamResult result = new StreamResult(new FileOutputStream("config.xml"));
+         DOMSource source = new DOMSource(doc);
+         transformer.transform(source, result);
+         System.out.println("Backup");
+	
+	} catch (ParserConfigurationException | SAXException | IOException | TransformerFactoryConfigurationError | TransformerException | TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+}
+	
+	
+public static DefaultListModel<T> FetchFromBackup(){
+		
+		DefaultListModel<T> tweets = new DefaultListModel<T>();
+		try {
+
+			File file = new File("config.xml");
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder;
+
+			dBuilder = dbFactory.newDocumentBuilder();
+
+			Document doc = dBuilder.parse(file);
+			doc.getDocumentElement().normalize();
+
+			NodeList list = doc.getChildNodes().item(0).getChildNodes();
+			for (int count = 0; count < list.getLength(); count++) {
+
+				Node tempNode = list.item(count);
+				
+				if(tempNode.getNodeName().equals("Twitter")){
+					
+					NodeList elist=tempNode.getChildNodes();
+					for(int i=0; i<elist.getLength(); i++){
+						Node m=elist.item(i);
+						
+						if (m.getNodeType() == Node.ELEMENT_NODE && m.getNodeName().equals("Tweet")) {
+						tweets.addElement(new T(((Element) m).getAttribute("Username"), ((Element) m).getAttribute("Text")));
+					}
+					}
+					
+				}
+				
+			}
+
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tweets;
+	}
+	
+	
 	
 }
 

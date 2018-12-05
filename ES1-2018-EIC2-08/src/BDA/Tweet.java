@@ -116,11 +116,11 @@ public class Tweet {
 	 	c.insets=new Insets(80, 0,0,0);
 		tweet.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel(t.name);
+		JLabel lblNewLabel = new JLabel(t.getName());
 		tweet.add(lblNewLabel, BorderLayout.NORTH);
 		
 		JTextArea text = new JTextArea();
-		text.append(t.text);
+		text.append(t.getText());
 		text.setEditable(false);
 		tweet.add(text, BorderLayout.CENTER);
 	

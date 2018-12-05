@@ -140,12 +140,29 @@ public class Login {
 					if(Found){
 						try {
 							
-							Facebook face=new Facebook(ftoken);
-							String[] tokens=ttoken.split(";");
-							System.out.println(tokens);
-							TwitterApp twitter=new TwitterApp(tokens[0], tokens[1], tokens[2], tokens[3]);
+							boolean f=Facebook.isFacebookOnline();
+							boolean t=TwitterApp.isTwitterOnline();
+							
+							Facebook face;
+							TwitterApp twitter;
+							
+							if(f){
+								face=new Facebook(ftoken);
+							}else{
+								face=null;
+							}
+							
+							if(t){
+								 String[] tokens=ttoken.split(";");
+								 twitter=new TwitterApp(tokens[0], tokens[1], tokens[2], tokens[3]);
+								 
+							}else{
+								twitter=null;
+								
+							}
+
 							launcher.dispose();
-							new MainTimeline(face, twitter, username, password);
+							new MainTimeline(face, twitter, username, password,f,t);
 						} catch (TwitterException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

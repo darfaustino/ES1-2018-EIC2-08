@@ -9,12 +9,12 @@ public class T {
 	/**
 	 * Represents the the tweet's user.
 	 */
-		public String name;
+		private String name;
 		
 		/**
 		 * Represents the the tweet's text.
 		 */
-		public String text;
+		private String text;
 		
 
 		/**
@@ -36,6 +36,14 @@ public class T {
 		@Override
 		public String toString() {
 			return "<html> Tweet: <br/>" + text ;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getText() {
+			return text;
 		}
 		
 		

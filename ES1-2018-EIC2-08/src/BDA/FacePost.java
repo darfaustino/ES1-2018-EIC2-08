@@ -31,6 +31,15 @@ public class FacePost {
 		story=post.getStory();
 	}
 		
+	public FacePost(String id, String message, String story, String date) {
+		// TODO Auto-generated constructor stub
+		this.id=Integer.valueOf(id);
+		this.message=message;
+		this.story=story;
+		this.date=new Date(Long.valueOf(date));
+		
+	}
+
 	@Override
 	public String toString() {
 		return "<html> FacePost: "+ id +"<br/>Date:"+date+"<br/Story:"+story;

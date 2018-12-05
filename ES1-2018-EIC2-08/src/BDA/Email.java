@@ -54,6 +54,15 @@ public class Email implements Comparable<Email>{
 		}
 	}
 	
+	public Email(String subject, String from, String body, String date) {
+		// TODO Auto-generated constructor stub
+		this.subject=subject;
+		this.from=from;
+		this.body=body;
+		this.timestamp=new Date(Long.parseLong(date));
+		
+	}
+
 	/**
 	 * Gets the Timestamp of the Email.
 	 * @return timestamp
