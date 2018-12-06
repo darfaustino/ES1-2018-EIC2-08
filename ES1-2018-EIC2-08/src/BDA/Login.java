@@ -113,7 +113,7 @@ public class Login {
 									Found=true;
 									for(int i=0; i<childs.getLength(); i++){
 										Node temp=childs.item(i);
-									
+										
 										if(temp.hasAttributes()){
 											if(((Element) temp).hasAttribute("Facebook")){
 												ftoken=((Element) temp).getAttribute("Facebook");

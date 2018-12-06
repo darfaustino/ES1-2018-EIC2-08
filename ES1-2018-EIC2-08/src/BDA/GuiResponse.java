@@ -83,7 +83,9 @@ public class GuiResponse {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				
+				enviar.setEnabled(false);
 				Mail.SendMail(email.getMsm(), messagetext.getText());
+				launcher.dispose();
 				
 			}
 			

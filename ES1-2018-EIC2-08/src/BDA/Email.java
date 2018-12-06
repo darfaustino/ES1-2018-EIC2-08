@@ -6,8 +6,9 @@ import java.util.Date;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeUtility;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
+//import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
 /**
  * 
