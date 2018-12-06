@@ -11,9 +11,9 @@ import com.restfb.types.Post;
 public class FacePost {
 
 	private int id;
-	private String message;
+	String message;
 	private Post post;
-	private Date date;
+	Date date;
 	private String story;
 	
 	/**

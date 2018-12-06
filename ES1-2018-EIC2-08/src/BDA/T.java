@@ -1,5 +1,7 @@
 package BDA;
 
+import java.util.Date;
+
 /**Represents a tweet's object
  *
  * 
@@ -9,12 +11,12 @@ public class T {
 	/**
 	 * Represents the the tweet's user.
 	 */
-		private String name;
+		String name;
 		
 		/**
 		 * Represents the the tweet's text.
 		 */
-		private String text;
+		String text;
 		
 
 		/**
@@ -23,10 +25,13 @@ public class T {
 		 * @param text tweet given text
 		 */
 		
-		public T(String name, String text) {
+		Date date;
+		
+		public T(String name, String text, Date date) {
 			super();
 			this.name = name;
 			this.text = text;
+			this.date=date;
 		}
 		
 		/**
