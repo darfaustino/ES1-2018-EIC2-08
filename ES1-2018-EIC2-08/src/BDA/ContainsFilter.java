@@ -17,6 +17,7 @@ import javax.swing.DefaultListModel;
 
 public class ContainsFilter extends JFrame {
 
+	
 	private JPanel contentPane;
 	private JTextField textField;
 	private JList<FacePost>facePosts;

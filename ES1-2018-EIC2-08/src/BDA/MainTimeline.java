@@ -304,6 +304,7 @@ public class MainTimeline {
 						e1.printStackTrace();
 					}
 				}
+				
 				if (isFaceOn && face != null) {
 					facePosts.setModel(face.getTimeLinePosts());
 				}

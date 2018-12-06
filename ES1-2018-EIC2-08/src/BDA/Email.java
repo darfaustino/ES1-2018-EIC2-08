@@ -18,6 +18,7 @@ import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
  *
  */
 
+
 public class Email implements Comparable<Email>{
 
 	private Message msm;

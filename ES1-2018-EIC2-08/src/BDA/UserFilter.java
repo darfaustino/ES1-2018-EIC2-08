@@ -16,6 +16,7 @@ import twitter4j.TwitterException;
 
 public class UserFilter extends JFrame {
 
+	
 	private JPanel contentPane;
 	private JTextField textField;
 	private JList<FacePost>facePosts;

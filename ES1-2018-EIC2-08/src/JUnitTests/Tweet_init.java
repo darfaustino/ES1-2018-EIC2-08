@@ -26,6 +26,7 @@ public class Tweet_init {
 		assertNotNull(s);
 		assertNotNull(t);
 		
+		
 //		frame
 		Background background=null;
 		try {
