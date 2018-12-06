@@ -33,6 +33,7 @@ private JList <T> tweets;
 private JList<Email> emails;
 private DefaultListModel<Email> mail;
 
+
 	
 /**
  * Contructor, initiates the GUI and displays the content.
@@ -181,10 +182,13 @@ new Thread(new Runnable() {
 	//JList<FacePost> facePosts;
 	System.out.println(isFaceOn);
 	System.out.println(isTwitterOn);
-	if(isFaceOn && face!=null){
-		 facePosts=new JList<FacePost>(face.getTimeLinePosts());//filtro retirado pra teste
+	 facePosts=new JList<FacePost>();
+	
+			 if(isFaceOn && face!=null){
+				 facePosts.setModel(face.getTimeLinePosts());//filtro retirado pra teste
 	}else{
-		 facePosts=new JList<FacePost>(Facebook.FetchFromBackup());
+		
+		 facePosts.setModel(Facebook.FetchFromBackup());
 	}
 	
 	((DefaultListCellRenderer)facePosts.getCellRenderer()).setOpaque(false);
@@ -211,12 +215,13 @@ new Thread(new Runnable() {
 	scroll2.setPreferredSize(new Dimension(250,490));
 	facebook.add(scroll2);
 	
-	//JList <T> tweets;
 	
+	tweets=new JList<T>();
 	if(isTwitterOn && twitterapp!= null){
-		tweets=new JList<T>(twitterapp.getTimeline());
+		tweets.setModel(twitterapp.getTimeline());
 	}else{
-		tweets=new JList<T>(TwitterApp.FetchFromBackup());
+		
+		tweets.setModel(TwitterApp.FetchFromBackup());
 	}
 	
 	((DefaultListCellRenderer)tweets.getCellRenderer()).setOpaque(false);
@@ -253,13 +258,13 @@ new Thread(new Runnable() {
 	        public void actionPerformed(ActionEvent e) {
 	        	if(isTwitterOn && twitterapp!=null){
 	        		try {
-						tweets=new JList<T>(twitterapp.getTimeline());
+	        			tweets.setModel(twitterapp.getTimeline());
 					} catch (TwitterException e1) {
 						e1.printStackTrace();
 					}
 	        	}
 	        	if(isFaceOn && face!=null){
-	       		 facePosts=new JList<FacePost>(face.getTimeLinePosts());
+	        		facePosts.setModel(face.getTimeLinePosts());
 	       	} 	
 	        	if(isMailOn){
 					
