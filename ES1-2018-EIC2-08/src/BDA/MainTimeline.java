@@ -143,7 +143,7 @@ public class MainTimeline {
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		c.insets = new Insets(12, 0, 0, 0);
+		c.insets = new Insets(50, 0, 0, 0);
 		c.gridheight = 2;
 		panel.add(email, c);
 
@@ -153,7 +153,7 @@ public class MainTimeline {
 		c.gridx = 1;
 		c.gridy = 0;
 		c.gridheight = 2;
-		c.insets = new Insets(12, 15, 0, 15);
+		c.insets = new Insets(50, 15, 0, 15);
 		panel.add(facebook, c);
 
 		JPanel twitter = new JPanel();
@@ -162,7 +162,7 @@ public class MainTimeline {
 		c.gridx = 2;
 		c.gridy = 0;
 		c.gridheight = 2;
-		c.insets = new Insets(12, 0, 0, 0);
+		c.insets = new Insets(50, 0, 0, 0);
 		panel.add(twitter, c);
 		background.add(panel);
 

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -177,6 +178,7 @@ public final class TwitterApp {
 				Element tweet = doc.createElement("Tweet");
 				tweet.setAttribute("Username", e.getName());
 				tweet.setAttribute("Text", e.getText());
+				tweet.setAttribute("Date", String.valueOf(e.getDate().getTime()));
 				twitter.appendChild(tweet);
 			}
 
@@ -221,7 +223,7 @@ public final class TwitterApp {
 						Node m = elist.item(i);
 
 						if (m.getNodeType() == Node.ELEMENT_NODE && m.getNodeName().equals("Tweet")) {
-							tweets.addElement(new T(((Element) m).getAttribute("Username"), ((Element) m).getAttribute("Text"), ((Element) m).getAttribute("Date")));
+							tweets.addElement(new T(((Element) m).getAttribute("Username"), ((Element) m).getAttribute("Text"),new Date(Long.valueOf(((Element) m).getAttribute("Date")))));
 						}
 					}
 

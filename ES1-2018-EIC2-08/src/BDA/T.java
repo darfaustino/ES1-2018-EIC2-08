@@ -12,12 +12,12 @@ public class T {
 	/**
 	 * Represents the the tweet's user.
 	 */
-		String name;
+		private String name;
 		
 		/**
 		 * Represents the the tweet's text.
 		 */
-		String text;
+	 private	String text;
 		
 
 		/**
@@ -26,7 +26,7 @@ public class T {
 		 * @param text tweet given text
 		 */
 		
-		Date date;
+		private Date date;
 		
 		public T(String name, String text, Date date) {
 			super();
@@ -50,6 +50,10 @@ public class T {
 
 		public String getText() {
 			return text;
+		}
+
+		public Date getDate() {
+			return date;
 		}
 		
 		
