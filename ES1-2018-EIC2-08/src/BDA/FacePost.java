@@ -12,9 +12,9 @@ import com.restfb.types.Post;
 public class FacePost {
 
 	private int id;
-	String message;
+	private String message;
 	private Post post;
-	Date date;
+	private Date date;
 	private String story;
 	
 	/**

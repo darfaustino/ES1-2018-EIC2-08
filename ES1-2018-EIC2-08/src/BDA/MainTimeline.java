@@ -118,7 +118,7 @@ public class MainTimeline {
 
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Clean Filters");
 		menuBar.add(mntmNewMenuItem_3);
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					emails.setModel(mail);
@@ -295,7 +295,7 @@ public class MainTimeline {
 		
 		JMenuItem button = new JMenuItem("Atualizar");
 		menuBar.add(button);
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (isTwitterOn && twitterapp != null) {
 					try {

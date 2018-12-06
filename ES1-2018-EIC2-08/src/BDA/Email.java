@@ -23,9 +23,9 @@ public class Email implements Comparable<Email>{
 
 	private Message msm;
 	private String subject;
-	String from;
-	String body;
-	Date timestamp;
+	private String from;
+	private String body;
+	private Date timestamp;
 	
 	/**
 	 * Constructor, receives a Message as a parameter and copies the message subject, body and whom is from.

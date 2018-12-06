@@ -73,24 +73,24 @@ public class DateFilter extends JFrame {
 		DefaultListModel<T> t = new DefaultListModel<>();
 
 		for (int i = 0; i < tweets.getModel().getSize(); i++) {
-			if (tweets.getModel().getElementAt(i).date.getDay() == day
-					&& tweets.getModel().getElementAt(i).date.getMonth() == month-1
-					&& tweets.getModel().getElementAt(i).date.getYear() == year-1900) {
+			if (tweets.getModel().getElementAt(i).getDate().getDay() == day
+					&& tweets.getModel().getElementAt(i).getDate().getMonth() == month-1
+					&& tweets.getModel().getElementAt(i).getDate().getYear() == year-1900) {
 				t.addElement(tweets.getModel().getElementAt(i));
 			}
 		}
 		for (int j = 0; j < emails.getModel().getSize(); j++) {
-			if (emails.getModel().getElementAt(j).timestamp.getDay() == day
-					&& emails.getModel().getElementAt(j).timestamp.getMonth() == month-1
-					&& emails.getModel().getElementAt(j).timestamp.getYear() == year-1900) {
+			if (emails.getModel().getElementAt(j).getTimestamp().getDay() == day
+					&& emails.getModel().getElementAt(j).getTimestamp().getMonth() == month-1
+					&& emails.getModel().getElementAt(j).getTimestamp().getYear() == year-1900) {
 				e.addElement(emails.getModel().getElementAt(j));
 			}
 		}
 
 		for (int k = 0; k < facePosts.getModel().getSize(); k++) {
-			if (facePosts.getModel().getElementAt(k).date.getDay()==day
-					&& facePosts.getModel().getElementAt(k).date.getMonth()==month-1
-					&& facePosts.getModel().getElementAt(k).date.getYear()==year-1900) {
+			if (facePosts.getModel().getElementAt(k).getDate().getDay()==day
+					&& facePosts.getModel().getElementAt(k).getDate().getMonth()==month-1
+					&& facePosts.getModel().getElementAt(k).getDate().getYear()==year-1900) {
 				f.addElement(facePosts.getModel().getElementAt(k));
 			}
 		}

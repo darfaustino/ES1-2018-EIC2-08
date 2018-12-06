@@ -68,12 +68,12 @@ public class UserFilter extends JFrame {
 		DefaultListModel<T> t = new DefaultListModel<>();
 
 		for (int i = 0; i < tweets.getModel().getSize(); i++) {
-			if (tweets.getModel().getElementAt(i).name.equals(s)) {
+			if (tweets.getModel().getElementAt(i).getName().contains(s)) {
 				t.addElement(tweets.getModel().getElementAt(i));
 			}
 		}
 		for (int j = 0; j < emails.getModel().getSize(); j++) {
-			if (emails.getModel().getElementAt(j).from.equals(s)) {
+			if (emails.getModel().getElementAt(j).getFrom().contains(s)) {
 				e.addElement(emails.getModel().getElementAt(j));
 			}
 		}

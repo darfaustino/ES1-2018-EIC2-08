@@ -64,18 +64,18 @@ public class ContainsFilter extends JFrame {
 		DefaultListModel<T> t = new DefaultListModel<>();
 
 		for (int i = 0; i < tweets.getModel().getSize(); i++) {
-			if (tweets.getModel().getElementAt(i).text.contains(s)) {
+			if (tweets.getModel().getElementAt(i).getText().contains(s)) {
 				t.addElement(tweets.getModel().getElementAt(i));
 			}
 		}
 		for (int j = 0; j < emails.getModel().getSize(); j++) {
-			if (emails.getModel().getElementAt(j).body.contains(s)) {
+			if (emails.getModel().getElementAt(j).getBody().contains(s)) {
 				e.addElement(emails.getModel().getElementAt(j));
 			}
 		}
 
 		for (int k = 0; k < facePosts.getModel().getSize(); k++) {
-			if (facePosts.getModel().getElementAt(k).message.contains(s)) {
+			if (facePosts.getModel().getElementAt(k).getMessage().contains(s)) {
 				f.addElement(facePosts.getModel().getElementAt(k));
 			}
 		}
