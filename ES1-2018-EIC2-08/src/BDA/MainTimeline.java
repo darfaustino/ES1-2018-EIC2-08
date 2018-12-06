@@ -290,73 +290,22 @@ public class MainTimeline {
 		scroll3.setPreferredSize(new Dimension(250, 490));
 		twitter.add(scroll3);
 
-		// Atualizar conteudo
-		///////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		JMenuItem button = new JMenuItem("Atualizar");
 		menuBar.add(button);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (isTwitterOn && twitterapp != null) {
-					try {
-						tweets.setModel(twitterapp.getTimeline());
-					} catch (TwitterException e1) {
-						e1.printStackTrace();
-					}
-				}
-				
-				if (isFaceOn && face != null) {
-					facePosts.setModel(face.getTimeLinePosts());
-				}
-				if (isMailOn) {
 
-					mail = Mail.LoginMail(username, password);
+				try {
+					tweets.setModel(twitterapp.getTimeline());
+					facePosts.setModel(face.getTimeLinePosts());
+					emails.setModel(Mail.LoginMail(username, password));
+				} catch (Exception e2) {
+
 				}
-				emails.setModel(mail);
 			}
 		});
-		
-		
-//		JButton but = new JButton("Atualizar");
-//
-//		but.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				if (isTwitterOn && twitterapp != null) {
-//					try {
-//						tweets.setModel(twitterapp.getTimeline());
-//					} catch (TwitterException e1) {
-//						e1.printStackTrace();
-//					}
-//				}
-//				if (isFaceOn && face != null) {
-//					facePosts.setModel(face.getTimeLinePosts());
-//				}
-//				if (isMailOn) {
-//
-//					mail = Mail.LoginMail(username, password);
-//				}
-//				emails.setModel(mail);
-//			}
-//		});
-		
-		
-
-//		JPanel buttons = new JPanel();
-//		buttons.setOpaque(false);
-//		but.setPreferredSize(new Dimension(100, 20));
-//		buttons.setPreferredSize(new Dimension(200, 30));
-//		buttons.add(but);
-//		c.gridx=0;
-//		c.gridy=0;
-//		c.gridwidth=3;
-//		c.insets=new Insets(0, 150,0,20);
-		// c.gridheight=1;
-		// c.insets=new Insets(10,10,0,0);
-//		background.add(buttons, BorderLayout.PAGE_START);
-
-		///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 		launcher.add(background);
+		
 		launcher.setSize(800, 600);
 		launcher.pack();
 
