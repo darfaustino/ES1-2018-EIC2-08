@@ -61,20 +61,37 @@ public class EmailSingular {
 		c.gridheight=2;
 		c.insets=new Insets(80, 0, 0, 0);
 		
-		JPanel text=new JPanel();
+		JPanel text=new JPanel(new GridBagLayout());
 		text.setPreferredSize(new Dimension(730,380));
+		text.setOpaque(false);
 		background.add(text, c);
 		
+		GridBagConstraints g=new GridBagConstraints();
+		g.gridx=0;
+		g.gridy=0;
+		g.gridwidth=3;
+		JTextPane info=new JTextPane();
+		info.setOpaque(false);
+		info.setPreferredSize(new Dimension(720,100));
+		info.setEditable(false);
+		info.setContentType("text/html");
+		info.setText("<html> Email: "+ email.getSubject() +"<br/> <html>From: "+ email.getFrom()+ "<br/>Date:"+email.getTimestamp());
+		text.add(info, g);
+		
 		JTextPane area=new JTextPane();
+		
 		area.setContentType("text/html");
 		area.setEditable(false);
-		area.setPreferredSize(new Dimension(720,380));
+		area.setPreferredSize(new Dimension(720,280));
 		
-		area.setText("<html> Email: "+ email.getSubject() +"<br/> <html>From: "+ email.getFrom()+ "<br/>Date:"+email.getTimestamp()+ "<br/><br/><br/><br/><html>"+ email.getBody());
+		area.setText("<html>"+ email.getBody());
 		
 		JScrollPane scroll =new JScrollPane(area);
-		scroll.setPreferredSize(new Dimension(720,380));
-		text.add(scroll);
+		scroll.setPreferredSize(new Dimension(720,280));
+		g.gridy=1;
+		g.gridx=0;
+		g.gridheight=2;
+		text.add(scroll, g);
 		
 		
 		JLabel r=new JLabel(new ImageIcon("images/responder.png"));

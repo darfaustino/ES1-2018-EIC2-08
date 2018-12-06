@@ -81,38 +81,44 @@ private void init(String username, String password) throws IOException, TwitterE
 	
 	//Background
 	Background background=new Background("images/maintimeline.png");
-	background.setLayout(new GridBagLayout());
+	background.setLayout(new BorderLayout());
 	background.setPreferredSize(new Dimension(800,600));
 	
 	
 	//JTextPanes
+	
+	JPanel panel=new JPanel(new GridBagLayout());
+	panel.setOpaque(false);
+	panel.setPreferredSize(new Dimension(800, 515));
+	
 	JPanel email= new JPanel(new FlowLayout());
 	email.setOpaque(false);
-	email.setPreferredSize(new Dimension(245,525));
+	email.setPreferredSize(new Dimension(245,495));
 	GridBagConstraints c=new GridBagConstraints();
 	c.gridx=0;
-	c.gridy=1;
-	c.insets=new Insets(70, 0,0,0);
-	c.gridheight=3;
-	background.add(email,c);
+	c.gridy=0;
+	c.insets=new Insets(12, 0,0,0);
+	c.gridheight=2;
+	panel.add(email,c);
 	
 	JPanel facebook= new JPanel();
 	facebook.setOpaque(false);
-	facebook.setPreferredSize(new Dimension(245,525));
+	facebook.setPreferredSize(new Dimension(245,495));
 	c.gridx=1;
-	c.gridy=1;
-	c.gridheight=3;
-	c.insets=new Insets(70,15,0,15);
-	background.add(facebook,c);
+	c.gridy=0;
+	c.gridheight=2;
+	c.insets=new Insets(12,15,0,15);
+	panel.add(facebook,c);
 	
 	JPanel twitter= new JPanel();
 	twitter.setOpaque(false);
-	twitter.setPreferredSize(new Dimension(245,525));
+	twitter.setPreferredSize(new Dimension(245,495));
 	c.gridx=2;
-	c.gridy=1;
-	c.gridheight=3;
-	c.insets=new Insets(70, 0,0,0);
-	background.add(twitter,c);
+	c.gridy=0;
+	c.gridheight=2;
+	c.insets=new Insets(12, 0,0,0);
+	panel.add(twitter,c);
+	background.add(panel);
 	
 	//JList<Email> emails;
 	emails=new JList<Email>();
@@ -207,7 +213,7 @@ new Thread(new Runnable() {
 	
 	//JList <T> tweets;
 	
-	if(isTwitterOn && twitterapp!=null){
+	if(isTwitterOn && twitterapp!= null){
 		tweets=new JList<T>(twitterapp.getTimeline());
 	}else{
 		tweets=new JList<T>(TwitterApp.FetchFromBackup());
@@ -265,13 +271,18 @@ new Thread(new Runnable() {
 	 
 	
 	
-		
-		but.setPreferredSize(new Dimension(50,20));
-		c.gridx=0;
-		c.gridy=0;
-		c.gridheight=1;
-		c.insets=new Insets(10,10,0,0);
-		background.add(but,c);
+		JPanel buttons=new JPanel();
+		buttons.setOpaque(false);
+		but.setPreferredSize(new Dimension(100,20));
+		buttons.setPreferredSize(new Dimension(200,30));
+		buttons.add(but);
+//		c.gridx=0;
+//		c.gridy=0;
+//		c.gridwidth=3;
+//		c.insets=new Insets(0, 150,0,20);
+		//c.gridheight=1;
+		//c.insets=new Insets(10,10,0,0);
+		background.add(buttons, BorderLayout.PAGE_START);
 		
 	 
 		
