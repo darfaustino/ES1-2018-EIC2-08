@@ -71,7 +71,7 @@ public class Login {
 		
 		Cursor cur=new Cursor(Cursor.HAND_CURSOR);
 		
-		  l1 = new JLabel("Username");
+		  l1 = new JLabel("Email");
 		  l2 = new JLabel("Password");
 		  tf1 = new JTextField();
 		  p1 = new JPasswordField();
@@ -162,7 +162,7 @@ public class Login {
 							}
 
 							launcher.dispose();
-							new MainTimeline(face, twitter, username, password,f,t);
+							new MainTimeline(email,face, twitter, username, password,f,t);
 						} catch (TwitterException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

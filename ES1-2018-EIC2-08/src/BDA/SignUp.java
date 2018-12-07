@@ -5,7 +5,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -15,12 +14,11 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import JUnitTests.Twitter_initTwitter;
-
 import java.awt.*;
-	import java.awt.event.*;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,8 +31,6 @@ import java.io.IOException;
 
 public class SignUp {
 
-	
-	
 		private	JFrame launcher;
 		private JLabel  l1, l2, l3, l4;
 		private JTextField tf1;
@@ -152,7 +148,11 @@ public class SignUp {
 				public void actionPerformed(ActionEvent arg0) {
 					
 					if(email_txt.getText().contains("@iscte-iul.pt") && p1.getPassword().length!=0){
-					openMailForm(email_txt.getText(), p1.getPassword(), tf1.getText());
+						if(!duplicateMail(email_txt.getText())){
+							openMailForm(email_txt.getText(), p1.getPassword(), tf1.getText());
+						}else{
+							JOptionPane.showMessageDialog(new JFrame(), "There's already one account with that email");
+						}
 					}else{
 						if(p1.getPassword().length==0){
 							JOptionPane.showMessageDialog(new JFrame(), "You must insert a password");
@@ -165,6 +165,42 @@ public class SignUp {
 			});;
 		}
 
+		
+		/**
+		 * It checks if the email isn't already present in an account.
+		 * @param email		email that is going to be compared to the user's mails.
+		 * @return			true if is a duplicate or false otherwise.
+		 */
+		
+		private boolean duplicateMail(String email) {
+			boolean duplicate=false;
+			File file = new File("config.xml");
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder;
+			try {
+				dBuilder = dbFactory.newDocumentBuilder();
+				Document doc = dBuilder.parse(file);
+				doc.getDocumentElement().normalize();
+
+				NodeList list = doc.getChildNodes().item(0).getChildNodes();
+				for (int count = 0; count < list.getLength(); count++) {
+					Node tempNode = list.item(count);
+					if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
+						if (tempNode.hasAttributes()) {
+							if (((Element) tempNode).getAttribute("Email").equals(email)) {
+								duplicate=true;
+								break;	
+							}
+						}
+					}
+				}
+					
+			} catch (ParserConfigurationException | SAXException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			return duplicate;
+		}
 		
 		/**
 		 * It checks if a file named "config.xml" exists.

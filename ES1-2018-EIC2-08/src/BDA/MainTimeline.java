@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionListener;
 
 import com.restfb.types.Post;
 
+
 import twitter4j.TwitterException;
 
 import java.awt.*;
@@ -38,13 +39,14 @@ public class MainTimeline {
 	/**
 	 * Contructor, initiates the GUI and displays the content.
 	 * 
-	 * @param face     Given Facebook access
-	 * @param twitter  Given Twitter access
-	 * @param username Given Account Outlook Email
-	 * @param password Given Account Outlook Password
+	 * @param userEmail		User email account 
+	 * @param face     		Given Facebook access
+	 * @param twitter  		Given Twitter access
+	 * @param username 		Given Account Outlook Email
+	 * @param password 		Given Account Outlook Password
 	 * @throws TwitterException problem in the Twitter
 	 */
-	public MainTimeline(Facebook face, TwitterApp twitter, String username, String password, boolean f, boolean t)
+	public MainTimeline(String userEmail, Facebook face, TwitterApp twitter, String username, String password, boolean f, boolean t)
 			throws TwitterException {
 		try {
 			this.face = face;
@@ -52,7 +54,7 @@ public class MainTimeline {
 			this.isFaceOn = f;
 			this.isTwitterOn = t;
 			this.isMailOn = Mail.isMailOnline();
-			init(username, password);
+			init(userEmail, username, password);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -65,13 +67,14 @@ public class MainTimeline {
 	 * Facebook posts Gives acess to every Email, Tweets and Facebook posts
 	 * displayed in the GUI
 	 * 
+	 * @param userEmail		User email account 
 	 * @param username Given email account
 	 * @param password Given email account's password
 	 * @throws IOException      Some I/O exception occurred.
 	 * @throws TwitterException Some Twitter Exception occurred.
 	 */
 
-	private void init(String username, String password) throws IOException, TwitterException {
+	private void init(String userEmail, String username, String password) throws IOException, TwitterException {
 
 		// SettingsJFrame
 		launcher = new JFrame("BOM DIA ACADEMIA!");
@@ -131,6 +134,34 @@ public class MainTimeline {
 			}
 		});
 
+		JMenu menu2 = new JMenu("My Account");
+		menuBar.add(menu2);
+
+		JMenuItem changeN = new JMenuItem("Change Username");
+		menu2.add(changeN);
+		changeN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ChangeName(userEmail);
+			}
+		});
+
+		JMenuItem changeP = new JMenuItem("Change Password");
+		menu2.add(changeP);
+		changeP.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ChangePass(userEmail);
+			}
+		});
+
+		JMenuItem changeE = new JMenuItem("Change Email");
+		menu2.add(changeE);
+		changeE.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ChangeMail(userEmail);
+				launcher.dispose();
+			}
+		});
+		
 		// JTextPanes
 
 		JPanel panel = new JPanel(new GridBagLayout());
