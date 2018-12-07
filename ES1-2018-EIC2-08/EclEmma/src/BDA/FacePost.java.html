@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>FacePost.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">BDA</a> &gt; <span class="el_source">FacePost.java</span></div><h1>FacePost.java</h1><pre class="source lang-java linenums">package BDA;
+
+import java.util.Date;
+import com.restfb.types.Post;
+
+
+	/** 
+	 * Face Post.
+	 *
+	 */
+
+public class FacePost {
+
+	private int id;
+	private String message;
+	private Post post;
+	private Date date;
+	private String story;
+	
+	/**
+	 * Constructor, it initializes all attributes: id, message, post, date and story.
+	 * 
+	 * @param p				The post from Facebook that contains all the information needed.
+	 * @param counter		The number that will serve has the id from the FacePost.
+	 */
+	
+<span class="fc" id="L27">	public FacePost (Post p, int counter){</span>
+<span class="fc" id="L28">		post=p;</span>
+<span class="fc" id="L29">		id=counter;</span>
+<span class="fc" id="L30">		message=post.getMessage();</span>
+<span class="fc" id="L31">		date=post.getCreatedTime();</span>
+<span class="fc" id="L32">		story=post.getStory();</span>
+<span class="fc" id="L33">	}</span>
+		
+	/**
+	 * Contructor, Creates a facebook post with given parameters
+	 * @param id post id
+	 * @param message post message
+	 * @param story post story
+	 * @param date post date
+	 */
+	
+<span class="fc" id="L43">	public FacePost(String id, String message, String story, String date) {</span>
+		// TODO Auto-generated constructor stub
+<span class="fc" id="L45">		this.id=Integer.valueOf(id);</span>
+<span class="fc" id="L46">		this.message=message;</span>
+<span class="fc" id="L47">		this.story=story;</span>
+<span class="fc" id="L48">		this.date=new Date(Long.valueOf(date));</span>
+		
+<span class="fc" id="L50">	}</span>
+
+	@Override
+	public String toString() {
+<span class="fc" id="L54">		return &quot;&lt;html&gt; FacePost: &quot;+ id +&quot;&lt;br/&gt;Date:&quot;+date+&quot;&lt;br/Story:&quot;+story;</span>
+	}
+
+	/**
+	 * 
+	 * @return		Returns the id number of the FacePost.
+	 */
+	
+	public int getId() {
+<span class="fc" id="L63">		return id;</span>
+	}
+
+	/**
+	 * 
+	 * @return		Returns the message of the FacePost.
+	 */
+	
+	public String getMessage() {
+<span class="fc" id="L72">		return message;</span>
+	}
+	
+	/**
+	 * 
+	 * @return		Returns the story of the FacePost.
+	 */
+	
+	public String getStory() {
+<span class="fc" id="L81">		return story;</span>
+	}
+	
+	/**
+	 * 
+	 * @return		Returns the post of the FacePost.
+	 */
+	
+	public Post getPost() {
+<span class="fc" id="L90">		return post;</span>
+	}
+
+	/**
+	 * 
+	 * @return		Returns the date of the FacePost.
+	 */
+	
+	public Date getDate() {
+<span class="fc" id="L99">		return date;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Background.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">BDA</a> &gt; <span class="el_source">Background.java</span></div><h1>Background.java</h1><pre class="source lang-java linenums">package BDA;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
+	/**
+	 * Class that creates the app background image.
+	 */
+@SuppressWarnings(&quot;serial&quot;)
+public class Background extends JPanel {
+
+	
+	
+		public Image backgroundImage;
+		
+		/**
+		 * Constructor, calls method init() and builds the app main window, where you can navigate to login or signup.
+		 * @param fileName Image filename.
+		 * @throws IOException cannot read the image.
+		 */
+		
+<span class="fc" id="L26">		public Background(String fileName) throws IOException {</span>
+<span class="fc" id="L27">		   backgroundImage = ImageIO.read(new File(fileName));</span>
+<span class="fc" id="L28">		   this.setOpaque(false);</span>
+<span class="fc" id="L29">		}</span>
+
+		
+		
+		
+		@Override
+		protected void paintComponent(Graphics g) {
+			// TODO Auto-generated method stub
+<span class="fc" id="L37">			super.paintComponent(g);</span>
+<span class="fc" id="L38">			g.drawImage(backgroundImage,0,0,null);</span>
+<span class="fc" id="L39">		}</span>
+		
+		
+		
+	
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

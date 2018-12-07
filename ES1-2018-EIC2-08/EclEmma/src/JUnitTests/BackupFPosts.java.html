@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>BackupFPosts.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">JUnitTests</a> &gt; <span class="el_source">BackupFPosts.java</span></div><h1>BackupFPosts.java</h1><pre class="source lang-java linenums">package JUnitTests;
+
+import static org.junit.Assert.*;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import com.restfb.Connection;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.types.Post;
+
+import BDA.FacePost;
+import BDA.Facebook;
+
+<span class="fc" id="L27">public class BackupFPosts {</span>
+
+	private FacebookClient fbClient;
+	private String accessToken;
+	
+	@SuppressWarnings(&quot;deprecation&quot;)
+	@Before
+	public void setUp() throws Exception {
+<span class="fc" id="L35">		accessToken=&quot;EAADoYhkS7RcBAEKHnrBd4T60iYQZCm1jfrK4xpq1quSDLCcQW7tAOXIw5TiK26A1MVZBTCV2jcijb8&quot;</span>
+				+ &quot;cdV1BtMuSZCOBdYRcDAMINHo7j4ws6F76RZC1uWuK18sZAZAZCSl99RXPJERm8okjSfMptfZCUKCc40KjUeEdtMi0a23ZCFJQZDZD&quot;;
+<span class="fc" id="L37">		fbClient=new DefaultFacebookClient(accessToken);</span>
+<span class="fc" id="L38">	}</span>
+	
+	
+	@Test
+	public void test() {
+		
+<span class="fc" id="L44">		Connection&lt;Post&gt; result = fbClient.fetchConnection(&quot;me/feed&quot;, Post.class);</span>
+<span class="fc" id="L45">		int counter = 0;</span>
+		
+<span class="fc" id="L47">		ArrayList&lt;FacePost&gt; lista= new ArrayList&lt;FacePost&gt;();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">		for (List&lt;Post&gt; page : result) {</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">			for (Post aPost : page) {</span>
+				// Filters only posts that contain the word &quot;ISCTE&quot;
+<span class="fc bfc" id="L51" title="All 2 branches covered.">				if (aPost.getMessage() != null /*&amp;&amp; aPost.getMessage().contains(&quot;ISCTE&quot;)*/) {</span>
+<span class="fc" id="L52">					lista.add((new FacePost(aPost, counter)));</span>
+<span class="fc" id="L53">					counter++;</span>
+				}
+				
+			}
+		}
+<span class="fc" id="L58">		Facebook.BackupFPosts(lista);</span>
+<span class="fc" id="L59">		boolean found=false;</span>
+		try {
+			
+<span class="fc" id="L62">			File file = new File(&quot;config.xml&quot;);</span>
+<span class="fc" id="L63">			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();</span>
+			DocumentBuilder dBuilder;
+<span class="fc" id="L65">			dBuilder = dbFactory.newDocumentBuilder();</span>
+<span class="fc" id="L66">			Document doc = dBuilder.parse(file);</span>
+			@SuppressWarnings(&quot;unused&quot;)
+<span class="fc" id="L68">			Element root=doc.getDocumentElement();</span>
+			
+<span class="fc" id="L70">				NodeList list = doc.getChildNodes().item(0).getChildNodes();</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">				for (int count = 0; count &lt; list.getLength(); count++) {</span>
+
+<span class="fc" id="L73">					Node tempNode = list.item(count);</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">					if(tempNode.getNodeName().equals(&quot;Facebook&quot;)){</span>
+<span class="fc" id="L75">						found=true;</span>
+					}
+				}
+<span class="pc" id="L78">		}catch (Exception e) {</span>
+			
+		}
+<span class="fc" id="L81">			assertTrue(found);	</span>
+		
+		
+<span class="fc" id="L84">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

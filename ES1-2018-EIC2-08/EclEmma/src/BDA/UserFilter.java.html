@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserFilter.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">BDA</a> &gt; <span class="el_source">UserFilter.java</span></div><h1>UserFilter.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package BDA;</span>
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import twitter4j.TwitterException;
+
+@SuppressWarnings(&quot;serial&quot;)
+public class UserFilter extends JFrame {
+
+	
+	private JPanel contentPane;
+	private JTextField textField;
+	private JList&lt;FacePost&gt;facePosts;
+	private JList&lt;Email&gt; emails;
+	private JList&lt;T&gt; tweets;
+	
+	
+
+	
+	/**
+	 * Create the frame.
+	 * @param tweets list of tweets
+	 * @param emails list of emails
+	 * @param facePosts list of posts
+	 */
+<span class="fc" id="L37">	public UserFilter(JList&lt;FacePost&gt; facePosts, JList&lt;Email&gt; emails, JList&lt;T&gt; tweets) {</span>
+<span class="fc" id="L38">		this.facePosts=facePosts;</span>
+<span class="fc" id="L39">		this.emails=emails;</span>
+<span class="fc" id="L40">		this.tweets=tweets;</span>
+<span class="fc" id="L41">		setTitle(&quot;User Filter&quot;);</span>
+<span class="fc" id="L42">		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
+<span class="fc" id="L43">		setBounds(100, 100, 333, 77);</span>
+<span class="fc" id="L44">		contentPane = new JPanel();</span>
+<span class="fc" id="L45">		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="fc" id="L46">		setContentPane(contentPane);</span>
+<span class="fc" id="L47">		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));</span>
+		
+<span class="fc" id="L49">		textField = new JTextField();</span>
+<span class="fc" id="L50">		contentPane.add(textField);</span>
+<span class="fc" id="L51">		textField.setColumns(10);</span>
+		
+<span class="fc" id="L53">		JButton btnNewButton = new JButton(&quot;Filter&quot;);</span>
+<span class="fc" id="L54">		contentPane.add(btnNewButton);</span>
+<span class="fc" id="L55">		btnNewButton.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try {
+<span class="nc" id="L58">					userFilter(textField.getText());</span>
+<span class="nc" id="L59">				} catch (TwitterException e1) {</span>
+					// TODO Auto-generated catch block
+<span class="nc" id="L61">					e1.printStackTrace();</span>
+				}
+<span class="nc" id="L63">			}});</span>
+<span class="fc" id="L64">		setVisible(true);</span>
+<span class="fc" id="L65">	}</span>
+	
+	/**
+	 * Filters the 3 lists by username
+	 * @param s username
+	 * @throws TwitterException twitter exception
+	 */
+	public void userFilter(String s) throws TwitterException {
+<span class="fc" id="L73">		DefaultListModel&lt;Email&gt; e = new DefaultListModel&lt;&gt;();</span>
+<span class="fc" id="L74">		DefaultListModel&lt;FacePost&gt; f = new DefaultListModel&lt;&gt;();</span>
+<span class="fc" id="L75">		DefaultListModel&lt;T&gt; t = new DefaultListModel&lt;&gt;();</span>
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">		for (int i = 0; i &lt; tweets.getModel().getSize(); i++) {</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">			if (tweets.getModel().getElementAt(i).getName().contains(s)) {</span>
+<span class="nc" id="L79">				t.addElement(tweets.getModel().getElementAt(i));</span>
+			}
+		}
+<span class="fc bfc" id="L82" title="All 2 branches covered.">		for (int j = 0; j &lt; emails.getModel().getSize(); j++) {</span>
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">			if (emails.getModel().getElementAt(j).getFrom().contains(s)) {</span>
+<span class="fc" id="L84">				e.addElement(emails.getModel().getElementAt(j));</span>
+			}
+		}
+
+<span class="fc" id="L88">		emails.setModel(e);</span>
+<span class="fc" id="L89">		facePosts.setModel(f);</span>
+<span class="fc" id="L90">		tweets.setModel(t);</span>
+<span class="fc" id="L91">	}</span>
+
+	/**
+	 * Gets the facebook post list
+	 * @return list of posts
+	 */
+	public JList&lt;FacePost&gt; getFacePosts() {
+<span class="fc" id="L98">		return facePosts;</span>
+	}
+
+	/**
+	 * Gets the list of emails
+	 * @return list of emails
+	 */
+	public JList&lt;Email&gt; getEmails() {
+<span class="fc" id="L106">		return emails;</span>
+	}
+
+	/**
+	 * Gets the list of tweets
+	 * @return list of tweets
+	 */
+	public JList&lt;T&gt; getTweets() {
+<span class="fc" id="L114">		return tweets;</span>
+	}
+
+	
+	
+	
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>InitLogin.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">JUnitTests</a> &gt; <span class="el_source">InitLogin.java</span></div><h1>InitLogin.java</h1><pre class="source lang-java linenums">package JUnitTests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import BDA.Home;
+import BDA.Login;
+
+<span class="fc" id="L10">public class InitLogin {</span>
+
+	@Test
+	public void test() {
+<span class="fc" id="L14">		Home home=new Home();</span>
+<span class="fc" id="L15">		Login login=new Login(home.getLauncher());</span>
+		
+		//LoginFrame Test
+		
+<span class="fc" id="L19">		int width=login.getLauncher().getWidth();</span>
+<span class="fc" id="L20">		int height=login.getLauncher().getHeight();</span>
+<span class="fc" id="L21">		boolean isVisible= login.getLauncher().isVisible();</span>
+<span class="fc" id="L22">		int componentnumber=login.getLauncher().getComponentCount();</span>
+<span class="fc" id="L23">		assertEquals(800, width);</span>
+<span class="fc" id="L24">		assertEquals(600, height);</span>
+<span class="fc" id="L25">		assertEquals(true, isVisible);</span>
+<span class="fc" id="L26">		assertEquals(1, componentnumber);</span>
+		
+		//JLabel1 Test
+		
+<span class="fc" id="L30">		int l1width=login.getL1().getWidth();</span>
+<span class="fc" id="L31">		int l1height=login.getL1().getHeight();</span>
+<span class="fc" id="L32">		int l1X=login.getL1().getX();</span>
+<span class="fc" id="L33">		int l1Y= login.getL1().getY();</span>
+<span class="fc" id="L34">		String username=login.getL1().getText();</span>
+<span class="fc" id="L35">		assertEquals(200, l1width);</span>
+<span class="fc" id="L36">		assertEquals(30, l1height);</span>
+<span class="fc" id="L37">		assertEquals(50, l1X);</span>
+<span class="fc" id="L38">		assertEquals(270, l1Y);</span>
+<span class="fc" id="L39">		assertEquals(&quot;Email&quot;, username);</span>
+	
+		//JLabel2 Test
+		
+<span class="fc" id="L43">		int l2width=login.getL2().getWidth();</span>
+<span class="fc" id="L44">		int l2height=login.getL2().getHeight();</span>
+<span class="fc" id="L45">		int l2X=login.getL2().getX();</span>
+<span class="fc" id="L46">		int l2Y= login.getL2().getY();</span>
+<span class="fc" id="L47">		String password=login.getL2().getText();</span>
+<span class="fc" id="L48">		assertEquals(200, l2width);</span>
+<span class="fc" id="L49">		assertEquals(30, l2height);</span>
+<span class="fc" id="L50">		assertEquals(50, l2X);</span>
+<span class="fc" id="L51">		assertEquals(330, l2Y);</span>
+<span class="fc" id="L52">		assertEquals(&quot;Password&quot;, password);</span>
+		
+		//JTextField Test
+		
+<span class="fc" id="L56">		int txtwidth=login.getTf1().getWidth();</span>
+<span class="fc" id="L57">		int txtheight=login.getTf1().getHeight();</span>
+<span class="fc" id="L58">		int txtX=login.getTf1().getX();</span>
+<span class="fc" id="L59">		int txtY=login.getTf1().getY();</span>
+<span class="fc" id="L60">		assertEquals(200,txtwidth);</span>
+<span class="fc" id="L61">		assertEquals(30, txtheight);</span>
+<span class="fc" id="L62">		assertEquals(120, txtX);</span>
+<span class="fc" id="L63">		assertEquals(270, txtY);</span>
+		
+		//JPassword Test
+<span class="fc" id="L66">		int passwidth=login.getP1().getWidth();</span>
+<span class="fc" id="L67">		int passheight=login.getP1().getHeight();</span>
+<span class="fc" id="L68">		int passX=login.getP1().getX();</span>
+<span class="fc" id="L69">		int passY=login.getP1().getY();</span>
+<span class="fc" id="L70">		assertEquals(200,passwidth);</span>
+<span class="fc" id="L71">		assertEquals(30, passheight);</span>
+<span class="fc" id="L72">		assertEquals(120, passX);</span>
+<span class="fc" id="L73">		assertEquals(330, passY);</span>
+
+		//JButton1 Test 
+<span class="fc" id="L76">		int buttonwidth=login.getBtn1().getWidth();</span>
+<span class="fc" id="L77">		int buttonheight=login.getBtn1().getHeight();</span>
+<span class="fc" id="L78">		int buttonX=login.getBtn1().getX();</span>
+<span class="fc" id="L79">		int buttonY=login.getBtn1().getY();</span>
+<span class="fc" id="L80">		assertEquals(100,buttonwidth);</span>
+<span class="fc" id="L81">		assertEquals(30, buttonheight);</span>
+<span class="fc" id="L82">		assertEquals(160, buttonX);</span>
+<span class="fc" id="L83">		assertEquals(370, buttonY);</span>
+<span class="fc" id="L84">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

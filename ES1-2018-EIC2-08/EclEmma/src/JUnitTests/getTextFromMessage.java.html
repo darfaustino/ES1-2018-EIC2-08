@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>getTextFromMessage.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">JUnitTests</a> &gt; <span class="el_source">getTextFromMessage.java</span></div><h1>getTextFromMessage.java</h1><pre class="source lang-java linenums">package JUnitTests;
+
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+
+import java.util.Properties;
+
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+
+import javax.mail.Session;
+
+import javax.mail.internet.MimeMessage;
+
+import org.junit.Test;
+
+import BDA.Mail;
+
+<span class="fc" id="L21">public class getTextFromMessage {</span>
+
+	@Test
+	public void test() {
+<span class="fc" id="L25">		String s=&quot;This is the message&quot;;</span>
+<span class="fc" id="L26">		Properties properties = new Properties();</span>
+<span class="fc" id="L27">	      properties.put(&quot;mail.pop3.host&quot;,&quot;pop.gmail.com&quot;);</span>
+<span class="fc" id="L28">	      properties.put(&quot;mail.pop3.port&quot;, &quot;995&quot;);</span>
+<span class="fc" id="L29">	      properties.put(&quot;mail.pop3.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L30">	      Session emailSession = Session.getDefaultInstance(properties);</span>
+<span class="fc" id="L31">		Message message=new MimeMessage(emailSession); </span>
+		try {
+<span class="fc" id="L33">			message.setText(s);</span>
+<span class="fc" id="L34">			String test=Mail.getTextFromMessage(message);</span>
+<span class="fc" id="L35">			assertEquals(&quot;This is the message&quot;, test);</span>
+<span class="pc" id="L36">		} catch (MessagingException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L38">			e.printStackTrace();</span>
+<span class="nc" id="L39">		} catch (IOException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L41">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L43">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

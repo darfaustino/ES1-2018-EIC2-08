@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Tweet.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">BDA</a> &gt; <span class="el_source">Tweet.java</span></div><h1>Tweet.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package BDA;</span>
+
+import javax.swing.*;
+import twitter4j.TwitterException;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.IOException;
+
+/**Represents the tweet's Frame.
+ * 
+ * 
+ */
+
+public class Tweet {
+	/**
+	 * Represents the frame.
+	 */
+	public	JFrame launcher;
+	/**
+	 * Represents the tweet.
+	 */
+	T t;
+	/**
+	 * Represents the twitter.
+	 */
+	TwitterApp twitter;
+	
+	
+	/**
+	 * Constructor, creates a frame with the tweet.
+	 * @param twitter represents twitter
+	 * @param t tweet
+	 * 
+	 */
+<span class="fc" id="L35">	public Tweet(TwitterApp twitter, T t){</span>
+<span class="fc" id="L36">		this.twitter=twitter;</span>
+<span class="fc" id="L37">		this.t=t;</span>
+		try {
+<span class="fc" id="L39">			init();</span>
+<span class="pc" id="L40">		} catch (IOException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L42">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L44">	}	</span>
+	/**
+	 * Frame's creation and customization.
+	 * @throws IOException Some error occurred
+	 */
+	public void init() throws IOException {
+		
+		//SettingsJFrame
+<span class="fc" id="L52">		launcher = new JFrame(&quot;BOM DIA ACADEMIA!&quot;);</span>
+<span class="fc" id="L53">		launcher.setResizable(false);</span>
+<span class="fc" id="L54">		launcher.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); </span>
+<span class="fc" id="L55">		launcher.setLayout(new BorderLayout());</span>
+<span class="fc" id="L56">		launcher.setVisible(true);</span>
+		
+		//Background
+<span class="fc" id="L59">		Background background=new Background(&quot;images/backtweet.png&quot;);</span>
+<span class="fc" id="L60">		background.setLayout(new GridBagLayout());</span>
+<span class="fc" id="L61">		background.setPreferredSize(new Dimension(800,600));</span>
+
+<span class="fc" id="L63">		GridBagConstraints c=new GridBagConstraints();</span>
+<span class="fc" id="L64">		c.gridx=0;</span>
+<span class="fc" id="L65">		c.gridy=0;</span>
+<span class="fc" id="L66">		c.gridheight=2;</span>
+<span class="fc" id="L67">		c.insets=new Insets(80, 0, 0, 0);</span>
+		
+<span class="fc" id="L69">		JPanel text=new JPanel(new GridBagLayout());</span>
+<span class="fc" id="L70">		text.setPreferredSize(new Dimension(730,380));</span>
+<span class="fc" id="L71">		text.setOpaque(false);</span>
+<span class="fc" id="L72">		background.add(text, c);</span>
+		
+<span class="fc" id="L74">		GridBagConstraints g=new GridBagConstraints();</span>
+<span class="fc" id="L75">		g.gridx=0;</span>
+<span class="fc" id="L76">		g.gridy=0;</span>
+<span class="fc" id="L77">		g.gridwidth=3;</span>
+<span class="fc" id="L78">		JTextPane info=new JTextPane();</span>
+<span class="fc" id="L79">		info.setOpaque(false);</span>
+<span class="fc" id="L80">		info.setPreferredSize(new Dimension(720,100));</span>
+<span class="fc" id="L81">		info.setEditable(false);</span>
+<span class="fc" id="L82">		info.setContentType(&quot;text/html&quot;);</span>
+<span class="fc" id="L83">		info.setText(&quot;From: &quot;+ t.getName()+ &quot;&lt;br/&gt;Date:&quot;+t.getDate().toString());</span>
+<span class="fc" id="L84">		text.add(info, g);</span>
+		
+<span class="fc" id="L86">		JTextPane area=new JTextPane();</span>
+		
+<span class="fc" id="L88">		area.setContentType(&quot;text/html&quot;);</span>
+<span class="fc" id="L89">		area.setEditable(false);</span>
+<span class="fc" id="L90">		area.setPreferredSize(new Dimension(720,200));</span>
+		
+<span class="fc" id="L92">		area.setText(&quot;&lt;html&gt;&quot;+ t.getText());</span>
+		
+<span class="fc" id="L94">		JScrollPane scroll =new JScrollPane(area);</span>
+<span class="fc" id="L95">		scroll.setPreferredSize(new Dimension(720,200));</span>
+<span class="fc" id="L96">		g.gridy=1;</span>
+<span class="fc" id="L97">		g.gridx=0;</span>
+<span class="fc" id="L98">		g.gridheight=2;</span>
+<span class="fc" id="L99">		text.add(scroll, g);</span>
+		
+<span class="fc" id="L101">		text.add(scroll,g);</span>
+	
+<span class="fc" id="L103">		background.add(text,c);</span>
+		
+<span class="fc" id="L105">		JLabel r=new JLabel(new ImageIcon(&quot;images/btnret.png&quot;));</span>
+<span class="fc" id="L106">		r.setPreferredSize(new Dimension(300,70));</span>
+<span class="fc" id="L107">		c.gridx=0;</span>
+<span class="fc" id="L108">		c.gridy=2;</span>
+<span class="fc" id="L109">		c.insets=new Insets(15, 0, 0, 0);</span>
+<span class="fc" id="L110">		background.add(r,c);</span>
+<span class="fc" id="L111">		r.addMouseListener(new MouseListener() {</span>
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+<span class="nc" id="L117">			}</span>
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				
+				try {
+<span class="nc" id="L123">					twitter.retweet(t);</span>
+<span class="nc" id="L124">				} catch (TwitterException e) {</span>
+					// TODO Auto-generated catch block
+<span class="nc" id="L126">					e.printStackTrace();</span>
+				}
+				
+				
+<span class="nc" id="L130">			}</span>
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+<span class="nc" id="L136">			}</span>
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+<span class="nc" id="L142">			}</span>
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+<span class="nc" id="L148">			}</span>
+		});
+
+<span class="fc" id="L151">		launcher.add(background);</span>
+<span class="fc" id="L152">		launcher.setSize(800, 600);</span>
+<span class="fc" id="L153">		launcher.pack();</span>
+<span class="fc" id="L154">	 }</span>
+	
+	}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

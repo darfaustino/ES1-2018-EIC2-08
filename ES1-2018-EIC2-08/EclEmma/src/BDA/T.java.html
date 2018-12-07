@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>T.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">BDA</a> &gt; <span class="el_source">T.java</span></div><h1>T.java</h1><pre class="source lang-java linenums">package BDA;
+
+import java.util.Date;
+
+
+/**Represents a tweet's object
+ *
+ * 
+ */
+
+public class T {
+	/**
+	 * Represents the the tweet's user.
+	 */
+		private String name;
+		
+		/**
+		 * Represents the the tweet's text.
+		 */
+	 private	String text;
+		
+
+	 /**
+		 * Represents the the tweet's date.
+		 */
+	 private Date date;
+	 
+		/**
+		 * Constructor, creates a Tweet with a user and a text.
+		 * @param name name given
+		 * @param text tweet given text
+		 * @param date date of tweet
+		 */
+		
+		
+		
+		public T(String name, String text, Date date) {
+<span class="fc" id="L38">			super();</span>
+<span class="fc" id="L39">			this.name = name;</span>
+<span class="fc" id="L40">			this.text = text;</span>
+<span class="fc" id="L41">			this.date=date;</span>
+<span class="fc" id="L42">		}</span>
+		
+		/**
+		 * Choose how to show the tweet
+		 * 
+		 */
+		@Override
+		public String toString() {
+<span class="fc" id="L50">			return &quot;&lt;html&gt; Tweet: &lt;br/&gt;&quot; + text ;</span>
+		}
+
+		/**
+		 * Gets the namo of the owner of the Tweet.
+		 * @return  tweet's nameuser
+		 */
+		public String getName() {
+<span class="fc" id="L58">			return name;</span>
+		}
+
+		/**
+		 * Gets the text of the Tweet.
+		 * @return  tweet's text
+		 */
+		public String getText() {
+<span class="fc" id="L66">			return text;</span>
+		}
+
+		/**
+		 *  Gets the date of the Tweet.
+		 * @return  tweet's date
+		 */
+		public Date getDate() {
+<span class="fc" id="L74">			return date;</span>
+		}
+		
+		
+		
+
+		
+	}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ChangePass.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">BDA</a> &gt; <span class="el_source">ChangePass.java</span></div><h1>ChangePass.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package BDA;</span>
+
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+/**
+ * Class that changes passwords of the BDA account.
+ */
+
+public class ChangePass {
+
+	private	JFrame launcher;
+	private String email;
+	
+	
+	/**
+	 * Class that allows the user to change his password.
+	 * @param email		The User's Login mail of the BDA application.
+	 */
+	
+<span class="fc" id="L50">	public ChangePass(String email){</span>
+<span class="fc" id="L51">		this.email=email;</span>
+<span class="fc" id="L52">		init();</span>
+<span class="fc" id="L53">	}</span>
+	
+	/**
+	 * 
+	 * @return		Returns the JFrame
+	 */
+	public JFrame getLauncher() {
+<span class="fc" id="L60">		return launcher;</span>
+	}
+
+	/**
+	 * 
+	 * @return		Returns the user email
+	 */
+	public String getEmail() {
+<span class="nc" id="L68">		return email;</span>
+	}
+
+	/**
+	 * Launches and builds the change password window.
+	 * Initiates the frame components (JLabels,	JPasswordFields, and JButton).
+	 * Adds an actionlistener to the button.
+	 * Puts everything in the correct positions.
+	 */
+
+	public void init() {
+		// SettingsJFrame
+<span class="fc" id="L80">		launcher = new JFrame(&quot;BOM DIA ACADEMIA!&quot;);</span>
+<span class="fc" id="L81">		launcher.setResizable(false);</span>
+<span class="fc" id="L82">		launcher.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
+<span class="fc" id="L83">		launcher.setVisible(true);</span>
+
+		// Dar Refresh
+
+<span class="fc" id="L87">		launcher.pack();</span>
+<span class="fc" id="L88">		launcher.setSize(800, 600);</span>
+		
+		//Background
+<span class="fc" id="L91">		launcher.setContentPane(new JLabel(new ImageIcon(&quot;images\\background.png&quot;)));</span>
+		
+		//Imagens
+<span class="fc" id="L94">		JLabel logo=new JLabel(new ImageIcon(&quot;images\\logo.png&quot;));</span>
+		//JLabel signup=new JLabel(new ImageIcon(&quot;images\\signup.png&quot;));
+		
+<span class="fc" id="L97">		launcher.setLayout(new GridLayout(1,2));</span>
+<span class="fc" id="L98">		JPanel signform= new JPanel();</span>
+<span class="fc" id="L99">		signform.setOpaque(false);</span>
+<span class="fc" id="L100">		signform.setLayout(null);</span>
+		
+		
+		
+		
+		 
+<span class="fc" id="L106">		  JLabel l1 = new JLabel(&quot;Password&quot;);</span>
+<span class="fc" id="L107">		  JLabel l2 = new JLabel(&quot;New Password&quot;);</span>
+<span class="fc" id="L108">		  JLabel l3 = new JLabel(&quot;Confirm Password&quot;);</span>
+		  
+<span class="fc" id="L110">		  Cursor cur=new Cursor(Cursor.HAND_CURSOR);</span>
+		 
+<span class="fc" id="L112">		  JPasswordField pass = new JPasswordField();</span>
+<span class="fc" id="L113">		  JPasswordField newPass = new JPasswordField();</span>
+<span class="fc" id="L114">		  JPasswordField confirm = new JPasswordField();</span>
+		  
+<span class="fc" id="L116">		  JButton btn1 = new JButton(&quot;Done&quot;);</span>
+<span class="fc" id="L117">		  btn1.setCursor(cur);</span>
+		  
+		  
+		  //signup.setBounds(35,-50,400,400);
+<span class="fc" id="L121">		  l1.setForeground(Color.black);</span>
+<span class="fc" id="L122">		  l2.setForeground(Color.black);</span>
+<span class="fc" id="L123">		  l3.setForeground(Color.black);</span>
+		  
+<span class="fc" id="L125">		  l1.setBounds(100, 180, 200, 30);</span>
+<span class="fc" id="L126">		  pass.setBounds(100, 210, 200, 30);</span>
+<span class="fc" id="L127">		  l2.setBounds(100, 240, 200, 30);</span>
+<span class="fc" id="L128">		  newPass.setBounds(100, 270, 200, 30);</span>
+<span class="fc" id="L129">		  l3.setBounds(100, 300, 200, 30);</span>
+<span class="fc" id="L130">		  confirm.setBounds(100, 330, 200, 30);			 </span>
+<span class="fc" id="L131">		  btn1.setBounds(160, 430, 100, 30);</span>
+		  
+		  //signform.add(signup);
+<span class="fc" id="L134">		  signform.add(l1);</span>
+<span class="fc" id="L135">		  signform.add(pass);</span>
+<span class="fc" id="L136">		  signform.add(l2);</span>
+<span class="fc" id="L137">		  signform.add(newPass);</span>
+<span class="fc" id="L138">		  signform.add(l3);</span>
+<span class="fc" id="L139">		  signform.add(btn1);</span>
+<span class="fc" id="L140">		  signform.add(confirm);</span>
+
+		
+<span class="fc" id="L143">		launcher.add(logo);</span>
+<span class="fc" id="L144">		launcher.add(signform);</span>
+	
+		//Dar Refresh
+<span class="fc" id="L147">		launcher.setSize(799,599);</span>
+<span class="fc" id="L148">		launcher.setSize(800,600);</span>
+		
+<span class="fc" id="L150">		btn1.addActionListener(new ActionListener() {</span>
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+<span class="nc bnc" id="L155" title="All 2 branches missed.">				if (new String(newPass.getPassword()).equals(new String(confirm.getPassword()))) {</span>
+<span class="nc" id="L156">					change(newPass.getPassword(), pass.getPassword());</span>
+<span class="nc bnc" id="L157" title="All 6 branches missed.">				} else if (newPass.getPassword().length == 0 || pass.getPassword().length == 0	|| confirm.getPassword().length == 0) {</span>
+<span class="nc" id="L158">					JOptionPane.showMessageDialog(new JFrame(), &quot;You can't have empty fields&quot;);</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">				} else if (!new String(newPass.getPassword()).equals(new String(confirm.getPassword()))) {</span>
+<span class="nc" id="L160">					JOptionPane.showMessageDialog(new JFrame(), &quot;You must confirm the new password&quot;);</span>
+				}
+<span class="nc" id="L162">			}</span>
+		});
+<span class="fc" id="L164">	}</span>
+	
+	
+	/**
+	 * It checks the user password.
+	 * If the password is incorrect it displays a message informing the user.
+	 * Else it changes the user password and closes the window.
+	 * Saves the changes in the XML file.
+	 * 
+	 * @param newPassword		User new password
+	 * @param password			User old password
+	 */
+	public void change(char[] newPassword, char[] password) {
+<span class="fc" id="L177">		File file = new File(&quot;config.xml&quot;);</span>
+<span class="fc" id="L178">		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();</span>
+		DocumentBuilder dBuilder;
+		try {
+<span class="fc" id="L181">			dBuilder = dbFactory.newDocumentBuilder();</span>
+<span class="fc" id="L182">			Document doc = dBuilder.parse(file);</span>
+<span class="fc" id="L183">			doc.getDocumentElement().normalize();</span>
+
+<span class="fc" id="L185">			NodeList list = doc.getChildNodes().item(0).getChildNodes();</span>
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">			for (int count = 0; count &lt; list.getLength(); count++) {</span>
+<span class="fc" id="L187">				Node tempNode = list.item(count);</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">				if (tempNode.getNodeType() == Node.ELEMENT_NODE) {</span>
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">					if (tempNode.hasAttributes()) {</span>
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">						if (((Element) tempNode).getAttribute(&quot;Email&quot;).equals(email)) {</span>
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">							if (((Element) tempNode).getAttribute(&quot;Password&quot;).equals(new String(password))) {</span>
+<span class="fc" id="L192">								((Element) tempNode).setAttribute(&quot;Password&quot;, new String(newPassword));</span>
+<span class="fc" id="L193">								launcher.dispose();</span>
+<span class="fc" id="L194">								break;</span>
+							} else {
+<span class="nc" id="L196">								JOptionPane.showMessageDialog(new JFrame(), &quot;The old password is incorrect&quot;);</span>
+<span class="nc" id="L197">								return;</span>
+							}
+						}
+					}
+				}
+			}
+<span class="fc" id="L203">			Transformer transformer = TransformerFactory.newInstance().newTransformer();</span>
+<span class="fc" id="L204">	         transformer.setOutputProperty(OutputKeys.INDENT, &quot;yes&quot;);</span>
+<span class="fc" id="L205">	         StreamResult result = new StreamResult(new FileOutputStream(&quot;config.xml&quot;));</span>
+<span class="fc" id="L206">	         DOMSource source = new DOMSource(doc);</span>
+<span class="fc" id="L207">	         transformer.transform(source, result);</span>
+<span class="pc" id="L208">		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e1) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L210">			e1.printStackTrace();</span>
+		}
+<span class="fc" id="L212">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

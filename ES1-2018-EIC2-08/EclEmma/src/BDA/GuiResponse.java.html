@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>GuiResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">BDA</a> &gt; <span class="el_source">GuiResponse.java</span></div><h1>GuiResponse.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package BDA;</span>
+
+
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+/**
+ * Class that opens Email Response Form. 
+ * @author Diogo
+ *
+ */
+
+public class GuiResponse {
+
+	private JFrame launcher;
+	private Email email;
+	private String username;
+	private String password;
+	
+	/**
+	 * Contructor, it initiates the frame and builds the Email Response Form GUI.
+	 * @param launcher frame to be initiated;
+	 * @param email  the Email which you want to respond.
+	 * @param username Mail account email
+	 * @param password Mail account password
+	 */
+	
+<span class="fc" id="L38">	public GuiResponse(String username, String password, JFrame launcher, Email email) {</span>
+<span class="fc" id="L39">		this.launcher = launcher;</span>
+<span class="fc" id="L40">		this.email=email;</span>
+<span class="fc" id="L41">		this.username=username;</span>
+<span class="fc" id="L42">		this.password=password;</span>
+<span class="fc" id="L43">		init();</span>
+<span class="fc" id="L44">	}</span>
+
+	
+	/**
+	 * Launches and builds the Email Response Window.
+	 * Initiates the frame components (JLabels,JTextPanes, JPanels , JTextField ).
+	 * Adds an MouseListener to the JLabel.
+	 * Puts everything in the correct positions. 
+	 */
+	
+	private void init() {
+		// TODO Auto-generated method stub
+		
+<span class="fc" id="L57">		launcher.getContentPane().removeAll();</span>
+<span class="fc" id="L58">		launcher.setContentPane(new JLabel(new ImageIcon(&quot;images\\emailsingular.png&quot;)));</span>
+<span class="fc" id="L59">		launcher.setLayout(new GridLayout(1,0));</span>
+		
+		
+<span class="fc" id="L62">		JPanel form=new JPanel();</span>
+<span class="fc" id="L63">		form.setPreferredSize(new Dimension(600, 600));</span>
+<span class="fc" id="L64">		form.setLayout(null);</span>
+<span class="fc" id="L65">		form.setOpaque(false);</span>
+		
+<span class="fc" id="L67">		JLabel to=new JLabel(&quot;To:&quot;);</span>
+<span class="fc" id="L68">		JLabel email1=new JLabel(email.getFrom());</span>
+<span class="fc" id="L69">		JLabel assunto=new JLabel(&quot;Assunto:&quot;);</span>
+<span class="fc" id="L70">		JLabel message=new JLabel(&quot;Message:&quot;);</span>
+<span class="fc" id="L71">		JLabel enviar=new JLabel(new ImageIcon(&quot;images/enviar.png&quot;));</span>
+<span class="fc" id="L72">		enviar.setPreferredSize(new Dimension(300,70));</span>
+		
+		
+<span class="fc" id="L75">		JTextField textass=new JTextField();</span>
+<span class="fc" id="L76">		JTextArea messagetext=new JTextArea();</span>
+		
+		
+<span class="fc" id="L79">		enviar.addMouseListener(new MouseListener() {</span>
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				
+				
+				
+<span class="nc" id="L86">			}</span>
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+<span class="nc" id="L92">				enviar.setEnabled(false);</span>
+<span class="nc" id="L93">				Mail.SendMail(email.getMsm(), messagetext.getText(),username, password);</span>
+<span class="nc" id="L94">				launcher.dispose();</span>
+				
+<span class="nc" id="L96">			}</span>
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+<span class="nc" id="L102">			}</span>
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+<span class="nc" id="L108">			}</span>
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+<span class="nc" id="L114">			}</span>
+		});
+		
+		
+<span class="fc" id="L118">		to.setBounds(90, 100, 20, 30);</span>
+<span class="fc" id="L119">		email1.setBounds(130, 90, 600, 50);</span>
+<span class="fc" id="L120">		assunto.setBounds(60, 150, 100, 30);</span>
+<span class="fc" id="L121">		message.setBounds(60, 200, 120, 30);</span>
+		
+<span class="fc" id="L123">		textass.setBounds(130, 150, 620, 40);</span>
+<span class="fc" id="L124">		messagetext.setBounds(130, 200, 620, 250);</span>
+<span class="fc" id="L125">		enviar.setBounds(450, 500, 300, 70);</span>
+		
+		
+<span class="fc" id="L128">		form.add(assunto);</span>
+<span class="fc" id="L129">		form.add(to);</span>
+<span class="fc" id="L130">		form.add(message);</span>
+<span class="fc" id="L131">		form.add(textass);</span>
+<span class="fc" id="L132">		form.add(messagetext);</span>
+<span class="fc" id="L133">		form.add(enviar);</span>
+<span class="fc" id="L134">		form.add(email1);</span>
+<span class="fc" id="L135">		launcher.add(form);</span>
+<span class="fc" id="L136">		launcher.setSize(799,599);</span>
+<span class="fc" id="L137">		launcher.setSize(800,600);</span>
+		
+		
+<span class="fc" id="L140">	}</span>
+	
+	/**
+	 * Gets the JFrame that serves as launcher of the window.
+	 * @return launcher
+	 */
+
+	public JFrame getLauncher() {
+<span class="fc" id="L148">		return launcher;</span>
+	}
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

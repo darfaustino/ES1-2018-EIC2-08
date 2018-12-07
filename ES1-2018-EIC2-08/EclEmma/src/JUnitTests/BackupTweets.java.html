@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>BackupTweets.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">JUnitTests</a> &gt; <span class="el_source">BackupTweets.java</span></div><h1>BackupTweets.java</h1><pre class="source lang-java linenums">package JUnitTests;
+
+import static org.junit.Assert.*;
+
+import java.io.File;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.junit.Test;
+import org.w3c.dom.Document;
+
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import BDA.TwitterApp;
+
+<span class="nc" id="L18">public class BackupTweets {</span>
+
+	@Test
+	public void test() {
+<span class="nc" id="L22">		TwitterApp ta = new TwitterApp(&quot;djruORHuSHJcsJW060wtuGowg&quot;,&quot;LzofRAO9R7a8sZIDofWXoix6gtXiS43MzFsrFrlqiIeKo66Ly5&quot;,&quot;1063486441114820608-2pujB6rSntopZvEd6ENTrt3gOPspgv&quot;,&quot;DTB1yFxV0pelfd9BlbBbYar6GE34rbGHA6ceDBs0beCnd&quot;);</span>
+<span class="nc" id="L23">		TwitterApp.BackupTweets();</span>
+<span class="nc" id="L24">		boolean found=false;</span>
+		try {
+			
+<span class="nc" id="L27">			File file = new File(&quot;config.xml&quot;);</span>
+<span class="nc" id="L28">			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();</span>
+			DocumentBuilder dBuilder;
+<span class="nc" id="L30">			dBuilder = dbFactory.newDocumentBuilder();</span>
+<span class="nc" id="L31">			Document doc = dBuilder.parse(file);</span>
+			
+			
+<span class="nc" id="L34">				NodeList list = doc.getChildNodes().item(0).getChildNodes();</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">				for (int count = 0; count &lt; list.getLength(); count++) {</span>
+
+<span class="nc" id="L37">					Node tempNode = list.item(count);</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">					if(tempNode.getNodeName().equals(&quot;Twitter&quot;)){</span>
+<span class="nc" id="L39">						found=true;</span>
+					}
+				}
+<span class="nc" id="L42">		}catch (Exception e) {</span>
+			
+		}
+<span class="nc" id="L45">			assertTrue(found);	</span>
+		
+<span class="nc" id="L47">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

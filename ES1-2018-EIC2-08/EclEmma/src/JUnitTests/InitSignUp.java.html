@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>InitSignUp.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">JUnitTests</a> &gt; <span class="el_source">InitSignUp.java</span></div><h1>InitSignUp.java</h1><pre class="source lang-java linenums">package JUnitTests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import BDA.Home;
+import BDA.SignUp;
+
+<span class="fc" id="L10">public class InitSignUp {</span>
+
+	@Test
+	public void test() {
+		
+<span class="fc" id="L15">		Home home=new Home();</span>
+<span class="fc" id="L16">		SignUp sign=new SignUp(home.getLauncher());</span>
+		
+		//Frame Test
+<span class="fc" id="L19">		int width=sign.getLauncher().getWidth();</span>
+<span class="fc" id="L20">		int height=sign.getLauncher().getHeight();</span>
+<span class="fc" id="L21">		boolean isVisible= sign.getLauncher().isVisible();</span>
+<span class="fc" id="L22">		int componentnumber=sign.getLauncher().getComponentCount();</span>
+<span class="fc" id="L23">		assertEquals(800, width);</span>
+<span class="fc" id="L24">		assertEquals(600, height);</span>
+<span class="fc" id="L25">		assertEquals(true, isVisible);</span>
+<span class="fc" id="L26">		assertEquals(1, componentnumber);</span>
+		
+		//JLabel1
+<span class="fc" id="L29">		int l1width=sign.getL1().getWidth();</span>
+<span class="fc" id="L30">		int l1height=sign.getL1().getHeight();</span>
+<span class="fc" id="L31">		int l1X=sign.getL1().getX();</span>
+<span class="fc" id="L32">		int l1Y= sign.getL1().getY();</span>
+<span class="fc" id="L33">		String username=sign.getL1().getText();</span>
+<span class="fc" id="L34">		assertEquals(200, l1width);</span>
+<span class="fc" id="L35">		assertEquals(30, l1height);</span>
+<span class="fc" id="L36">		assertEquals(50, l1X);</span>
+<span class="fc" id="L37">		assertEquals(210, l1Y);</span>
+<span class="fc" id="L38">		assertEquals(&quot;Name&quot;, username);</span>
+		
+		//JLabel2
+		
+<span class="fc" id="L42">		int l2width=sign.getL2().getWidth();</span>
+<span class="fc" id="L43">		int l2height=sign.getL2().getHeight();</span>
+<span class="fc" id="L44">		int l2X=sign.getL2().getX();</span>
+<span class="fc" id="L45">		int l2Y= sign.getL2().getY();</span>
+<span class="fc" id="L46">		String password=sign.getL2().getText();</span>
+<span class="fc" id="L47">		assertEquals(200, l2width);</span>
+<span class="fc" id="L48">		assertEquals(30, l2height);</span>
+<span class="fc" id="L49">		assertEquals(50, l2X);</span>
+<span class="fc" id="L50">		assertEquals(270, l2Y);</span>
+<span class="fc" id="L51">		assertEquals(&quot;Password&quot;, password);</span>
+		
+		//JLabel3 
+		
+<span class="fc" id="L55">		int l3width=sign.getL3().getWidth();</span>
+<span class="fc" id="L56">		int l3height=sign.getL3().getHeight();</span>
+<span class="fc" id="L57">		int l3X=sign.getL3().getX();</span>
+<span class="fc" id="L58">		int l3Y= sign.getL3().getY();</span>
+<span class="fc" id="L59">		String gender=sign.getL3().getText();</span>
+<span class="fc" id="L60">		assertEquals(200, l3width);</span>
+<span class="fc" id="L61">		assertEquals(30, l3height);</span>
+<span class="fc" id="L62">		assertEquals(50, l3X);</span>
+<span class="fc" id="L63">		assertEquals(330, l3Y);</span>
+<span class="fc" id="L64">		assertEquals(&quot;Gender&quot;, gender);</span>
+		
+		//JLabel4
+		
+<span class="fc" id="L68">				int l4width=sign.getL4().getWidth();</span>
+<span class="fc" id="L69">				int l4height=sign.getL4().getHeight();</span>
+<span class="fc" id="L70">				int l4X=sign.getL4().getX();</span>
+<span class="fc" id="L71">				int l4Y= sign.getL4().getY();</span>
+<span class="fc" id="L72">				String email=sign.getL4().getText();</span>
+<span class="fc" id="L73">				assertEquals(200, l4width);</span>
+<span class="fc" id="L74">				assertEquals(30, l4height);</span>
+<span class="fc" id="L75">				assertEquals(50, l4X);</span>
+<span class="fc" id="L76">				assertEquals(390, l4Y);</span>
+<span class="fc" id="L77">				assertEquals(&quot;Email&quot;, email);</span>
+				
+				//TextField 1
+				
+<span class="fc" id="L81">				int tf1width=sign.getTf1().getWidth();</span>
+<span class="fc" id="L82">				int tf1height=sign.getTf1().getHeight();</span>
+<span class="fc" id="L83">				int tf1X=sign.getTf1().getX();</span>
+<span class="fc" id="L84">				int tf1Y= sign.getTf1().getY();</span>
+<span class="fc" id="L85">				assertEquals(200, tf1width);</span>
+<span class="fc" id="L86">				assertEquals(30, tf1height);</span>
+<span class="fc" id="L87">				assertEquals(120, tf1X);</span>
+<span class="fc" id="L88">				assertEquals(210, tf1Y);</span>
+				
+				
+				//Button1
+				
+<span class="fc" id="L93">				int btn1width=sign.getBtn1().getWidth();</span>
+<span class="fc" id="L94">				int btn1height=sign.getBtn1().getHeight();</span>
+<span class="fc" id="L95">				int btn1X=sign.getBtn1().getX();</span>
+<span class="fc" id="L96">				int btn1Y= sign.getBtn1().getY();</span>
+<span class="fc" id="L97">				assertEquals(100, btn1width);</span>
+<span class="fc" id="L98">				assertEquals(30, btn1height);</span>
+<span class="fc" id="L99">				assertEquals(160, btn1X);</span>
+<span class="fc" id="L100">				assertEquals(430, btn1Y);</span>
+				
+				//PasswordField1
+				
+<span class="fc" id="L104">				int p1width=sign.getP1().getWidth();</span>
+<span class="fc" id="L105">				int p1height=sign.getP1().getHeight();</span>
+<span class="fc" id="L106">				int p1X=sign.getP1().getX();</span>
+<span class="fc" id="L107">				int p1Y= sign.getP1().getY();</span>
+<span class="fc" id="L108">				assertEquals(200, p1width);</span>
+<span class="fc" id="L109">				assertEquals(30, p1height);</span>
+<span class="fc" id="L110">				assertEquals(120, p1X);</span>
+<span class="fc" id="L111">				assertEquals(270, p1Y);</span>
+				
+				
+		
+<span class="fc" id="L115">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

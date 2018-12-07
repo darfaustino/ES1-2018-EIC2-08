@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ChangeName.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">BDA</a> &gt; <span class="el_source">ChangeName.java</span></div><h1>ChangeName.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package BDA;</span>
+
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+/**
+ * Class that changes name of the BDA account.
+ */
+
+
+public class ChangeName {
+	private	JFrame launcher;
+	private String email;
+	
+	
+	/**
+	 * Class that allows the user to change his password.
+	 * @param email		The User's Login mail of the BDA application.
+	 */
+	
+<span class="fc" id="L51">	public ChangeName(String email){</span>
+<span class="fc" id="L52">		this.email=email;</span>
+<span class="fc" id="L53">		init();</span>
+<span class="fc" id="L54">	}</span>
+
+	/**
+	 * 
+	 * @return		Returns the JFrame
+	 */
+	public JFrame getLauncher() {
+<span class="fc" id="L61">		return launcher;</span>
+	}
+
+	/**
+	 * 
+	 * @return		Returns the user email
+	 */
+	public String getEmail() {
+<span class="nc" id="L69">		return email;</span>
+	}
+
+	/**
+	 * Launches and builds the change password window.
+	 * Initiates the frame components (JLabel,	JTextField, and JButton).
+	 * Adds an actionlistener to the button.
+	 * Puts everything in the correct positions.
+	 */
+
+	public void init() {
+		// SettingsJFrame
+<span class="fc" id="L81">		launcher = new JFrame(&quot;BOM DIA ACADEMIA!&quot;);</span>
+<span class="fc" id="L82">		launcher.setResizable(false);</span>
+<span class="fc" id="L83">		launcher.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
+<span class="fc" id="L84">		launcher.setVisible(true);</span>
+
+		// Dar Refresh
+
+<span class="fc" id="L88">		launcher.pack();</span>
+<span class="fc" id="L89">		launcher.setSize(800, 600);</span>
+
+		//Background
+<span class="fc" id="L92">		launcher.setContentPane(new JLabel(new ImageIcon(&quot;images\\background.png&quot;)));</span>
+		
+		//Imagens
+<span class="fc" id="L95">		JLabel logo=new JLabel(new ImageIcon(&quot;images\\logo.png&quot;));</span>
+		//JLabel signup=new JLabel(new ImageIcon(&quot;images\\signup.png&quot;));
+		
+<span class="fc" id="L98">		launcher.setLayout(new GridLayout(1,2));</span>
+<span class="fc" id="L99">		JPanel signform= new JPanel();</span>
+<span class="fc" id="L100">		signform.setOpaque(false);</span>
+<span class="fc" id="L101">		signform.setLayout(null);</span>
+		
+		
+		
+		
+		 
+<span class="fc" id="L107">		  JLabel l1 = new JLabel(&quot;New Name&quot;);</span>
+		  
+<span class="fc" id="L109">		  Cursor cur=new Cursor(Cursor.HAND_CURSOR);</span>
+		 
+<span class="fc" id="L111">		  JTextField newName = new JTextField();</span>
+		 
+		  
+<span class="fc" id="L114">		  JButton btn1 = new JButton(&quot;Done&quot;);</span>
+<span class="fc" id="L115">		  btn1.setCursor(cur);</span>
+		  
+		  //signup.setBounds(35,-50,400,400);
+<span class="fc" id="L118">		  l1.setForeground(Color.black);</span>
+		 		  		  
+<span class="fc" id="L120">		  l1.setBounds(100, 180, 200, 30);</span>
+<span class="fc" id="L121">		  newName.setBounds(100, 230, 200, 30);</span>
+		  		 
+<span class="fc" id="L123">		  btn1.setBounds(160, 430, 100, 30);</span>
+		  
+		  //signform.add(signup);
+<span class="fc" id="L126">		  signform.add(l1);</span>
+<span class="fc" id="L127">		  signform.add(newName);</span>
+<span class="fc" id="L128">		  signform.add(btn1);</span>
+		
+
+		
+<span class="fc" id="L132">		launcher.add(logo);</span>
+<span class="fc" id="L133">		launcher.add(signform);</span>
+	
+		//Dar Refresh
+<span class="fc" id="L136">		launcher.setSize(799,599);</span>
+<span class="fc" id="L137">		launcher.setSize(800,600);</span>
+		
+		
+<span class="fc" id="L140">		btn1.addActionListener(new ActionListener() {</span>
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc bnc" id="L144" title="All 2 branches missed.">				if (!newName.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L145">					change(newName.getText());</span>
+<span class="nc" id="L146">				} else {</span>
+<span class="nc" id="L147">					JOptionPane.showMessageDialog(new JFrame(), &quot;You must insert a name&quot;);</span>
+				}
+<span class="nc" id="L149">			}</span>
+		});
+<span class="fc" id="L151">	}</span>
+
+	
+	/**
+	 *It changes the user name and closes the window.
+	 *Saves the changes in the XML file.
+	 * 
+	 * @param name		The user new name.
+	 */
+	public void change(String name) {
+<span class="fc" id="L161">		File file = new File(&quot;config.xml&quot;);</span>
+<span class="fc" id="L162">		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();</span>
+		DocumentBuilder dBuilder;
+		try {
+<span class="fc" id="L165">			dBuilder = dbFactory.newDocumentBuilder();</span>
+<span class="fc" id="L166">			Document doc = dBuilder.parse(file);</span>
+<span class="fc" id="L167">			doc.getDocumentElement().normalize();</span>
+
+<span class="fc" id="L169">			NodeList list = doc.getChildNodes().item(0).getChildNodes();</span>
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">			for (int count = 0; count &lt; list.getLength(); count++) {</span>
+<span class="fc" id="L171">				Node tempNode = list.item(count);</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">				if (tempNode.getNodeType() == Node.ELEMENT_NODE) {</span>
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">					if (tempNode.hasAttributes()) {</span>
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">						if (((Element) tempNode).getAttribute(&quot;Email&quot;).equals(email)) {</span>
+<span class="fc" id="L175">							((Element) tempNode).setAttribute(&quot;Name&quot;, name);</span>
+<span class="fc" id="L176">							launcher.dispose();</span>
+<span class="fc" id="L177">							break;</span>
+						}
+					}
+				}
+			}
+<span class="fc" id="L182">			Transformer transformer = TransformerFactory.newInstance().newTransformer();</span>
+<span class="fc" id="L183">	         transformer.setOutputProperty(OutputKeys.INDENT, &quot;yes&quot;);</span>
+<span class="fc" id="L184">	         StreamResult result = new StreamResult(new FileOutputStream(&quot;config.xml&quot;));</span>
+<span class="fc" id="L185">	         DOMSource source = new DOMSource(doc);</span>
+<span class="fc" id="L186">	         transformer.transform(source, result);</span>
+<span class="pc" id="L187">		} catch (ParserConfigurationException | SAXException | IOException | TransformerFactoryConfigurationError | TransformerException e1) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L189">			e1.printStackTrace();</span>
+		}		
+<span class="fc" id="L191">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

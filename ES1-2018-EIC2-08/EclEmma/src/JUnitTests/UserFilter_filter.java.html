@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserFilter_filter.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">JUnitTests</a> &gt; <span class="el_source">UserFilter_filter.java</span></div><h1>UserFilter_filter.java</h1><pre class="source lang-java linenums">package JUnitTests;
+
+import static org.junit.Assert.*;
+
+import javax.swing.JList;
+
+import org.junit.Test;
+
+import BDA.Email;
+import BDA.FacePost;
+import BDA.Facebook;
+import BDA.Mail;
+
+import BDA.T;
+import BDA.TwitterApp;
+import BDA.UserFilter;
+import twitter4j.TwitterException;
+
+<span class="fc" id="L19">public class UserFilter_filter {</span>
+
+	@Test
+	public void test() {
+		
+<span class="fc" id="L24">		JList&lt;Email&gt; mail=new JList&lt;&gt;(Mail.FetchFromBackup());</span>
+<span class="fc" id="L25">		JList&lt;T&gt; tweet=new JList&lt;&gt;(TwitterApp.FetchFromBackup());</span>
+<span class="fc" id="L26">		JList&lt;FacePost&gt; face=new JList&lt;&gt;(Facebook.FetchFromBackup());</span>
+		
+		
+		
+<span class="fc" id="L30">		UserFilter u= new UserFilter(face,mail, tweet);</span>
+<span class="fc" id="L31">		String s = &quot;iscte&quot;;</span>
+		try {
+<span class="fc" id="L33">			u.userFilter(s);</span>
+<span class="pc" id="L34">		} catch (TwitterException e1) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L36">			e1.printStackTrace();</span>
+		}
+<span class="fc" id="L38">		assertNotNull(u.getFacePosts());</span>
+<span class="fc" id="L39">		assertNotNull(u.getTweets());</span>
+<span class="fc" id="L40">		assertNotNull(u.getEmails());</span>
+<span class="fc" id="L41">		assertNotNull(s);</span>
+
+		
+<span class="fc" id="L44">	}</span>
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

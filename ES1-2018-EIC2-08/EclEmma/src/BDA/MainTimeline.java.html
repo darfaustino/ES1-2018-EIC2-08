@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>MainTimeline.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">BDA</a> &gt; <span class="el_source">MainTimeline.java</span></div><h1>MainTimeline.java</h1><pre class="source lang-java linenums"><span class="pc" id="L1">package BDA;</span>
+
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+
+
+import twitter4j.TwitterException;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.IOException;
+
+/**
+ * Class that represents the app's MainTimiline with access to the Email,
+ * Facebook and Twitter Timeline and to its respective contents
+ * 
+ * @author Diogo
+ *
+ */
+
+public class MainTimeline {
+
+	private JFrame launcher;
+	private Facebook face;
+	private TwitterApp twitterapp;
+	private boolean isFaceOn;
+	private boolean isMailOn;
+	private boolean isTwitterOn;
+	private JList&lt;FacePost&gt; facePosts;
+	private JList&lt;T&gt; tweets;
+	private JList&lt;Email&gt; emails;
+	private DefaultListModel&lt;Email&gt; mail;
+
+	/**
+	 * Contructor, initiates the GUI and displays the content.
+	 * 
+	 * @param userEmail		User email account 
+	 * @param face     		Given Facebook access
+	 * @param twitter  		Given Twitter access
+	 * @param username 		Given Account Outlook Email
+	 * @param password 		Given Account Outlook Password
+	 * @param f             Facebook status
+	 * @param t             Twitter status
+	 * @throws TwitterException problem in the Twitter
+	 */
+<span class="fc" id="L50">	public MainTimeline(String userEmail, Facebook face, TwitterApp twitter, String username, String password, boolean f, boolean t)</span>
+			throws TwitterException {
+		try {
+<span class="fc" id="L53">			this.face = face;</span>
+<span class="fc" id="L54">			this.twitterapp = twitter;</span>
+<span class="fc" id="L55">			this.isFaceOn = f;</span>
+<span class="fc" id="L56">			this.isTwitterOn = t;</span>
+<span class="fc" id="L57">			this.isMailOn = Mail.isMailOnline();</span>
+<span class="fc" id="L58">			init(userEmail, username, password);</span>
+
+<span class="pc" id="L60">		} catch (IOException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L62">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L64">	}</span>
+
+	/**
+	 * It creates the Gui with all its Features. Displays various Emails, Tweets and
+	 * Facebook posts Gives acess to every Email, Tweets and Facebook posts
+	 * displayed in the GUI
+	 * 
+	 * @param userEmail		User email account 
+	 * @param username Given email account
+	 * @param password Given email account's password
+	 * @throws IOException      Some I/O exception occurred.
+	 * @throws TwitterException Some Twitter Exception occurred.
+	 */
+
+	private void init(String userEmail, String username, String password) throws IOException, TwitterException {
+
+		// SettingsJFrame
+<span class="fc" id="L81">		launcher = new JFrame(&quot;BOM DIA ACADEMIA!&quot;);</span>
+<span class="fc" id="L82">		launcher.setResizable(false);</span>
+<span class="fc" id="L83">		launcher.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="fc" id="L84">		launcher.setLayout(new BorderLayout());</span>
+<span class="fc" id="L85">		launcher.setVisible(true);</span>
+
+		// Background
+<span class="fc" id="L88">		Background background = new Background(&quot;images/maintimeline.png&quot;);</span>
+<span class="fc" id="L89">		background.setLayout(new BorderLayout());</span>
+<span class="fc" id="L90">		background.setPreferredSize(new Dimension(800, 600));</span>
+
+		// Menu
+<span class="fc" id="L93">		JMenuBar menuBar = new JMenuBar();</span>
+<span class="fc" id="L94">		menuBar.setBackground(Color.BLACK);</span>
+<span class="fc" id="L95">		menuBar.setLayout(new FlowLayout());</span>
+<span class="fc" id="L96">		launcher.setJMenuBar(menuBar);</span>
+
+<span class="fc" id="L98">		JMenu mnNewMenu = new JMenu(&quot;Filters&quot;);</span>
+<span class="fc" id="L99">		menuBar.add(mnNewMenu);</span>
+<span class="fc" id="L100">		mnNewMenu.setBackground(Color.black);</span>
+<span class="fc" id="L101">		mnNewMenu.setForeground(Color.WHITE);</span>
+		
+		
+
+<span class="fc" id="L105">		JMenuItem mntmNewMenuItem = new JMenuItem(&quot;User Filter&quot;);</span>
+<span class="fc" id="L106">		mnNewMenu.add(mntmNewMenuItem);</span>
+<span class="fc" id="L107">		mntmNewMenuItem.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L109">				new UserFilter(facePosts, emails, tweets);</span>
+<span class="nc" id="L110">			}</span>
+		});
+
+<span class="fc" id="L113">		JMenuItem mntmNewMenuItem_1 = new JMenuItem(&quot;Contains Filter&quot;);</span>
+<span class="fc" id="L114">		mnNewMenu.add(mntmNewMenuItem_1);</span>
+<span class="fc" id="L115">		mntmNewMenuItem_1.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L117">				new ContainsFilter(facePosts, emails, tweets);</span>
+<span class="nc" id="L118">			}</span>
+		});
+
+<span class="fc" id="L121">		JMenuItem mntmNewMenuItem_2 = new JMenuItem(&quot;Date Filter&quot;);</span>
+<span class="fc" id="L122">		mnNewMenu.add(mntmNewMenuItem_2);</span>
+<span class="fc" id="L123">		mntmNewMenuItem_2.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L125">				new DateFilter(facePosts, emails, tweets);</span>
+<span class="nc" id="L126">			}</span>
+		});
+
+<span class="fc" id="L129">		JMenuItem mntmNewMenuItem_3 = new JMenuItem(&quot;Clean Filters&quot;);</span>
+<span class="fc" id="L130">		mntmNewMenuItem_3.setBackground(Color.BLACK);</span>
+<span class="fc" id="L131">		mntmNewMenuItem_3.setForeground(Color.white);</span>
+<span class="fc" id="L132">		menuBar.add(mntmNewMenuItem_3);</span>
+<span class="fc" id="L133">		mntmNewMenuItem_3.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try {
+<span class="nc" id="L136">					emails.setModel(mail);</span>
+<span class="nc" id="L137">					facePosts.setModel(face.getTimeLinePosts());</span>
+<span class="nc" id="L138">					tweets.setModel(twitterapp.getTimeline());</span>
+<span class="nc" id="L139">				} catch (Exception e1) {</span>
+					// TODO Auto-generated catch block
+<span class="nc" id="L141">					e1.printStackTrace();</span>
+				}
+<span class="nc" id="L143">			}</span>
+		});
+
+<span class="fc" id="L146">		JMenu menu2 = new JMenu(&quot;My Account&quot;);</span>
+<span class="fc" id="L147">		menu2.setBackground(Color.BLACK);</span>
+<span class="fc" id="L148">		menu2.setForeground(Color.white);</span>
+<span class="fc" id="L149">		menuBar.add(menu2);</span>
+
+<span class="fc" id="L151">		JMenuItem changeN = new JMenuItem(&quot;Change Username&quot;);</span>
+<span class="fc" id="L152">		menu2.add(changeN);</span>
+<span class="fc" id="L153">		changeN.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L155">				new ChangeName(userEmail);</span>
+<span class="nc" id="L156">			}</span>
+		});
+
+<span class="fc" id="L159">		JMenuItem changeP = new JMenuItem(&quot;Change Password&quot;);</span>
+<span class="fc" id="L160">		menu2.add(changeP);</span>
+<span class="fc" id="L161">		changeP.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L163">				new ChangePass(userEmail);</span>
+<span class="nc" id="L164">			}</span>
+		});
+
+<span class="fc" id="L167">		JMenuItem changeE = new JMenuItem(&quot;Change Email&quot;);</span>
+<span class="fc" id="L168">		menu2.add(changeE);</span>
+<span class="fc" id="L169">		changeE.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L171">				new ChangeMail(userEmail);</span>
+<span class="nc" id="L172">				launcher.dispose();</span>
+<span class="nc" id="L173">			}</span>
+		});
+		
+		// JTextPanes
+
+<span class="fc" id="L178">		JPanel panel = new JPanel(new GridBagLayout());</span>
+<span class="fc" id="L179">		panel.setOpaque(false);</span>
+<span class="fc" id="L180">		panel.setPreferredSize(new Dimension(800, 515));</span>
+
+<span class="fc" id="L182">		JPanel email = new JPanel(new FlowLayout());</span>
+<span class="fc" id="L183">		email.setOpaque(false);</span>
+<span class="fc" id="L184">		email.setPreferredSize(new Dimension(245, 495));</span>
+<span class="fc" id="L185">		GridBagConstraints c = new GridBagConstraints();</span>
+<span class="fc" id="L186">		c.gridx = 0;</span>
+<span class="fc" id="L187">		c.gridy = 0;</span>
+<span class="fc" id="L188">		c.insets = new Insets(50, 0, 0, 0);</span>
+<span class="fc" id="L189">		c.gridheight = 2;</span>
+<span class="fc" id="L190">		panel.add(email, c);</span>
+
+<span class="fc" id="L192">		JPanel facebook = new JPanel();</span>
+<span class="fc" id="L193">		facebook.setOpaque(false);</span>
+<span class="fc" id="L194">		facebook.setPreferredSize(new Dimension(245, 495));</span>
+<span class="fc" id="L195">		c.gridx = 1;</span>
+<span class="fc" id="L196">		c.gridy = 0;</span>
+<span class="fc" id="L197">		c.gridheight = 2;</span>
+<span class="fc" id="L198">		c.insets = new Insets(50, 15, 0, 15);</span>
+<span class="fc" id="L199">		panel.add(facebook, c);</span>
+
+<span class="fc" id="L201">		JPanel twitter = new JPanel();</span>
+<span class="fc" id="L202">		twitter.setOpaque(false);</span>
+<span class="fc" id="L203">		twitter.setPreferredSize(new Dimension(245, 495));</span>
+<span class="fc" id="L204">		c.gridx = 2;</span>
+<span class="fc" id="L205">		c.gridy = 0;</span>
+<span class="fc" id="L206">		c.gridheight = 2;</span>
+<span class="fc" id="L207">		c.insets = new Insets(50, 0, 0, 0);</span>
+<span class="fc" id="L208">		panel.add(twitter, c);</span>
+<span class="fc" id="L209">		background.add(panel);</span>
+
+		// JList&lt;Email&gt; emails;
+<span class="fc" id="L212">		emails = new JList&lt;Email&gt;();</span>
+
+<span class="fc" id="L214">		((DefaultListCellRenderer) emails.getCellRenderer()).setOpaque(false);</span>
+<span class="fc" id="L215">		emails.setFixedCellHeight(70);</span>
+<span class="fc" id="L216">		emails.setBorder(new EmptyBorder(10, 5, 10, 0));</span>
+<span class="fc" id="L217">		emails.setOpaque(false);</span>
+
+<span class="fc" id="L219">		emails.addListSelectionListener(new ListSelectionListener() {</span>
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+
+<span class="nc bnc" id="L224" title="All 4 branches missed.">				if (emails.getSelectedValue() != null &amp;&amp; !e.getValueIsAdjusting()) {</span>
+<span class="nc" id="L225">					Email selectedValue = emails.getSelectedValue();</span>
+<span class="nc" id="L226">					System.out.println(&quot;Body:&quot; + selectedValue.getBody());</span>
+<span class="nc" id="L227">					new EmailSingular(username, password, selectedValue);</span>
+				}
+<span class="nc" id="L229">			}</span>
+		});
+
+<span class="fc" id="L232">		JScrollPane scroll = new JScrollPane(emails);</span>
+<span class="fc" id="L233">		scroll.setOpaque(false);</span>
+<span class="fc" id="L234">		scroll.getViewport().setOpaque(false);</span>
+<span class="fc" id="L235">		scroll.setPreferredSize(new Dimension(250, 490));</span>
+		// email.add(scroll);
+
+<span class="fc" id="L238">		new Thread(new Runnable() {</span>
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+<span class="fc" id="L243">				menuBar.setEnabled(false);</span>
+<span class="fc" id="L244">				JTextPane load = new JTextPane();</span>
+<span class="fc" id="L245">				load.setEditable(false);</span>
+<span class="fc" id="L246">				load.setOpaque(false);</span>
+<span class="fc" id="L247">				load.setText(&quot;Loading...&quot;);</span>
+<span class="fc" id="L248">				load.setPreferredSize(new Dimension(100, 50));</span>
+<span class="fc" id="L249">				email.add(load);</span>
+
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">				if (isMailOn) {</span>
+<span class="fc" id="L252">					mail = Mail.LoginMail(username, password);</span>
+<span class="fc" id="L253">				} else {</span>
+<span class="nc" id="L254">					mail = Mail.FetchFromBackup();</span>
+				}
+<span class="fc" id="L256">				menuBar.setEnabled(true);</span>
+<span class="fc" id="L257">				email.remove(load);</span>
+<span class="fc" id="L258">				emails.setModel(mail);</span>
+<span class="fc" id="L259">				email.add(scroll);</span>
+<span class="fc" id="L260">				launcher.revalidate();</span>
+<span class="fc" id="L261">				launcher.repaint();</span>
+
+<span class="fc" id="L263">			}</span>
+<span class="fc" id="L264">		}).start();</span>
+
+		// JList&lt;FacePost&gt; facePosts;
+<span class="fc" id="L267">		System.out.println(isFaceOn);</span>
+<span class="fc" id="L268">		System.out.println(isTwitterOn);</span>
+<span class="fc" id="L269">		facePosts = new JList&lt;FacePost&gt;();</span>
+
+<span class="pc bpc" id="L271" title="2 of 4 branches missed.">		if (isFaceOn &amp;&amp; face != null) {</span>
+<span class="fc" id="L272">			facePosts.setModel(face.getTimeLinePosts());// filtro retirado pra teste</span>
+<span class="fc" id="L273">		} else {</span>
+
+<span class="nc" id="L275">			facePosts.setModel(Facebook.FetchFromBackup());</span>
+		}
+
+<span class="fc" id="L278">		((DefaultListCellRenderer) facePosts.getCellRenderer()).setOpaque(false);</span>
+<span class="fc" id="L279">		facePosts.setFixedCellHeight(70);</span>
+<span class="fc" id="L280">		facePosts.setBorder(new EmptyBorder(10, 5, 10, 0));</span>
+<span class="fc" id="L281">		facePosts.setOpaque(false);</span>
+
+<span class="fc" id="L283">		facePosts.addListSelectionListener(new ListSelectionListener() {</span>
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+
+<span class="nc bnc" id="L288" title="All 4 branches missed.">				if (facePosts.getSelectedValue() != null &amp;&amp; !e.getValueIsAdjusting()) {</span>
+<span class="nc" id="L289">					FacePost selectedValue = facePosts.getSelectedValue();</span>
+<span class="nc" id="L290">					new FacebookPost(selectedValue);</span>
+				}
+<span class="nc" id="L292">			}</span>
+		});
+
+<span class="fc" id="L295">		JScrollPane scroll2 = new JScrollPane(facePosts);</span>
+<span class="fc" id="L296">		scroll2.setOpaque(false);</span>
+<span class="fc" id="L297">		scroll2.getViewport().setOpaque(false);</span>
+<span class="fc" id="L298">		scroll2.setPreferredSize(new Dimension(250, 490));</span>
+<span class="fc" id="L299">		facebook.add(scroll2);</span>
+
+<span class="fc" id="L301">		tweets = new JList&lt;T&gt;();</span>
+<span class="pc bpc" id="L302" title="2 of 4 branches missed.">		if (isTwitterOn &amp;&amp; twitterapp != null) {</span>
+<span class="fc" id="L303">			tweets.setModel(twitterapp.getTimeline());</span>
+<span class="fc" id="L304">		} else {</span>
+
+<span class="nc" id="L306">			tweets.setModel(TwitterApp.FetchFromBackup());</span>
+		}
+
+<span class="fc" id="L309">		((DefaultListCellRenderer) tweets.getCellRenderer()).setOpaque(false);</span>
+<span class="fc" id="L310">		tweets.setFixedCellHeight(70);</span>
+<span class="fc" id="L311">		tweets.setBorder(new EmptyBorder(10, 5, 10, 0));</span>
+<span class="fc" id="L312">		tweets.setOpaque(false);</span>
+
+<span class="fc" id="L314">		tweets.addListSelectionListener(new ListSelectionListener() {</span>
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+
+<span class="nc bnc" id="L319" title="All 4 branches missed.">				if (tweets.getSelectedValue() != null &amp;&amp; !e.getValueIsAdjusting()) {</span>
+<span class="nc" id="L320">					T selectedValue = tweets.getSelectedValue();</span>
+<span class="nc" id="L321">					new Tweet(twitterapp, selectedValue);</span>
+				}
+<span class="nc" id="L323">			}</span>
+		});
+
+		//
+
+<span class="fc" id="L328">		JScrollPane scroll3 = new JScrollPane(tweets);</span>
+<span class="fc" id="L329">		scroll3.setOpaque(false);</span>
+<span class="fc" id="L330">		scroll3.getViewport().setOpaque(false);</span>
+<span class="fc" id="L331">		scroll3.setPreferredSize(new Dimension(250, 490));</span>
+<span class="fc" id="L332">		twitter.add(scroll3);</span>
+
+<span class="fc" id="L334">		JMenuItem button = new JMenuItem(&quot;Atualizar&quot;);</span>
+<span class="fc" id="L335">		button.setBackground(Color.BLACK);</span>
+<span class="fc" id="L336">		button.setForeground(Color.WHITE);</span>
+<span class="fc" id="L337">		button.setPreferredSize(new Dimension(70,20));</span>
+<span class="fc" id="L338">		menuBar.add(button);</span>
+<span class="fc" id="L339">		button.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+
+<span class="nc" id="L342">				new Thread(new Runnable() {</span>
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+<span class="nc" id="L347">						JTextPane load = new JTextPane();</span>
+<span class="nc" id="L348">						load.setEditable(false);</span>
+<span class="nc" id="L349">						load.setOpaque(false);</span>
+<span class="nc" id="L350">						load.setText(&quot;Loading...&quot;);</span>
+<span class="nc" id="L351">						load.setPreferredSize(new Dimension(100, 50));</span>
+<span class="nc" id="L352">						email.remove(scroll);</span>
+<span class="nc" id="L353">						email.add(load);</span>
+<span class="nc" id="L354">						launcher.revalidate();</span>
+<span class="nc" id="L355">						launcher.repaint();</span>
+
+<span class="nc bnc" id="L357" title="All 2 branches missed.">						if (isMailOn) {</span>
+<span class="nc" id="L358">							mail = Mail.LoginMail(username, password);</span>
+						}
+<span class="nc" id="L360">						email.remove(load);</span>
+<span class="nc" id="L361">						emails.setModel(mail);</span>
+<span class="nc" id="L362">						email.add(scroll);</span>
+<span class="nc" id="L363">						launcher.revalidate();</span>
+<span class="nc" id="L364">						launcher.repaint();</span>
+<span class="nc" id="L365">					}</span>
+<span class="nc" id="L366">				}).start();</span>
+
+				try {
+
+<span class="nc bnc" id="L370" title="All 4 branches missed.">					if (isTwitterOn &amp;&amp; twitterapp != null) {</span>
+<span class="nc" id="L371">						tweets.setModel(twitterapp.getTimeline());</span>
+					}
+<span class="nc bnc" id="L373" title="All 4 branches missed.">					if (isFaceOn &amp;&amp; face != null) {</span>
+<span class="nc" id="L374">						facePosts.setModel(face.getTimeLinePosts());</span>
+					}
+
+<span class="nc" id="L377">				} catch (Exception e2) {</span>
+
+				}
+
+<span class="nc" id="L381">			}</span>
+		});
+<span class="fc" id="L383">		launcher.add(background);</span>
+		
+<span class="fc" id="L385">		launcher.setSize(800, 600);</span>
+<span class="fc" id="L386">		launcher.pack();</span>
+
+<span class="fc" id="L388">	}</span>
+
+	/**
+	 * Gets the JFrame that serves as launcher of the window.
+	 * 
+	 * @return launcher
+	 */
+
+	public JFrame getLauncher() {
+<span class="fc" id="L397">		return launcher;</span>
+	}
+	
+	/**
+	 * Gets the JList of facePosts.
+	 * 
+	 * @return facePosts
+	 */
+	public JList&lt;FacePost&gt; getFacePosts() {
+<span class="nc" id="L406">		return facePosts;</span>
+	}
+
+	/**
+	 * Gets the JList of tweets.
+	 * 
+	 * @return tweets
+	 */
+	public JList&lt;T&gt; getTweets() {
+<span class="nc" id="L415">		return tweets;</span>
+	}
+
+	
+	/**
+	 * Gets the JList of emails.
+	 * 
+	 * @return emails
+	 */
+	public JList&lt;Email&gt; getEmails() {
+<span class="nc" id="L425">		return emails;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>SignUp.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">BDA</a> &gt; <span class="el_source">SignUp.java</span></div><h1>SignUp.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package BDA;</span>
+import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+	/**
+	 * This class updates the window frame and displays the sign up form of our BDA application. 
+	 * Also saves the user info in a xml file named config.xml.
+	 *  
+	 */
+
+public class SignUp {
+
+		private	JFrame launcher;
+		private JLabel  l1, l2, l3, l4;
+		private JTextField tf1;
+		private JButton btn1;
+		private JPasswordField p1;
+		
+		
+		/**
+		 * Class constructor, creates a Sign Up form.
+		 * @param	 launcher2 the frame to add the components. 
+		 */
+		
+<span class="fc" id="L46">		public SignUp(JFrame launcher2){</span>
+<span class="fc" id="L47">			this.launcher=launcher2;</span>
+<span class="fc" id="L48">			init();</span>
+<span class="fc" id="L49">		}</span>
+
+		/**
+		 * Updates the previous window frame to the SignUp frame and opens the first part of the form, where the user creates an Account for the BDA application.
+		 * Initiates the frame components (JLabels,JTextFields,	JPasswordField, and JButtons).
+		 * Adds an ActionListener to the buttons.
+		 * Places every component in the correct position.
+		 */
+
+		private void init() {
+		
+			
+			//Background
+<span class="fc" id="L62">			launcher.getContentPane().removeAll();</span>
+<span class="fc" id="L63">			launcher.setContentPane(new JLabel(new ImageIcon(&quot;images\\background.png&quot;)));</span>
+			
+			//Imagens
+<span class="fc" id="L66">			JLabel logo=new JLabel(new ImageIcon(&quot;images\\logo.png&quot;));</span>
+<span class="fc" id="L67">			JLabel signup=new JLabel(new ImageIcon(&quot;images\\signup.png&quot;));</span>
+			
+<span class="fc" id="L69">			launcher.setLayout(new GridLayout(1,2));</span>
+<span class="fc" id="L70">			JPanel signform= new JPanel();</span>
+<span class="fc" id="L71">			signform.setOpaque(false);</span>
+<span class="fc" id="L72">			signform.setLayout(null);</span>
+			
+			
+			
+			
+			 
+<span class="fc" id="L78">			  l1 = new JLabel(&quot;Name&quot;);</span>
+<span class="fc" id="L79">			  l2 = new JLabel(&quot;Password&quot;);</span>
+<span class="fc" id="L80">			  l3=  new JLabel(&quot;Gender&quot;);</span>
+			  
+<span class="fc" id="L82">			  l4= new JLabel(&quot;Email&quot;);</span>
+			  
+<span class="fc" id="L84">			  Cursor cur=new Cursor(Cursor.HAND_CURSOR);</span>
+			 
+<span class="fc" id="L86">			  JRadioButton male=new JRadioButton(&quot;Male&quot;);</span>
+<span class="fc" id="L87">			  male.setCursor(cur);</span>
+<span class="fc" id="L88">			  JRadioButton female=new JRadioButton(&quot;Female&quot;);</span>
+<span class="fc" id="L89">			  female.setCursor(cur);</span>
+			  
+<span class="fc" id="L91">			  ButtonGroup gender_grp=new ButtonGroup();</span>
+<span class="fc" id="L92">			  gender_grp.add(male);</span>
+<span class="fc" id="L93">			  gender_grp.add(female);</span>
+			  
+			 
+<span class="fc" id="L96">			  JTextField email_txt=new JTextField();</span>
+			  
+<span class="fc" id="L98">			  tf1 = new JTextField();</span>
+<span class="fc" id="L99">			  p1 = new JPasswordField();</span>
+			  
+			  
+<span class="fc" id="L102">			  btn1 = new JButton(&quot;Next&quot;);</span>
+<span class="fc" id="L103">			  btn1.setCursor(cur);</span>
+			  
+<span class="fc" id="L105">			  signup.setBounds(35,-50,400,400);</span>
+<span class="fc" id="L106">			  l1.setForeground(Color.black);</span>
+<span class="fc" id="L107">			  l2.setForeground(Color.black);</span>
+<span class="fc" id="L108">			  p1.setBounds(120, 270, 200, 30);</span>
+<span class="fc" id="L109">			  l3.setForeground(Color.black);</span>
+<span class="fc" id="L110">			  l4.setForeground(Color.black);</span>
+			  
+<span class="fc" id="L112">			  l1.setBounds(50, 210, 200, 30);</span>
+<span class="fc" id="L113">			  tf1.setBounds(120, 210, 200, 30);</span>
+<span class="fc" id="L114">			  l2.setBounds(50, 270, 200, 30);</span>
+<span class="fc" id="L115">			  l3.setBounds(50,330,200,30);</span>
+<span class="fc" id="L116">			  male.setBounds(120, 330, 80, 30);</span>
+<span class="fc" id="L117">			  female.setBounds(180, 330, 80, 30);</span>
+<span class="fc" id="L118">			  male.setOpaque(false);</span>
+<span class="fc" id="L119">			  female.setOpaque(false);</span>
+<span class="fc" id="L120">			  l4.setBounds(50, 390, 200, 30);</span>
+<span class="fc" id="L121">			  email_txt.setBounds(120, 390, 200, 30);			 </span>
+<span class="fc" id="L122">			  btn1.setBounds(160, 430, 100, 30);</span>
+			  
+<span class="fc" id="L124">			  signform.add(signup);</span>
+<span class="fc" id="L125">			  signform.add(l1);</span>
+<span class="fc" id="L126">			  signform.add(tf1);</span>
+<span class="fc" id="L127">			  signform.add(l2);</span>
+<span class="fc" id="L128">			  signform.add(l3);</span>
+<span class="fc" id="L129">			  signform.add(male);</span>
+<span class="fc" id="L130">			  signform.add(female);</span>
+<span class="fc" id="L131">			  signform.add(p1);</span>
+<span class="fc" id="L132">			  signform.add(l4);</span>
+<span class="fc" id="L133">			  signform.add(email_txt);</span>
+<span class="fc" id="L134">			  signform.add(btn1);</span>
+
+			
+<span class="fc" id="L137">			launcher.add(logo);</span>
+<span class="fc" id="L138">			launcher.add(signform);</span>
+		
+			//Dar Refresh
+<span class="fc" id="L141">			launcher.setSize(799,599);</span>
+<span class="fc" id="L142">			launcher.setSize(800,600);</span>
+			
+			
+<span class="fc" id="L145">			btn1.addActionListener(new ActionListener() {</span>
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					
+<span class="nc bnc" id="L150" title="All 4 branches missed.">					if(email_txt.getText().contains(&quot;@iscte-iul.pt&quot;) &amp;&amp; p1.getPassword().length!=0){</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">						if(!duplicateMail(email_txt.getText())){</span>
+<span class="nc" id="L152">							openMailForm(email_txt.getText(), p1.getPassword(), tf1.getText());</span>
+<span class="nc" id="L153">						}else{</span>
+<span class="nc" id="L154">							JOptionPane.showMessageDialog(new JFrame(), &quot;There's already one account with that email&quot;);</span>
+						}
+<span class="nc" id="L156">					}else{</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">						if(p1.getPassword().length==0){</span>
+<span class="nc" id="L158">							JOptionPane.showMessageDialog(new JFrame(), &quot;You must insert a password&quot;);</span>
+<span class="nc" id="L159">						}else{</span>
+<span class="nc" id="L160">						JOptionPane.showMessageDialog(new JFrame(), &quot;You must use a ISCTE email&quot;);</span>
+					}
+					}		
+					
+<span class="nc" id="L164">				}</span>
+			});;
+<span class="fc" id="L166">		}</span>
+
+		
+		/**
+		 * It checks if the email isn't already present in an account.
+		 * @param email		email that is going to be compared to the user's mails.
+		 * @return			true if is a duplicate or false otherwise.
+		 */
+		
+		public boolean duplicateMail(String email) {
+<span class="nc" id="L176">			boolean duplicate=false;</span>
+<span class="nc" id="L177">			File file = new File(&quot;config.xml&quot;);</span>
+<span class="nc" id="L178">			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();</span>
+			DocumentBuilder dBuilder;
+			try {
+<span class="nc" id="L181">				dBuilder = dbFactory.newDocumentBuilder();</span>
+<span class="nc" id="L182">				Document doc = dBuilder.parse(file);</span>
+<span class="nc" id="L183">				doc.getDocumentElement().normalize();</span>
+
+<span class="nc" id="L185">				NodeList list = doc.getChildNodes().item(0).getChildNodes();</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">				for (int count = 0; count &lt; list.getLength(); count++) {</span>
+<span class="nc" id="L187">					Node tempNode = list.item(count);</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">					if (tempNode.getNodeType() == Node.ELEMENT_NODE) {</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">						if (tempNode.hasAttributes()) {</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">							if (((Element) tempNode).getAttribute(&quot;Email&quot;).equals(email)) {</span>
+<span class="nc" id="L191">								duplicate=true;</span>
+<span class="nc" id="L192">								break;	</span>
+							}
+						}
+					}
+				}
+					
+<span class="nc" id="L198">			} catch (ParserConfigurationException | SAXException | IOException e1) {</span>
+				// TODO Auto-generated catch block
+<span class="nc" id="L200">				e1.printStackTrace();</span>
+			}
+<span class="nc" id="L202">			return duplicate;</span>
+		}
+		
+		/**
+		 * It checks if a file named &quot;config.xml&quot; exists.
+		 * If exists, it adds a new child Node(&quot;Account&quot;) to the file with the info of a new created account.
+		 * If not, it creates the file, creates a ParentNode(&quot;ISCTEAccounts&quot;) and adds a new  child Node(&quot;Account&quot;) to the file with the info of a new created account.
+		 * Also adds 2 child Node (&quot;Facebook&quot;) and (&quot;Twitter&quot;) to the Parent Node (&quot;Account&quot;) with the respective access token in the Attributes.
+		 * @param Mainemail The User's Login mail of the BDA application.
+		 * @param Mainpassword The User's Login password of the BDA application.
+		 * @param name The User's name.
+		 * @param email The User's email account 
+		 * @param password The User's email account password.
+		 */
+
+	public static void SaveXML(String Mainemail, char[] Mainpassword, String name, String email, char[] password){
+		try {
+			
+<span class="fc" id="L220">		String facetoken=&quot;EAADoYhkS7RcBAEKHnrBd4T60iYQZCm1jfrK4xpq1quSDLCcQW7tAOXIw5TiK26A1MVZBTCV2jcijb8&quot;</span>
+				+ &quot;cdV1BtMuSZCOBdYRcDAMINHo7j4ws6F76RZC1uWuK18sZAZAZCSl99RXPJERm8okjSfMptfZCUKCc40KjUeEdtMi0a23ZCFJQZDZD&quot;;
+
+<span class="fc" id="L223">		String twittertoken=&quot;djruORHuSHJcsJW060wtuGowg;LzofRAO9R7a8sZIDofWXoix6gtXiS43MzFsrFrlqiIeKo66Ly5;1063486441114820608-2pujB6rSntopZvEd6ENTrt3gOPspgv;DTB1yFxV0pelfd9BlbBbYar6GE34rbGHA6ceDBs0beCnd&quot;;</span>
+			
+<span class="fc" id="L225">		File inputFile = new File(&quot;config.xml&quot;);</span>
+		Document doc;
+		Element rootElement;
+<span class="pc bpc" id="L228" title="1 of 2 branches missed.">		if(inputFile.exists()){</span>
+<span class="fc" id="L229">			System.out.println(&quot;existe&quot;);</span>
+<span class="fc" id="L230">        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();</span>
+        DocumentBuilder dBuilder;
+<span class="fc" id="L232">		dBuilder = dbFactory.newDocumentBuilder();</span>
+<span class="fc" id="L233">         doc = dBuilder.parse(inputFile);</span>
+<span class="fc" id="L234">         rootElement=doc.getDocumentElement();</span>
+        		 
+<span class="fc" id="L236">		}else{</span>
+<span class="nc" id="L237">			 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();</span>
+		     DocumentBuilder dBuilder;
+<span class="nc" id="L239">			 dBuilder = dbFactory.newDocumentBuilder();</span>
+<span class="nc" id="L240">		     doc = dBuilder.newDocument();</span>
+<span class="nc" id="L241">		     rootElement = doc.createElement(&quot;ISCTEAccounts&quot;);</span>
+<span class="nc" id="L242">		     doc.appendChild(rootElement);</span>
+		}
+
+		
+        
+<span class="fc" id="L247">		 Element newElement1 = doc.createElement(&quot;Account&quot;);</span>
+<span class="fc" id="L248">         newElement1.setAttribute(&quot;Email&quot;, Mainemail);</span>
+<span class="fc" id="L249">         newElement1.setAttribute(&quot;Name&quot;, name );</span>
+<span class="fc" id="L250">         newElement1.setAttribute(&quot;Password&quot;,new String(Mainpassword));</span>
+<span class="fc" id="L251">         rootElement.appendChild(newElement1);</span>
+         
+<span class="fc" id="L253">         Element mail=doc.createElement(&quot;EmailAccount&quot;);</span>
+<span class="fc" id="L254">         mail.setAttribute(&quot;Email&quot;, email);</span>
+<span class="fc" id="L255">         mail.setAttribute(&quot;Password&quot;, new String(password));</span>
+<span class="fc" id="L256">         newElement1.appendChild(mail);</span>
+         
+<span class="fc" id="L258">         Element facebook=doc.createElement(&quot;Facebook&quot;);</span>
+<span class="fc" id="L259">         facebook.setAttribute(&quot;Facebook&quot;, facetoken);</span>
+<span class="fc" id="L260">         newElement1.appendChild(facebook);</span>
+         
+<span class="fc" id="L262">         Element twitter=doc.createElement(&quot;Twitter&quot;);</span>
+<span class="fc" id="L263">         twitter.setAttribute(&quot;Twitter&quot;, twittertoken);</span>
+<span class="fc" id="L264">         newElement1.appendChild(twitter);      </span>
+         
+<span class="fc" id="L266">         Transformer transformer = TransformerFactory.newInstance().newTransformer();</span>
+<span class="fc" id="L267">         transformer.setOutputProperty(OutputKeys.INDENT, &quot;yes&quot;);</span>
+<span class="fc" id="L268">         StreamResult result = new StreamResult(new FileOutputStream(&quot;config.xml&quot;));</span>
+<span class="fc" id="L269">         DOMSource source = new DOMSource(doc);</span>
+<span class="fc" id="L270">         transformer.transform(source, result);</span>
+<span class="fc" id="L271">         System.out.println(&quot;Saved&quot;);</span>
+      
+         
+         
+<span class="pc" id="L275">		} catch (ParserConfigurationException | IOException | TransformerFactoryConfigurationError | TransformerException | SAXException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L277">			e.printStackTrace();</span>
+		}
+		
+<span class="fc" id="L280">	}</span>
+	
+	/**
+	 * Updates the previous window frame, and opens the second part of the Sign Up form, where the user adds his email account.
+	 * @param mainemail The User's BDA application email.
+	 * @param mainpassword The User's BDA application password
+	 * @param name The User's name.
+	 */
+	
+	
+	public void openMailForm(String mainemail, char[] mainpassword, String name){
+		
+		//ClearForm
+<span class="fc" id="L293">		launcher.getContentPane().removeAll();</span>
+<span class="fc" id="L294">		launcher.setContentPane(new JLabel(new ImageIcon(&quot;images\\background.png&quot;)));</span>
+		
+		//DesignMail
+<span class="fc" id="L297">		JLabel logo=new JLabel(new ImageIcon(&quot;images\\logo.png&quot;));</span>
+<span class="fc" id="L298">		JLabel signup=new JLabel(new ImageIcon(&quot;images\\signupemail.png&quot;));</span>
+		
+<span class="fc" id="L300">		launcher.setLayout(new GridLayout(1,2));</span>
+<span class="fc" id="L301">		JPanel signform= new JPanel();</span>
+<span class="fc" id="L302">		signform.setOpaque(false);</span>
+<span class="fc" id="L303">		signform.setLayout(null);</span>
+		
+<span class="fc" id="L305">		  l2 = new JLabel(&quot;Password&quot;);  </span>
+<span class="fc" id="L306">		  l4= new JLabel(&quot;Email&quot;);</span>
+<span class="fc" id="L307">		  JTextField email_txt=new JTextField();</span>
+<span class="fc" id="L308">		  p1 = new JPasswordField();</span>
+<span class="fc" id="L309">		  btn1=new JButton(&quot;Concluido!&quot;);</span>
+		  
+<span class="fc" id="L311">		  signup.setBounds(35,-50,400,400);</span>
+<span class="fc" id="L312">		  l2.setForeground(Color.black);</span>
+<span class="fc" id="L313">		  p1.setBounds(120, 320, 200, 30);</span>
+<span class="fc" id="L314">		  l4.setForeground(Color.black);</span>
+		  
+<span class="fc" id="L316">		  p1.setBounds(120, 320, 200, 30);</span>
+<span class="fc" id="L317">		  l2.setBounds(50, 320, 200, 30);</span>
+<span class="fc" id="L318">		  l4.setBounds(50, 280, 200, 30);</span>
+<span class="fc" id="L319">		  email_txt.setBounds(120, 280, 200, 30);			 </span>
+<span class="fc" id="L320">		  btn1.setBounds(160, 360, 100, 30);</span>
+		  
+<span class="fc" id="L322">		  signform.add(signup);</span>
+<span class="fc" id="L323">		  signform.add(l2);</span>
+<span class="fc" id="L324">		  signform.add(p1);</span>
+<span class="fc" id="L325">		  signform.add(l4);</span>
+<span class="fc" id="L326">		  signform.add(email_txt);</span>
+<span class="fc" id="L327">		  signform.add(btn1);</span>
+		  
+<span class="fc" id="L329">		  	launcher.add(logo);</span>
+<span class="fc" id="L330">			launcher.add(signform);</span>
+		
+			//Listener
+			
+<span class="fc" id="L334">			btn1.addActionListener(new ActionListener() {</span>
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					
+<span class="nc bnc" id="L340" title="All 2 branches missed.">					if(email_txt.getText().contains(&quot;@iscte-iul.pt&quot;)){</span>
+<span class="nc" id="L341">						SaveXML(mainemail, mainpassword, name, email_txt.getText(), p1.getPassword());</span>
+<span class="nc" id="L342">						new Login(launcher);</span>
+<span class="nc" id="L343">						}else{</span>
+<span class="nc bnc" id="L344" title="All 2 branches missed.">							if(p1.getPassword().length==0){</span>
+<span class="nc" id="L345">								JOptionPane.showMessageDialog(new JFrame(), &quot;You must insert a password&quot;);</span>
+<span class="nc" id="L346">							}else{</span>
+<span class="nc" id="L347">							JOptionPane.showMessageDialog(new JFrame(), &quot;You must use a ISCTE email&quot;);</span>
+						}
+						}	
+					
+					
+					
+<span class="nc" id="L353">				}</span>
+			});
+			
+			//Dar Refresh
+<span class="fc" id="L357">			launcher.setSize(799,599);</span>
+<span class="fc" id="L358">			launcher.setSize(800,600);</span>
+		
+<span class="fc" id="L360">	}</span>
+
+	/**
+	 * Gets the displayed JFrame.
+	 * @return the displayed JFrame
+	 */
+
+	public JFrame getLauncher() {
+<span class="fc" id="L368">		return launcher;</span>
+	}
+
+	/**
+	 * Gets the first JLabel.
+	 * @return the first JLabel
+	 */
+
+	public JLabel getL1() {
+<span class="fc" id="L377">		return l1;</span>
+	}
+
+	/**
+	 * Gets the second JLabel.
+	 * @return the second JLabel.
+	 */
+
+	public JLabel getL2() {
+<span class="fc" id="L386">		return l2;</span>
+	}
+
+	/**
+	 * Gets the third JLabel
+	 * @return the third JLabel
+	 */
+	public JLabel getL3() {
+<span class="fc" id="L394">		return l3;</span>
+	}
+
+	/**
+	 * Gets the forth JLabel.
+	 * @return the forth JLabel
+	 */
+
+	public JLabel getL4() {
+<span class="fc" id="L403">		return l4;</span>
+	}
+
+	/**
+	 * Gets the JTextField
+	 * @return the JTextField
+	 */
+	public JTextField getTf1() {
+<span class="fc" id="L411">		return tf1;</span>
+	}
+
+	/**
+	 * Gets the displayed JButton
+	 * @return the JButton
+	 */
+	public JButton getBtn1() {
+<span class="fc" id="L419">		return btn1;</span>
+	}
+
+	/**
+	 * Gets the JPasswordField
+	 * @return the JPasswordField
+	 */
+	public JPasswordField getP1() {
+<span class="fc" id="L427">		return p1;</span>
+	}
+		
+		
+		
+		
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>

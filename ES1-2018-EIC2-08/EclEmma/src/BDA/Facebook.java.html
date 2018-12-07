@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Facebook.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestBatery (7/dez/2018 21:39:39)</a> &gt; <a href="../../index.html" class="el_group">ES1-2018-EIC2-08</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">BDA</a> &gt; <span class="el_source">Facebook.java</span></div><h1>Facebook.java</h1><pre class="source lang-java linenums">package BDA;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import com.restfb.Connection;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.FacebookClient.AccessToken;
+
+import com.restfb.types.Post;
+
+
+	/** 
+	 * Facebook App.
+	 *
+	 */
+	
+public class Facebook {
+	
+	private String accessToken;
+	private FacebookClient fbClient;
+
+	/**
+	 * Constructor, it initializes both attributes: the access token and the Facebook Client.
+	 * 
+	 * @param acessToken	The name of the string that is going to be the accessToken.
+	 */
+	
+	@SuppressWarnings(&quot;deprecation&quot;)
+<span class="fc" id="L55">	public Facebook(String acessToken){</span>
+<span class="fc" id="L56">		this.accessToken=acessToken; //expira 21/12/2018</span>
+<span class="fc" id="L57">		fbClient = new DefaultFacebookClient(accessToken);</span>
+<span class="fc" id="L58">		BackupFPosts(this.PostsList());</span>
+<span class="fc" id="L59">	}</span>
+	
+	/**
+	 * Connects the Facebook Client with the posts of the user's time line.
+	 * Creates a DefaultListModel.
+	 * Scrolls through all the posts of all the pages of the user's time line.
+	 * Filters the posts: they must have something written and have the word &quot;ISCTE&quot; also written there.
+	 * Counts each post and filtered post.
+	 * Prints the number, id, time when it was created and message of each filtered post.
+	 * Adds the filtered posts to the DefaultListModel.
+	 * Prints the number of filtered and total number of posts covered.
+	 * 
+	 * @return 		Returns the DefaultListModel that contains the filtered posts.
+	 */
+	public DefaultListModel&lt;FacePost&gt; getTimeLinePosts(){
+<span class="fc" id="L74">		Connection&lt;Post&gt; result = fbClient.fetchConnection(&quot;me/feed&quot;, Post.class);</span>
+<span class="fc" id="L75">		int counter = 0;</span>
+		
+<span class="fc" id="L77">		DefaultListModel&lt;FacePost&gt; lista= new DefaultListModel&lt;FacePost&gt;();</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">		for (List&lt;Post&gt; page : result) {</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">			for (Post aPost : page) {</span>
+				
+<span class="fc bfc" id="L81" title="All 2 branches covered.">				if (aPost.getMessage() != null) {</span>
+					
+<span class="fc" id="L83">					lista.addElement((new FacePost(aPost, counter)));</span>
+<span class="fc" id="L84">					counter++;</span>
+				}
+				
+			}
+		}
+		
+<span class="fc" id="L90">		return lista;</span>
+	}
+	
+
+	/**
+	 * Creates an access token with an extended expired date with the use of the AppId and AppSecret.
+	 * It uses the new token to create a new Facebook Client.
+	 */
+	
+	@SuppressWarnings(&quot;deprecation&quot;)
+	public void useExtendedAccessToken(){
+		//extendedAccessToken=fbClient.obtainExtendedAccessToken(AppID, AppSecret);
+<span class="nc" id="L102">		AccessToken extendedAccessToken = fbClient.obtainExtendedAccessToken(&quot;255508025109783&quot;,&quot;97c2eea96f770959e83591baa238ab01&quot;);</span>
+<span class="nc" id="L103">		accessToken=extendedAccessToken.getAccessToken();</span>
+<span class="nc" id="L104">		fbClient = new DefaultFacebookClient(accessToken);</span>
+<span class="nc" id="L105">		System.out.println(&quot;ExtendedAccessToken: &quot; + extendedAccessToken.getAccessToken());</span>
+<span class="nc" id="L106">		System.out.println(&quot;Expires: &quot; + extendedAccessToken.getExpires());</span>
+<span class="nc" id="L107">	}</span>
+	
+
+	
+	/**
+	 * Retrieves the user faceposts.
+	 * @return list of facebookposts
+	 */
+	
+	public ArrayList&lt;FacePost&gt; PostsList(){
+<span class="fc" id="L117">		Connection&lt;Post&gt; result = fbClient.fetchConnection(&quot;me/feed&quot;, Post.class);</span>
+<span class="fc" id="L118">		int counter = 0;</span>
+		
+<span class="fc" id="L120">		ArrayList&lt;FacePost&gt; lista= new ArrayList&lt;FacePost&gt;();</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">		for (List&lt;Post&gt; page : result) {</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">			for (Post aPost : page) {</span>
+				// Filters only posts that contain the word &quot;ISCTE&quot;
+<span class="fc bfc" id="L124" title="All 2 branches covered.">				if (aPost.getMessage() != null /*&amp;&amp; aPost.getMessage().contains(&quot;ISCTE&quot;)*/) {</span>
+<span class="fc" id="L125">					lista.add((new FacePost(aPost, counter)));</span>
+<span class="fc" id="L126">					counter++;</span>
+				}
+				
+			}
+		}
+<span class="fc" id="L131">		return lista;</span>
+	}
+	
+	
+	/**
+	 * Checks if the facebook server is online
+	 * @return server status.
+	 */
+	
+	@SuppressWarnings(&quot;resource&quot;)
+	public  static boolean isFacebookOnline(){
+		try {
+			
+<span class="fc" id="L144">		Socket socket=new Socket();</span>
+<span class="fc" id="L145">		int port = 80;</span>
+<span class="fc" id="L146">        InetSocketAddress socketAddress = new InetSocketAddress(&quot;facebook.com&quot;, port);</span>
+<span class="fc" id="L147">		socket.connect(socketAddress, 3000);</span>
+<span class="fc" id="L148">		return true;</span>
+<span class="nc" id="L149">		} catch (IOException e) {</span>
+			
+<span class="nc" id="L151">			return false;</span>
+			
+		}
+		
+		}
+
+	/**
+	 * Backups a list of Facebook posts in a XML
+	 * @param list1 list to backup
+	 */
+        	public static void BackupFPosts(ArrayList&lt;FacePost&gt; list1){
+        		
+        		try {
+    				
+<span class="fc" id="L165">        			File file = new File(&quot;config.xml&quot;);</span>
+<span class="fc" id="L166">        			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();</span>
+        			DocumentBuilder dBuilder;
+<span class="fc" id="L168">        			dBuilder = dbFactory.newDocumentBuilder();</span>
+<span class="fc" id="L169">        			Document doc = dBuilder.parse(file);</span>
+<span class="fc" id="L170">        			Element root=doc.getDocumentElement();</span>
+        			
+<span class="fc" id="L172">        				NodeList list = doc.getChildNodes().item(0).getChildNodes();</span>
+<span class="fc bfc" id="L173" title="All 2 branches covered.">        				for (int count = 0; count &lt; list.getLength(); count++) {</span>
+
+<span class="fc" id="L175">        					Node tempNode = list.item(count);</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">        					if(tempNode.getNodeName().equals(&quot;Facebook&quot;)){</span>
+<span class="fc" id="L177">        						System.out.println(&quot;found&quot;);</span>
+<span class="fc" id="L178">        						tempNode.getParentNode().removeChild(tempNode);</span>
+        					}
+        				}
+        				
+<span class="fc" id="L182">        				Element mail=doc.createElement(&quot;Facebook&quot;);</span>
+<span class="fc" id="L183">        				root.appendChild(mail);</span>
+        				
+<span class="fc bfc" id="L185" title="All 2 branches covered.">        				for(FacePost e:list1){</span>
+<span class="fc" id="L186">        					Element email=doc.createElement(&quot;Post&quot;);</span>
+<span class="fc" id="L187">        					email.setAttribute(&quot;Id&quot;, String.valueOf(e.getId()));</span>
+<span class="fc" id="L188">        					email.setAttribute(&quot;Message&quot;, e.getMessage());</span>
+<span class="fc" id="L189">        					email.setAttribute(&quot;Story&quot;, e.getStory());</span>
+<span class="fc" id="L190">        					email.setAttribute(&quot;Date&quot;, String.valueOf(e.getDate().getTime()));</span>
+<span class="fc" id="L191">        					mail.appendChild(email);</span>
+        				}
+        			
+<span class="fc" id="L194">        			 Transformer transformer = TransformerFactory.newInstance().newTransformer();</span>
+<span class="fc" id="L195">        	         transformer.setOutputProperty(OutputKeys.INDENT, &quot;yes&quot;);</span>
+<span class="fc" id="L196">        	         StreamResult result = new StreamResult(new FileOutputStream(&quot;config.xml&quot;));</span>
+<span class="fc" id="L197">        	         DOMSource source = new DOMSource(doc);</span>
+<span class="fc" id="L198">        	         transformer.transform(source, result);</span>
+<span class="fc" id="L199">        	         System.out.println(&quot;Backup&quot;);</span>
+        			
+        			
+        			
+        			
+        		
+<span class="pc" id="L205">        		} catch (ParserConfigurationException | SAXException | IOException | TransformerFactoryConfigurationError | TransformerException e) {</span>
+        				// TODO Auto-generated catch block
+<span class="nc" id="L207">        				e.printStackTrace();</span>
+        			}
+<span class="fc" id="L209">	}</span>
+        	
+        	/**
+        	 * Fetch a list of Facebook posts from backup
+        	 * @return list of Facebook posts.
+        	 */
+        	
+        	public static DefaultListModel&lt;FacePost&gt; FetchFromBackup(){
+        		
+<span class="fc" id="L218">        		DefaultListModel&lt;FacePost&gt; posts = new DefaultListModel&lt;FacePost&gt;();</span>
+        		try {
+
+<span class="fc" id="L221">        			File file = new File(&quot;config.xml&quot;);</span>
+<span class="fc" id="L222">        			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();</span>
+        			DocumentBuilder dBuilder;
+
+<span class="fc" id="L225">        			dBuilder = dbFactory.newDocumentBuilder();</span>
+
+<span class="fc" id="L227">        			Document doc = dBuilder.parse(file);</span>
+<span class="fc" id="L228">        			doc.getDocumentElement().normalize();</span>
+
+<span class="fc" id="L230">        			NodeList list = doc.getChildNodes().item(0).getChildNodes();</span>
+<span class="fc bfc" id="L231" title="All 2 branches covered.">        			for (int count = 0; count &lt; list.getLength(); count++) {</span>
+
+<span class="fc" id="L233">        				Node tempNode = list.item(count);</span>
+        				
+<span class="fc bfc" id="L235" title="All 2 branches covered.">        				if(tempNode.getNodeName().equals(&quot;Facebook&quot;)){</span>
+        					
+<span class="fc" id="L237">        					NodeList elist=tempNode.getChildNodes();</span>
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        					for(int i=0; i&lt;elist.getLength(); i++){</span>
+<span class="fc" id="L239">        						Node m=elist.item(i);</span>
+        						
+<span class="pc bpc" id="L241" title="1 of 4 branches missed.">        						if (m.getNodeType() == Node.ELEMENT_NODE &amp;&amp; m.getNodeName().equals(&quot;Post&quot;)) {</span>
+<span class="fc" id="L242">        						posts.addElement(new FacePost(((Element) m).getAttribute(&quot;Id&quot;), ((Element) m).getAttribute(&quot;Message&quot;), ((Element) m).getAttribute(&quot;Story&quot;), ((Element) m).getAttribute(&quot;Date&quot;)));</span>
+        					}
+        					}
+        					
+        				}
+        				
+        			}
+
+<span class="pc" id="L250">        		} catch (ParserConfigurationException | SAXException | IOException e) {</span>
+        			// TODO Auto-generated catch block
+<span class="nc" id="L252">        			e.printStackTrace();</span>
+        		}
+<span class="fc" id="L254">        		return posts;</span>
+        	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>TestBatery (7/dez/2018 21:39:39)</div></body></html>
