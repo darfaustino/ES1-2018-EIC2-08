@@ -36,7 +36,7 @@ import com.restfb.types.Post;
 
 
 	/** 
-	 * Facebook App.
+	 * Class that represents the object Facebook.
 	 *
 	 */
 	

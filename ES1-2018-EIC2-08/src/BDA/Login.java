@@ -80,11 +80,11 @@ public class Login {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String email=tf1.getText();
+				String mainemail=tf1.getText();
 				char[] pass=p1.getPassword();
 				String ftoken="";
 				String ttoken="";
-				String username="";
+				String email="";
 				String password="";
 				Found=false;
 				
@@ -107,7 +107,7 @@ public class Login {
 
 							if (tempNode.hasAttributes()) {
 
-								if (((Element) tempNode).getAttribute("Email").equals(email)
+								if (((Element) tempNode).getAttribute("Email").equals(mainemail)
 										&& ((Element) tempNode).getAttribute("Password").equals(new String(pass))) {
 									NodeList childs=tempNode.getChildNodes();
 									Found=true;
@@ -123,7 +123,7 @@ public class Login {
 												System.out.println(ttoken);
 											}
 											if(((Element) temp).hasAttribute("Email") && ((Element) temp).hasAttribute("Password")){
-												username=((Element) temp).getAttribute("Email");
+												email=((Element) temp).getAttribute("Email");
 												password=((Element) temp).getAttribute("Password");
 											}
 											
@@ -162,7 +162,7 @@ public class Login {
 							}
 
 							launcher.dispose();
-							new MainTimeline(email,face, twitter, username, password,f,t);
+							new MainTimeline(mainemail,face, twitter, email, password,f,t);
 						} catch (TwitterException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

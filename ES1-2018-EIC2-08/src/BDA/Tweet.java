@@ -15,15 +15,15 @@ public class Tweet {
 	/**
 	 * Represents the frame.
 	 */
-	public	JFrame launcher;
+	private	JFrame launcher;
 	/**
 	 * Represents the tweet.
 	 */
-	T t;
+	private T t;
 	/**
 	 * Represents the twitter.
 	 */
-	TwitterApp twitter;
+	private TwitterApp twitter;
 	
 	
 	/**

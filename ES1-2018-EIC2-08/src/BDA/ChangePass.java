@@ -53,7 +53,7 @@ public class ChangePass {
 	}
 	
 	/**
-	 * 
+	 * Gets the frame
 	 * @return		Returns the JFrame
 	 */
 	public JFrame getLauncher() {
@@ -61,7 +61,7 @@ public class ChangePass {
 	}
 
 	/**
-	 * 
+	 * Gets the user email
 	 * @return		Returns the user email
 	 */
 	public String getEmail() {

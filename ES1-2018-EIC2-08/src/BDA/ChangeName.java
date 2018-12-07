@@ -54,7 +54,7 @@ public class ChangeName {
 	}
 
 	/**
-	 * 
+	 * Gets the frame
 	 * @return		Returns the JFrame
 	 */
 	public JFrame getLauncher() {
@@ -62,7 +62,7 @@ public class ChangeName {
 	}
 
 	/**
-	 * 
+	 * Gets the email
 	 * @return		Returns the user email
 	 */
 	public String getEmail() {

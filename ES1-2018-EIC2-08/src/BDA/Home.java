@@ -22,7 +22,7 @@ public class Home {
 	 * Initial window class
 	 */
 	
-	public	JFrame launcher;
+	private	JFrame launcher;
 
 	/**
 	 * Constructor, calls method init() and builds the app main window, where you can navigate to login or signup.
@@ -67,14 +67,14 @@ public class Home {
 	JLabel signup=new JLabel(new ImageIcon("images\\signup.png"));
 	
 	
-	JPanel t= new JPanel(new GridLayout(2,1));
-	t.setOpaque(false);
-	t.add(login, BorderLayout.NORTH);
-	t.add(signup, BorderLayout.SOUTH);
+	JPanel painel= new JPanel(new GridLayout(2,1));
+	painel.setOpaque(false);
+	painel.add(login, BorderLayout.NORTH);
+	painel.add(signup, BorderLayout.SOUTH);
 	
 	
 	background.add(logo, BorderLayout.PAGE_START);
-	background.add(t, BorderLayout.CENTER);
+	background.add(painel, BorderLayout.CENTER);
 	
 	//Dar Refresh
 	

@@ -5,7 +5,7 @@ import com.restfb.types.Post;
 
 
 	/** 
-	 * Face Post.
+	 * Object that represents a post.
 	 *
 	 */
 
