@@ -17,6 +17,7 @@ public class Face_getLikedPages {
 	private FacebookClient fbClient;
 	private String accessToken;
 	
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		accessToken="EAADoYhkS7RcBAEKHnrBd4T60iYQZCm1jfrK4xpq1quSDLCcQW7tAOXIw5TiK26A1MVZBTCV2jcijb8"
@@ -29,13 +30,13 @@ public class Face_getLikedPages {
 		Connection<Page> result = fbClient.fetchConnection("me/likes", Page.class);
 		assertNotNull( result);
 		
-		int counter = 0;
+		
 		for (List<Page> feedPage : result) {
 			assertNotNull( feedPage);
 			
 			for (Page page : feedPage) {
 				assertNotNull( page);
-				counter++;	
+					
 			}
 		}
 	}

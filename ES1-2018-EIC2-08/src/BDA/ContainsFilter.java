@@ -20,6 +20,7 @@ import javax.swing.DefaultListModel;
  *
  */
 
+@SuppressWarnings("serial")
 public class ContainsFilter extends JFrame {
 
 	

@@ -21,6 +21,7 @@ public class Face_getTimeLinePosts {
 	private FacebookClient fbClient;
 	private String accessToken;
 	
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		accessToken="EAADoYhkS7RcBAEKHnrBd4T60iYQZCm1jfrK4xpq1quSDLCcQW7tAOXIw5TiK26A1MVZBTCV2jcijb8"
@@ -34,7 +35,7 @@ public class Face_getTimeLinePosts {
 		assertNotNull( result);
 		
 		int counter = 0;
-		int counterTotal = 0;
+		
 		DefaultListModel<FacePost> lista= new DefaultListModel<FacePost>();
 		assertNotNull(lista);
 		for (List<Post> page : result) {
@@ -49,7 +50,7 @@ public class Face_getTimeLinePosts {
 					assertNotNull(lista.elementAt(counter));
 					counter++;
 				}
-				counterTotal++;
+				
 			}
 		}	
 	}

@@ -2,7 +2,7 @@ package JUnitTests;
 
 import static org.junit.Assert.*;
 
-import javax.mail.Message;
+
 import javax.swing.DefaultListModel;
 
 import org.junit.Test;

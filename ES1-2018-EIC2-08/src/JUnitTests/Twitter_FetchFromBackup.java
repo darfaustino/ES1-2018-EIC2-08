@@ -6,8 +6,7 @@ import javax.swing.DefaultListModel;
 
 import org.junit.Test;
 
-import BDA.FacePost;
-import BDA.Facebook;
+
 import BDA.T;
 import BDA.TwitterApp;
 

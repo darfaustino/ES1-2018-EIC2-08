@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
+
 
 import BDA.FacePost;
 import BDA.Facebook;

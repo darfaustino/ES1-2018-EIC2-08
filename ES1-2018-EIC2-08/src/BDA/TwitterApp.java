@@ -128,6 +128,7 @@ public final class TwitterApp {
 	public static boolean isTwitterOnline() {
 		try {
 
+			@SuppressWarnings("resource")
 			Socket socket = new Socket();
 			int port = 80;
 			InetSocketAddress socketAddress = new InetSocketAddress("twitter.com", port);

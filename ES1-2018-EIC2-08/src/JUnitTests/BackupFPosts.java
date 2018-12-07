@@ -29,6 +29,7 @@ public class BackupFPosts {
 	private FacebookClient fbClient;
 	private String accessToken;
 	
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		accessToken="EAADoYhkS7RcBAEKHnrBd4T60iYQZCm1jfrK4xpq1quSDLCcQW7tAOXIw5TiK26A1MVZBTCV2jcijb8"
@@ -42,7 +43,7 @@ public class BackupFPosts {
 		
 		Connection<Post> result = fbClient.fetchConnection("me/feed", Post.class);
 		int counter = 0;
-		int counterTotal = 0;
+		
 		ArrayList<FacePost> lista= new ArrayList<FacePost>();
 		for (List<Post> page : result) {
 			for (Post aPost : page) {
@@ -51,7 +52,7 @@ public class BackupFPosts {
 					lista.add((new FacePost(aPost, counter)));
 					counter++;
 				}
-				counterTotal++;
+				
 			}
 		}
 		Facebook.BackupFPosts(lista);
@@ -63,6 +64,7 @@ public class BackupFPosts {
 			DocumentBuilder dBuilder;
 			dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(file);
+			@SuppressWarnings("unused")
 			Element root=doc.getDocumentElement();
 			
 				NodeList list = doc.getChildNodes().item(0).getChildNodes();

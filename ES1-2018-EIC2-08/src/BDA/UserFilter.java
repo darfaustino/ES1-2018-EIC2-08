@@ -1,6 +1,6 @@
 package BDA;
 
-import java.awt.Component;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import twitter4j.TwitterException;
 
+@SuppressWarnings("serial")
 public class UserFilter extends JFrame {
 
 	

@@ -19,6 +19,7 @@ public class TwitterTimelineInit {
 		@Test
 		public void test() {
 			TwitterApp ta = new TwitterApp("djruORHuSHJcsJW060wtuGowg","LzofRAO9R7a8sZIDofWXoix6gtXiS43MzFsrFrlqiIeKo66Ly5","1063486441114820608-2pujB6rSntopZvEd6ENTrt3gOPspgv","DTB1yFxV0pelfd9BlbBbYar6GE34rbGHA6ceDBs0beCnd");
+			@SuppressWarnings("rawtypes")
 			JList tweets= null;
 			try {
 				tweets=new JList<T>(ta.getTimeline());

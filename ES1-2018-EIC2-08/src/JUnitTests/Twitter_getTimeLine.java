@@ -6,11 +6,11 @@ import org.junit.Test;
 import BDA.T;
 import BDA.TwitterApp;
 
-import java.util.List;
+
 
 import javax.swing.DefaultListModel;
 
-import twitter4j.Status;
+
 import twitter4j.TwitterException;
 
 

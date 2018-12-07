@@ -19,6 +19,7 @@ public class isMailOnline {
 		
 		try {
 			
+			@SuppressWarnings("resource")
 			Socket socket=new Socket();
 			int port = 80;
 	        InetSocketAddress socketAddress = new InetSocketAddress("outlook.office365.com", port);

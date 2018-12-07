@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 	/**
 	 * Class that creates the app background image.
 	 */
+@SuppressWarnings("serial")
 public class Background extends JPanel {
 
 	

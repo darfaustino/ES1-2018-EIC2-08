@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -31,11 +31,9 @@ import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.FacebookClient.AccessToken;
-import com.restfb.Parameter;
-import com.restfb.types.FacebookType;
-import com.restfb.types.Page;
+
 import com.restfb.types.Post;
-import com.restfb.types.User;
+
 
 	/** 
 	 * Facebook App.
@@ -53,6 +51,7 @@ public class Facebook {
 	 * @param acessToken	The name of the string that is going to be the accessToken.
 	 */
 	
+	@SuppressWarnings("deprecation")
 	public Facebook(String acessToken){
 		this.accessToken=acessToken; //expira 21/12/2018
 		fbClient = new DefaultFacebookClient(accessToken);
@@ -74,7 +73,7 @@ public class Facebook {
 	public DefaultListModel<FacePost> getTimeLinePosts(){
 		Connection<Post> result = fbClient.fetchConnection("me/feed", Post.class);
 		int counter = 0;
-		int counterTotal = 0;
+		
 		DefaultListModel<FacePost> lista= new DefaultListModel<FacePost>();
 		for (List<Post> page : result) {
 			for (Post aPost : page) {
@@ -84,7 +83,7 @@ public class Facebook {
 					lista.addElement((new FacePost(aPost, counter)));
 					counter++;
 				}
-				counterTotal++;
+				
 			}
 		}
 		
@@ -97,6 +96,7 @@ public class Facebook {
 	 * It uses the new token to create a new Facebook Client.
 	 */
 	
+	@SuppressWarnings("deprecation")
 	public void useExtendedAccessToken(){
 		//extendedAccessToken=fbClient.obtainExtendedAccessToken(AppID, AppSecret);
 		AccessToken extendedAccessToken = fbClient.obtainExtendedAccessToken("255508025109783","97c2eea96f770959e83591baa238ab01");
@@ -116,7 +116,7 @@ public class Facebook {
 	public ArrayList<FacePost> PostsList(){
 		Connection<Post> result = fbClient.fetchConnection("me/feed", Post.class);
 		int counter = 0;
-		int counterTotal = 0;
+		
 		ArrayList<FacePost> lista= new ArrayList<FacePost>();
 		for (List<Post> page : result) {
 			for (Post aPost : page) {
@@ -125,7 +125,7 @@ public class Facebook {
 					lista.add((new FacePost(aPost, counter)));
 					counter++;
 				}
-				counterTotal++;
+				
 			}
 		}
 		return lista;
@@ -137,6 +137,7 @@ public class Facebook {
 	 * @return server status.
 	 */
 	
+	@SuppressWarnings("resource")
 	public  static boolean isFacebookOnline(){
 		try {
 			

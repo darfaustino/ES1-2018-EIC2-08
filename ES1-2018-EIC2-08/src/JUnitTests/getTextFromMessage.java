@@ -3,21 +3,15 @@ package JUnitTests;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Date;
-import java.util.Enumeration;
+
 import java.util.Properties;
 
-import javax.activation.DataHandler;
-import javax.mail.Address;
-import javax.mail.Flags;
-import javax.mail.Header;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
+
 import javax.mail.Session;
-import javax.mail.Message.RecipientType;
+
 import javax.mail.internet.MimeMessage;
 
 import org.junit.Test;

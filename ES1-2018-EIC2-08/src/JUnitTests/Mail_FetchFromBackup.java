@@ -7,8 +7,7 @@ import javax.swing.DefaultListModel;
 import org.junit.Test;
 
 import BDA.Email;
-import BDA.FacePost;
-import BDA.Facebook;
+
 import BDA.Mail;
 
 public class Mail_FetchFromBackup {

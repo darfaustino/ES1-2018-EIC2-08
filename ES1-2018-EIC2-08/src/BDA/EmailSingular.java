@@ -1,6 +1,6 @@
 package BDA;
 
-import javax.mail.MessagingException;
+
 import javax.swing.*;
 
 import java.awt.*;

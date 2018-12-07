@@ -2,23 +2,22 @@ package JUnitTests;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
+
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.restfb.Connection;
+
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.FacebookClient.AccessToken;
-import com.restfb.types.Page;
-import com.restfb.types.Post;
-import com.restfb.types.User;
+
 
 public class Face_getExtendedAccessToken {
 	private FacebookClient fbClient;
 	private String accessToken;
 	
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		accessToken="EAADoYhkS7RcBAEKHnrBd4T60iYQZCm1jfrK4xpq1quSDLCcQW7tAOXIw5TiK26A1MVZBTCV2jcijb8"
@@ -26,6 +25,7 @@ public class Face_getExtendedAccessToken {
 		fbClient=new DefaultFacebookClient(accessToken);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testUseExtendedAccessToken() {
 		AccessToken extendedAccessToken = fbClient.obtainExtendedAccessToken("255508025109783","97c2eea96f770959e83591baa238ab01");

@@ -2,21 +2,17 @@ package JUnitTests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-import javax.swing.JList;
+import java.util.Date;
+
+
+
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
-import com.restfb.types.Post;
 
 import BDA.FacePost;
-import BDA.Facebook;
 import BDA.FacebookPost;
 
 public class FacebookPost_getFacePost {

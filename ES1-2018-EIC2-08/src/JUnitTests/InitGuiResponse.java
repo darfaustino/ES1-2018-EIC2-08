@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import org.junit.Test;
 
 import BDA.Email;
-import BDA.EmailSingular;
+
 import BDA.GuiResponse;
 import BDA.Mail;
 

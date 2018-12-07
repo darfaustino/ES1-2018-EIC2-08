@@ -20,6 +20,7 @@ public class isFacebookOnline {
 		
 		try {
 			
+			@SuppressWarnings("resource")
 			Socket socket=new Socket();
 			int port = 80;
 	        InetSocketAddress socketAddress = new InetSocketAddress("facebook.com", port);

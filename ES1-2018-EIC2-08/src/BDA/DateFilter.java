@@ -21,6 +21,7 @@ import twitter4j.TwitterException;
  *
  */
 
+@SuppressWarnings("serial")
 public class DateFilter extends JFrame {
 
 	

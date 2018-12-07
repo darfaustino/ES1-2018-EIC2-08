@@ -1,11 +1,11 @@
 package BDA;
 
-import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -71,7 +71,7 @@ public class GuiResponse {
 		JLabel enviar=new JLabel(new ImageIcon("images/enviar.png"));
 		enviar.setPreferredSize(new Dimension(300,70));
 		
-		JTextField textto=new JTextField();
+		
 		JTextField textass=new JTextField();
 		JTextArea messagetext=new JTextArea();
 		
