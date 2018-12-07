@@ -18,7 +18,7 @@ public class InitEmailSingular {
 		String email="darfo@iscte-iul.pt";
 		String pass="EngenhariaSoftware98";
 		DefaultListModel<Email> mail=Mail.LoginMail(email, pass);
-		EmailSingular emailsingular=new EmailSingular(mail.getElementAt(0));
+		EmailSingular emailsingular=new EmailSingular(email,pass,mail.getElementAt(0));
 		int width=emailsingular.getLauncher().getWidth();
 		int height=emailsingular.getLauncher().getHeight();
 		boolean isVisible= emailsingular.getLauncher().isVisible();

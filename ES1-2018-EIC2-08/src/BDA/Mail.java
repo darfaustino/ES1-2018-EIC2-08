@@ -122,12 +122,10 @@ public class Mail {
 		 * @param text text to be sent.
 		 */
 	
-		public static void SendMail(Message message, String text){
+		public static void SendMail(Message message, String text, String username, String password){
 			
 			 try {
-			
-			String username="darfo@iscte-iul.pt";
-			String password= "EngenhariaSoftware98";
+		
 			  String host = "outlook.office365.com";
 
 		        Properties props = new Properties();

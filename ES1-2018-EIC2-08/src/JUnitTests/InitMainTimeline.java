@@ -25,6 +25,7 @@ public class InitMainTimeline {
 			int width=main.getLauncher().getWidth();
 			int height=main.getLauncher().getHeight();
 			boolean isVisible= main.getLauncher().isVisible();
+			
 			assertTrue(width>=800);
 			assertTrue(height>=600);
 			assertEquals(true, isVisible);

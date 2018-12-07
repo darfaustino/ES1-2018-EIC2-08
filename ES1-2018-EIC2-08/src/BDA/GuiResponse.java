@@ -24,6 +24,8 @@ public class GuiResponse {
 
 	private JFrame launcher;
 	private Email email;
+	private String username;
+	private String password;
 	
 	/**
 	 * Contructor, it initiates the frame and builds the Email Response Form GUI.
@@ -31,9 +33,11 @@ public class GuiResponse {
 	 * @param email  the Email which you want to respond.
 	 */
 	
-	public GuiResponse(JFrame launcher, Email email) {
+	public GuiResponse(String username, String password, JFrame launcher, Email email) {
 		this.launcher = launcher;
 		this.email=email;
+		this.username=username;
+		this.password=password;
 		init();
 	}
 
@@ -84,7 +88,7 @@ public class GuiResponse {
 				// TODO Auto-generated method stub
 				
 				enviar.setEnabled(false);
-				Mail.SendMail(email.getMsm(), messagetext.getText());
+				Mail.SendMail(email.getMsm(), messagetext.getText(),username, password);
 				launcher.dispose();
 				
 			}

@@ -21,7 +21,7 @@ public class InitGuiResponse {
 		DefaultListModel<Email> mail=Mail.LoginMail(email, pass);
 		JFrame frame=new JFrame();
 		frame.setVisible(true);
-		GuiResponse response=new GuiResponse(frame, mail.getElementAt(0));
+		GuiResponse response=new GuiResponse(email,pass,frame, mail.getElementAt(0));
 		int width=response.getLauncher().getWidth();
 		int height=response.getLauncher().getHeight();
 		boolean isVisible= response.getLauncher().isVisible();

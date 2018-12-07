@@ -36,7 +36,7 @@ public class InitLogin {
 		assertEquals(30, l1height);
 		assertEquals(50, l1X);
 		assertEquals(270, l1Y);
-		assertEquals("Username", username);
+		assertEquals("Email", username);
 	
 		//JLabel2 Test
 		

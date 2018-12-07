@@ -18,13 +18,17 @@ public class EmailSingular {
 	
 	private	JFrame launcher;
 	private Email email;
+	private String username;
+	private String password;
 	
 	/**
 	 * Contructor, it call the methods necessary to create the GUI to show a email.
 	 * @param email email to show.
 	 */
-	public EmailSingular(Email email){
+	public EmailSingular(String username, String password, Email email){
 		try {
+			this.username=username;
+			this.password=password;
 			this.email=email;
 			init();
 		} catch (IOException e) {
@@ -112,7 +116,7 @@ public class EmailSingular {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				
-				new GuiResponse(launcher, email);
+				new GuiResponse(username, password, launcher, email);
 				
 				
 			}

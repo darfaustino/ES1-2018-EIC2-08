@@ -73,26 +73,21 @@ public class Facebook {
 	 */
 	public DefaultListModel<FacePost> getTimeLinePosts(){
 		Connection<Post> result = fbClient.fetchConnection("me/feed", Post.class);
-		System.out.println("\nPosts:");
 		int counter = 0;
 		int counterTotal = 0;
 		DefaultListModel<FacePost> lista= new DefaultListModel<FacePost>();
 		for (List<Post> page : result) {
 			for (Post aPost : page) {
-				// Filters only posts that contain the word "ISCTE"
-				if (aPost.getMessage() != null /*&& aPost.getMessage().contains("ISCTE")*/) {
-					System.out.println("---- Post " + counter + " ----");
-					System.out.println("Id: " + "fb.com/" + aPost.getId());
-					System.out.println("Message: " + aPost.getMessage());
-					System.out.println("Created: " + aPost.getCreatedTime());
-					System.out.println("From: " + aPost.getStory());
+				
+				if (aPost.getMessage() != null) {
+					
 					lista.addElement((new FacePost(aPost, counter)));
 					counter++;
 				}
 				counterTotal++;
 			}
 		}
-		System.out.println("-------------\nNº of Results: " + counter + "/" + counterTotal);
+		
 		return lista;
 	}
 	
@@ -111,44 +106,9 @@ public class Facebook {
 		System.out.println("Expires: " + extendedAccessToken.getExpires());
 	}
 	
-	/**
-	 * Prints the user's id, name, email and home town.
-	 */
+
 	
-	public void getUserInformation(){
-		User me = fbClient.fetchObject("me", User.class);
-		System.out.println("Facebook:");
-		System.out.println("Id: " + me.getId());
-		System.out.println("Name: " + me.getName());
-		System.out.println("Email: " + me.getEmail());
-		System.out.println("Home town: " + me.getHometownName());
-		//...me.get...
-		
-	}
-	
-	/**
-	 * Scrolls through all the pages the user likes.
-	 * Counts each page.
-	 * Prints the number, id and number of likes of each page.
-	 * Prints the total number of pages covered.
-	 */
-	
-	public void getLikedPages() {
-		Connection<Page> result = fbClient.fetchConnection("me/likes", Page.class);
-		System.out.println("\nPosts:");
-		int counter = 0;
-		for (List<Page> feedPage : result) {
-			for (Page page : feedPage) {
-				System.out.println("---- Page " + counter + " ----");
-				System.out.println("Name: "+ page.getName());
-				System.out.println("Id: " + "fb.com/" + page.getId());
-				System.out.println("Number of Likes: " + page.getLikesCount());
-				counter++;	
-			}
-		}
-		System.out.println("-------------\nNº of Results: " + counter);
-		
-	}
+
 	
 	public ArrayList<FacePost> PostsList(){
 		Connection<Post> result = fbClient.fetchConnection("me/feed", Post.class);

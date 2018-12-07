@@ -110,5 +110,19 @@ public class DateFilter extends JFrame {
 		this.dispose();
 	}
 
+	public JList<FacePost> getFacePosts() {
+		return facePosts;
+	}
+
+	public JList<Email> getEmails() {
+		return emails;
+	}
+
+	public JList<T> getTweets() {
+		return tweets;
+	}
+	
+	
+
 }
 

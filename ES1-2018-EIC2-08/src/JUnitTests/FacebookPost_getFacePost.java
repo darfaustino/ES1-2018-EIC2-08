@@ -3,6 +3,7 @@ package JUnitTests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JList;
@@ -24,8 +25,7 @@ public class FacebookPost_getFacePost {
 	
 	@Before
 	public void setUp() throws Exception {
-		Post w = new Post();
-		fp= new FacePost(w, 0);
+		fp= new FacePost("1", "test", "test",String.valueOf( new Date().getTime()));
 		
 	}
 	@Test

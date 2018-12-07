@@ -33,6 +33,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+/**
+ * Class that changes passwords of the BDA account.
+ */
+
+
 public class ChangeName {
 	private	JFrame launcher;
 	private String email;

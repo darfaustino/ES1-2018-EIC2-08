@@ -84,6 +84,20 @@ public class UserFilter extends JFrame {
 		tweets.setModel(t);
 	}
 
+	public JList<FacePost> getFacePosts() {
+		return facePosts;
+	}
+
+	public JList<Email> getEmails() {
+		return emails;
+	}
+
+	public JList<T> getTweets() {
+		return tweets;
+	}
+
+	
+	
 	
 
 }
