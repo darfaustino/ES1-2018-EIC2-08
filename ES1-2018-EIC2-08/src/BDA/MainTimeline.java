@@ -8,7 +8,6 @@ import javax.swing.event.ListSelectionListener;
 
 import com.restfb.types.Post;
 
-
 import twitter4j.TwitterException;
 
 import java.awt.*;
@@ -394,6 +393,34 @@ public class MainTimeline {
 
 	public JFrame getLauncher() {
 		return launcher;
+	}
+	
+	/**
+	 * Gets the JList of facePosts.
+	 * 
+	 * @return facePosts
+	 */
+	public JList<FacePost> getFacePosts() {
+		return facePosts;
+	}
+
+	/**
+	 * Gets the JList of tweets.
+	 * 
+	 * @return tweets
+	 */
+	public JList<T> getTweets() {
+		return tweets;
+	}
+
+	
+	/**
+	 * Gets the JList of emails.
+	 * 
+	 * @return emails
+	 */
+	public JList<Email> getEmails() {
+		return emails;
 	}
 
 }
