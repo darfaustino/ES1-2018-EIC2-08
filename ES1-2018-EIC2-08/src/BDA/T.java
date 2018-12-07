@@ -20,13 +20,18 @@ public class T {
 	 private	String text;
 		
 
+	 /**
+		 * Represents the the tweet's date.
+		 */
+	 private Date date;
+	 
 		/**
 		 * Constructor, creates a Tweet with a user and a text.
 		 * @param name name given
 		 * @param text tweet given text
 		 */
 		
-		private Date date;
+		
 		
 		public T(String name, String text, Date date) {
 			super();
@@ -44,14 +49,26 @@ public class T {
 			return "<html> Tweet: <br/>" + text ;
 		}
 
+		/**
+		 * Gets the namo of the owner of the Tweet.
+		 * @return  tweet's nameuser
+		 */
 		public String getName() {
 			return name;
 		}
 
+		/**
+		 * Gets the text of the Tweet.
+		 * @return  tweet's text
+		 */
 		public String getText() {
 			return text;
 		}
 
+		/**
+		 *  Gets the date of the Tweet.
+		 * @return  tweet's date
+		 */
 		public Date getDate() {
 			return date;
 		}
