@@ -120,6 +120,8 @@ public class Mail {
 		 * It responds to a given Message with a given Text via STMP. 
 		 * @param message Message to respond to.
 		 * @param text text to be sent.
+		 * @param username email
+		 * @param password email password
 		 */
 	
 		public static void SendMail(Message message, String text, String username, String password){
@@ -274,6 +276,11 @@ public class Mail {
 		return null;
 	}
 	
+	/**
+	 * Check mail server status
+	 * @return server status
+	 */
+	
 	public  static boolean isMailOnline(){
 		try {
 			
@@ -289,7 +296,10 @@ public class Mail {
 		}
 	}
 	
-	
+	/**
+	 * Backup a list of emails
+	 * @param list1 list to backup
+	 */
 	public static void BackupMail(ArrayList<Email> list1){
 	
 			try {
@@ -340,7 +350,10 @@ public class Mail {
 			}
 	}
 	
-	
+	/**
+	 * Fetch list of emails from backup
+	 * @return list of emails
+	 */
 	public static DefaultListModel<Email> FetchFromBackup(){
 		
 		DefaultListModel<Email> emails = new DefaultListModel<Email>();

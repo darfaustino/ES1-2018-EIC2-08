@@ -16,6 +16,11 @@ import javax.swing.border.EmptyBorder;
 
 import twitter4j.TwitterException;
 
+/**
+ * Class that represents a date filter.
+ *
+ */
+
 public class DateFilter extends JFrame {
 
 	
@@ -30,9 +35,9 @@ public class DateFilter extends JFrame {
 	
 	/**
 	 * Create the frame.
-	 * @param tweets 
-	 * @param emails 
-	 * @param facePosts 
+	 * @param tweets list of tweets
+	 * @param emails list of emails
+	 * @param facePosts list of posts
 	 */
 	public DateFilter(JList<FacePost> facePosts, JList<Email> emails, JList<T> tweets) {
 		this.facePosts=facePosts;
@@ -72,6 +77,14 @@ public class DateFilter extends JFrame {
 		setVisible(true);
 	}
 	
+	/**
+	 * Filters 3 lists by a certain date
+	 * @param day chosen day
+	 * @param month chosen month
+	 * @param year chosen year
+	 * @throws TwitterException twitter exception
+	 */
+	
 	public void dateFilter(int day, int month, int year) throws TwitterException {
 		DefaultListModel<Email> e = new DefaultListModel<>();
 		DefaultListModel<FacePost> f = new DefaultListModel<>();
@@ -110,14 +123,29 @@ public class DateFilter extends JFrame {
 		this.dispose();
 	}
 
+	/**
+	 * Get the facebook posts
+	 * @return list of facebook posts
+	 */
+	
 	public JList<FacePost> getFacePosts() {
 		return facePosts;
 	}
+	
+	/**
+	 * Get the emails
+	 * @return list of emails
+	 */
 
 	public JList<Email> getEmails() {
 		return emails;
 	}
 
+	
+	/**
+	 * Get the tweets
+	 * @return list of tweets
+	 */
 	public JList<T> getTweets() {
 		return tweets;
 	}

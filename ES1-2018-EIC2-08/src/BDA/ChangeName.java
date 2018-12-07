@@ -34,7 +34,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- * Class that changes passwords of the BDA account.
+ * Class that changes name of the BDA account.
  */
 
 

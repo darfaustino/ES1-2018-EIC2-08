@@ -108,7 +108,10 @@ public class Facebook {
 	
 
 	
-
+	/**
+	 * Retrieves the user faceposts.
+	 * @return list of facebookposts
+	 */
 	
 	public ArrayList<FacePost> PostsList(){
 		Connection<Post> result = fbClient.fetchConnection("me/feed", Post.class);
@@ -129,6 +132,11 @@ public class Facebook {
 	}
 	
 	
+	/**
+	 * Checks if the facebook server is online
+	 * @return server status.
+	 */
+	
 	public  static boolean isFacebookOnline(){
 		try {
 			
@@ -145,6 +153,10 @@ public class Facebook {
 		
 		}
 
+	/**
+	 * Backups a list of Facebook posts in a XML
+	 * @param list1 list to backup
+	 */
         	public static void BackupFPosts(ArrayList<FacePost> list1){
         		
         		try {
@@ -195,6 +207,10 @@ public class Facebook {
         			}
 	}
         	
+        	/**
+        	 * Fetch a list of Facebook posts from backup
+        	 * @return list of Facebook posts.
+        	 */
         	
         	public static DefaultListModel<FacePost> FetchFromBackup(){
         		

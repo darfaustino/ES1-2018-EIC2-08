@@ -107,26 +107,7 @@ public final class TwitterApp {
 
 	}
 
-	/**
-	 * Searching by user's name.
-	 * 
-	 * @param s is the name of the user.
-	 * 
-	 */
-//	public static void searchForUser(String s) {
-//		int counter = 0;
-//		int counterTotal = 0;
-//		for (Status status : statuses) {
-//			if (status.getUser().getName() != null && status.getUser().getName().contains(s)) {
-//				System.out.println(status.getUser().getName() + ":" + status.getText());
-//				counter++;
-//			}
-//			counterTotal++;
-//		}
-//		System.out.println("-------------\nNº of Results: " + counter + "/" + counterTotal);
-//
-//	}
-
+	
 	/**
 	 * Retweet
 	 * 
@@ -139,6 +120,11 @@ public final class TwitterApp {
 		System.out.println("Successfully updated the status to [" + status.getText() + "].");
 	}
 
+	/**
+	 * Check the Twitter server status
+	 * @return Twitter status
+	 */
+	
 	public static boolean isTwitterOnline() {
 		try {
 
@@ -153,6 +139,9 @@ public final class TwitterApp {
 
 		}
 	}
+	/**
+	 * Backup the homeline tweets.
+	 */
 
 	public static void BackupTweets() {
 
@@ -206,7 +195,10 @@ public final class TwitterApp {
 		}
 	}
 	
-
+	/**
+	 * Fetch the Homeline tweets in the backup
+	 * @return list of tweets
+	 */
 	public static DefaultListModel<T> FetchFromBackup() {
 
 		DefaultListModel<T> tweets = new DefaultListModel<T>();

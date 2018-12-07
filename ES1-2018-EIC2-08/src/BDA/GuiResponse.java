@@ -31,6 +31,8 @@ public class GuiResponse {
 	 * Contructor, it initiates the frame and builds the Email Response Form GUI.
 	 * @param launcher frame to be initiated;
 	 * @param email  the Email which you want to respond.
+	 * @param username Mail account email
+	 * @param password Mail account password
 	 */
 	
 	public GuiResponse(String username, String password, JFrame launcher, Email email) {

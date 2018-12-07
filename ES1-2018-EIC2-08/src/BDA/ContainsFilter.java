@@ -15,6 +15,11 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 
+/**
+ * Class that filters lists by containing certain words
+ *
+ */
+
 public class ContainsFilter extends JFrame {
 
 	
@@ -27,9 +32,9 @@ public class ContainsFilter extends JFrame {
 	
 	/**
 	 * Create the frame.
-	 * @param tweets 
-	 * @param emails 
-	 * @param facePosts 
+	 * @param tweets list of tweets
+	 * @param emails list of emails
+	 * @param facePosts list of posts
 	 */
 	public ContainsFilter(JList<FacePost> facePosts, JList<Email> emails, JList<T> tweets) {
 		this.facePosts=facePosts;
@@ -61,6 +66,12 @@ public class ContainsFilter extends JFrame {
 		setVisible(true);
 	}
 	
+	/**
+	 * Filter 3 lists by a certain word
+	 * @param s word to search
+	 * @throws TwitterException Twitter exception
+	 */
+	
 	public void containsFilter(String s) throws TwitterException {
 		DefaultListModel<Email> e = new DefaultListModel<>();
 		DefaultListModel<FacePost> f = new DefaultListModel<>();
@@ -88,14 +99,29 @@ public class ContainsFilter extends JFrame {
 		tweets.setModel(t);
 	}
 
+	/**
+	 * Get the facebook posts
+	 * @return list of facebook posts
+	 */
+	
 	public JList<FacePost> getFacePosts() {
 		return facePosts;
 	}
 
+	/**
+	 * Get the emails
+	 * @return list of emails
+	 */
+	
 	public JList<Email> getEmails() {
 		return emails;
 	}
 
+	/**
+	 * Get the tweets
+	 * @return list of tweets
+	 */
+	
 	public JList<T> getTweets() {
 		return tweets;
 	}

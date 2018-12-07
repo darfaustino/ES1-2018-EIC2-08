@@ -29,9 +29,9 @@ public class UserFilter extends JFrame {
 	
 	/**
 	 * Create the frame.
-	 * @param tweets 
-	 * @param emails 
-	 * @param facePosts 
+	 * @param tweets list of tweets
+	 * @param emails list of emails
+	 * @param facePosts list of posts
 	 */
 	public UserFilter(JList<FacePost> facePosts, JList<Email> emails, JList<T> tweets) {
 		this.facePosts=facePosts;
@@ -63,6 +63,11 @@ public class UserFilter extends JFrame {
 		setVisible(true);
 	}
 	
+	/**
+	 * Filters the 3 lists by username
+	 * @param s username
+	 * @throws TwitterException twitter exception
+	 */
 	public void userFilter(String s) throws TwitterException {
 		DefaultListModel<Email> e = new DefaultListModel<>();
 		DefaultListModel<FacePost> f = new DefaultListModel<>();
@@ -84,14 +89,26 @@ public class UserFilter extends JFrame {
 		tweets.setModel(t);
 	}
 
+	/**
+	 * Gets the facebook post list
+	 * @return list of posts
+	 */
 	public JList<FacePost> getFacePosts() {
 		return facePosts;
 	}
 
+	/**
+	 * Gets the list of emails
+	 * @return list of emails
+	 */
 	public JList<Email> getEmails() {
 		return emails;
 	}
 
+	/**
+	 * Gets the list of tweets
+	 * @return list of tweets
+	 */
 	public JList<T> getTweets() {
 		return tweets;
 	}

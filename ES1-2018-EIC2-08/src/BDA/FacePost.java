@@ -32,6 +32,14 @@ public class FacePost {
 		story=post.getStory();
 	}
 		
+	/**
+	 * Contructor, Creates a facebook post with given parameters
+	 * @param id post id
+	 * @param message post message
+	 * @param story post story
+	 * @param date post date
+	 */
+	
 	public FacePost(String id, String message, String story, String date) {
 		// TODO Auto-generated constructor stub
 		this.id=Integer.valueOf(id);

@@ -24,6 +24,8 @@ public class EmailSingular {
 	/**
 	 * Contructor, it call the methods necessary to create the GUI to show a email.
 	 * @param email email to show.
+	 * @param password password of the mail
+	 * @param username email of the mail
 	 */
 	public EmailSingular(String username, String password, Email email){
 		try {

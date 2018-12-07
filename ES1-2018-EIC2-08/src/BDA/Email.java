@@ -32,9 +32,6 @@ public class Email implements Comparable<Email>{
 	 * Constructor, receives a Message as a parameter and copies the message subject, body and whom is from.
 	 * It creates the object Email.  
 	 * @param msm Message received.
-	 * @throws MessagingException It founds a problem in the Message
-	 * @throws UnsupportedEncodingException It can´t decode the Message.getFrom().
-	 * @throws IOException  I/O exception of some sort has occurred.
 	 */
 	
 	public Email(Message msm) {
@@ -55,6 +52,14 @@ public class Email implements Comparable<Email>{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Contructor, creates an email with the given parameters
+	 * @param subject email subject
+	 * @param from email sender
+	 * @param body email text
+	 * @param date received date.
+	 */
 	
 	public Email(String subject, String from, String body, String date) {
 		// TODO Auto-generated constructor stub

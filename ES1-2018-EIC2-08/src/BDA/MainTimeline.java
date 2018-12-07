@@ -43,6 +43,8 @@ public class MainTimeline {
 	 * @param twitter  		Given Twitter access
 	 * @param username 		Given Account Outlook Email
 	 * @param password 		Given Account Outlook Password
+	 * @param f             Facebook status
+	 * @param t             Twitter status
 	 * @throws TwitterException problem in the Twitter
 	 */
 	public MainTimeline(String userEmail, Facebook face, TwitterApp twitter, String username, String password, boolean f, boolean t)
