@@ -27,15 +27,43 @@ public class ChangeMail_change {
 
 	@Before
 	public void setUp() throws Exception {
-		// dados duma conta existente
-		email="darfo@iscte-iul.pt";
-		newMail="diogo@iscte-iul.pt";
-		pass="test".toCharArray();
+		try {
+			File file = new File("config.xml");
+
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder;
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(file);
+			doc.getDocumentElement().normalize();
+
+			NodeList list = doc.getChildNodes().item(0).getChildNodes();
+			for (int count = 0; count < list.getLength(); count++) {
+				Node tempNode = list.item(count);
+				if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
+					if (tempNode.hasAttributes()) {
+						email=((Element) tempNode).getAttribute("Email");
+						pass=((Element) tempNode).getAttribute("Password").toCharArray();
+						break;
+					}
+				}
+			}
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	public void test() {
 		ChangeMail a = new ChangeMail(email);
+		char[] c= email.toCharArray();
+		newMail="teste"+email;
 		a.change(newMail, pass); 
 
 		try {

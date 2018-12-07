@@ -22,21 +22,49 @@ import BDA.ChangePass;
 public class ChangePass_change {
 
 	private char[] newPass, pass;
-	private String email;
+	private String email, passTeste;
 	
 
 	@Before
 	public void setUp() throws Exception {
-		// dados duma conta existente
-		email="diogo@iscte-iul.pt";
-		newPass="teste".toCharArray();
-		pass="test".toCharArray();
+		try {
+			File file = new File("config.xml");
+
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder;
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(file);
+			doc.getDocumentElement().normalize();
+
+			NodeList list = doc.getChildNodes().item(0).getChildNodes();
+			for (int count = 0; count < list.getLength(); count++) {
+				Node tempNode = list.item(count);
+				if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
+					if (tempNode.hasAttributes()) {
+						email=((Element) tempNode).getAttribute("Email");
+						pass=((Element) tempNode).getAttribute("Password").toCharArray();
+						break;
+					}
+				}
+			}
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	public void test() {
 		ChangePass a = new ChangePass(email);
-		a.change(newPass, pass); 
+		passTeste=new String(pass)+"test";
+		newPass=passTeste.toCharArray();
+		a.change(newPass, pass);
 
 		try {
 			File file = new File("config.xml");
@@ -57,18 +85,13 @@ public class ChangePass_change {
 				Node tempNode = list.item(count);
 				if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
 					if (tempNode.hasAttributes()) {
-						if (((Element) tempNode).getAttribute("Email").equals(email) && ((Element) tempNode).getAttribute("Password").equals(new String(newPass))){
+						if (((Element) tempNode).getAttribute("Email").equals(email) && ((Element) tempNode).getAttribute("Password").equals(passTeste)){
 							isSaved = true;
 						}
-
 					}
-
 				}
-
 			}
-
 			assertTrue(isSaved);
-
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
