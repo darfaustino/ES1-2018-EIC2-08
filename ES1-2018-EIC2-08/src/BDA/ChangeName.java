@@ -54,13 +54,29 @@ public class ChangeName {
 	}
 
 	/**
+	 * 
+	 * @return		Returns the JFrame
+	 */
+	public JFrame getLauncher() {
+		return launcher;
+	}
+
+	/**
+	 * 
+	 * @return		Returns the user email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
 	 * Launches and builds the change password window.
 	 * Initiates the frame components (JLabel,	JTextField, and JButton).
 	 * Adds an actionlistener to the button.
 	 * Puts everything in the correct positions.
 	 */
 
-	private void init() {
+	public void init() {
 		// SettingsJFrame
 		launcher = new JFrame("BOM DIA ACADEMIA!");
 		launcher.setResizable(false);
@@ -141,7 +157,7 @@ public class ChangeName {
 	 * 
 	 * @param name		The user new name.
 	 */
-	private void change(String name) {
+	public void change(String name) {
 		File file = new File("config.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
