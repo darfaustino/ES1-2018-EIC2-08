@@ -172,7 +172,7 @@ public class SignUp {
 		 * @return			true if is a duplicate or false otherwise.
 		 */
 		
-		private boolean duplicateMail(String email) {
+		public boolean duplicateMail(String email) {
 			boolean duplicate=false;
 			File file = new File("config.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

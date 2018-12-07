@@ -58,7 +58,7 @@ public class ChangeMail {
 	 * Puts everything in the correct positions.
 	 */
 
-	private void init() {
+	public void init() {
 		// SettingsJFrame
 		launcher = new JFrame("BOM DIA ACADEMIA!");
 		launcher.setResizable(false);
@@ -146,7 +146,7 @@ public class ChangeMail {
 	 * @param newMail		The user new email.
 	 * @param pass			The user password.
 	 */
-	private void change(String newMail, char[] pass){
+	public void change(String newMail, char[] pass){
 		File file = new File("config.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
@@ -188,5 +188,20 @@ public class ChangeMail {
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e1) {
 			e1.printStackTrace();
 		}		
+	}
+	/**
+	 * 
+	 * @return		Returns the JFrame
+	 */
+	public JFrame getLauncher() {
+		return launcher;
+	}
+
+	/**
+	 * 
+	 * @return		Returns the user email
+	 */
+	public String getEmail() {
+		return email;
 	}
 }
