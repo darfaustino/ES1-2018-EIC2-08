@@ -295,13 +295,45 @@ public class MainTimeline {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						JTextPane load = new JTextPane();
+						load.setEditable(false);
+						load.setOpaque(false);
+						load.setText("Loading...");
+						load.setPreferredSize(new Dimension(100, 50));
+						email.remove(scroll);
+						email.add(load);
+						launcher.revalidate();
+						launcher.repaint();
+
+						if (isMailOn) {
+							mail = Mail.LoginMail(username, password);
+						}
+						email.remove(load);
+						emails.setModel(mail);
+						email.add(scroll);
+						launcher.revalidate();
+						launcher.repaint();
+					}
+				}).start();
+
 				try {
-					tweets.setModel(twitterapp.getTimeline());
-					facePosts.setModel(face.getTimeLinePosts());
-					emails.setModel(Mail.LoginMail(username, password));
+
+					if (isTwitterOn && twitterapp != null) {
+						tweets.setModel(twitterapp.getTimeline());
+					}
+					if (isFaceOn && face != null) {
+						facePosts.setModel(face.getTimeLinePosts());
+					}
+
 				} catch (Exception e2) {
 
 				}
+
 			}
 		});
 		launcher.add(background);

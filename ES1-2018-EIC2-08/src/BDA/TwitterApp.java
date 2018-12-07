@@ -44,7 +44,9 @@ public final class TwitterApp {
 	/**
 	 * Represents the twitter.
 	 */
-	public static Twitter twitter;
+	public Twitter twitter;
+	public static Twitter stwitter;
+	private TwitterFactory tf;
 	/**
 	 * Represents all posts in this page.
 	 */
@@ -69,8 +71,9 @@ public final class TwitterApp {
 			cb.setDebugEnabled(true).setOAuthConsumerKey(AuthConsumerKey).setOAuthConsumerSecret(AuthConsumerSecret)
 					.setOAuthAccessToken(AuthAccessToken).setOAuthAccessTokenSecret(AuthAccessTokenSecret);
 
-			TwitterFactory tf = new TwitterFactory(cb.build());
+			 tf = new TwitterFactory(cb.build());
 			twitter = tf.getInstance();
+			stwitter= tf.getInstance();
 			tweets = new DefaultListModel<T>();
 			BackupTweets();
 
@@ -87,6 +90,8 @@ public final class TwitterApp {
 	 * @return a list of tweets
 	 */
 	public DefaultListModel<T> getTimeline() throws TwitterException {
+		tweets.clear();
+		twitter=tf.getInstance();
 		List<Status> statuses = twitter.getHomeTimeline();
 		for (Status status : statuses) {
 			T x = new T(status.getUser().getName(), status.getText(), status.getCreatedAt());
@@ -148,7 +153,7 @@ public final class TwitterApp {
 
 		try {
 			ArrayList<T> list1 = new ArrayList<T>();
-			List<Status> statuses = twitter.getHomeTimeline();
+			List<Status> statuses = stwitter.getHomeTimeline();
 			for (Status status : statuses) {
 				T x = new T(status.getUser().getName(), status.getText(), status.getCreatedAt());
 				list1.add(x);
