@@ -6,6 +6,6 @@ GONÇALO DUARTE -77882
 DIOGO FAUSTINO - 77823 
 
 
-https://www.youtube.com/0kGyokKvUng -- VIDEO DEMONSTRAÇÃO
+https://www.youtube.com/watch?v=0kGyokKvUng -- VIDEO DEMONSTRAÇÃO
 
 
