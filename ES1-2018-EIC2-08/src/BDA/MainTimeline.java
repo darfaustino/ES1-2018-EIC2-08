@@ -143,6 +143,8 @@ public class MainTimeline {
 		});
 
 		JMenu menu2 = new JMenu("My Account");
+		menu2.setBackground(Color.BLACK);
+		menu2.setForeground(Color.white);
 		menuBar.add(menu2);
 
 		JMenuItem changeN = new JMenuItem("Change Username");
