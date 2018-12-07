@@ -87,10 +87,16 @@ public class MainTimeline {
 
 		// Menu
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(Color.BLACK);
+		menuBar.setLayout(new FlowLayout());
 		launcher.setJMenuBar(menuBar);
 
 		JMenu mnNewMenu = new JMenu("Filters");
 		menuBar.add(mnNewMenu);
+		mnNewMenu.setBackground(Color.black);
+		mnNewMenu.setForeground(Color.WHITE);
+		
+		
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("User Filter");
 		mnNewMenu.add(mntmNewMenuItem);
@@ -117,6 +123,8 @@ public class MainTimeline {
 		});
 
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Clean Filters");
+		mntmNewMenuItem_3.setBackground(Color.BLACK);
+		mntmNewMenuItem_3.setForeground(Color.white);
 		menuBar.add(mntmNewMenuItem_3);
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -198,6 +206,7 @@ public class MainTimeline {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				menuBar.setEnabled(false);
 				JTextPane load = new JTextPane();
 				load.setEditable(false);
 				load.setOpaque(false);
@@ -205,14 +214,12 @@ public class MainTimeline {
 				load.setPreferredSize(new Dimension(100, 50));
 				email.add(load);
 
-				System.out.println(isMailOn);
 				if (isMailOn) {
-
 					mail = Mail.LoginMail(username, password);
 				} else {
 					mail = Mail.FetchFromBackup();
 				}
-
+				menuBar.setEnabled(true);
 				email.remove(load);
 				emails.setModel(mail);
 				email.add(scroll);
@@ -291,6 +298,9 @@ public class MainTimeline {
 		twitter.add(scroll3);
 
 		JMenuItem button = new JMenuItem("Atualizar");
+		button.setBackground(Color.BLACK);
+		button.setForeground(Color.WHITE);
+		button.setPreferredSize(new Dimension(70,20));
 		menuBar.add(button);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

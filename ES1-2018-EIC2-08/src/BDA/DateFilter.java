@@ -2,6 +2,8 @@ package BDA;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.Calendar;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -74,26 +76,30 @@ public class DateFilter extends JFrame {
 		DefaultListModel<Email> e = new DefaultListModel<>();
 		DefaultListModel<FacePost> f = new DefaultListModel<>();
 		DefaultListModel<T> t = new DefaultListModel<>();
+		Calendar calendar = Calendar.getInstance();
+		calendar.clear();
+		calendar.set(year, month-1, day);
+		Date filter=calendar.getTime();
+		long time=filter.getTime()/(1000 * 60 * 60 * 24);
 
 		for (int i = 0; i < tweets.getModel().getSize(); i++) {
-			if (tweets.getModel().getElementAt(i).getDate().getDay() == day
-					&& tweets.getModel().getElementAt(i).getDate().getMonth() == month-1
-					&& tweets.getModel().getElementAt(i).getDate().getYear() == year-1900) {
+			
+			long date=tweets.getModel().getElementAt(i).getDate().getTime()/(1000 * 60 * 60 * 24);
+		
+			if (time==date) {
 				t.addElement(tweets.getModel().getElementAt(i));
 			}
 		}
 		for (int j = 0; j < emails.getModel().getSize(); j++) {
-			if (emails.getModel().getElementAt(j).getTimestamp().getDay() == day
-					&& emails.getModel().getElementAt(j).getTimestamp().getMonth() == month-1
-					&& emails.getModel().getElementAt(j).getTimestamp().getYear() == year-1900) {
+			long date=emails.getModel().getElementAt(j).getTimestamp().getTime()/(1000 * 60 * 60 * 24);
+			if (time==date) {
 				e.addElement(emails.getModel().getElementAt(j));
 			}
 		}
 
 		for (int k = 0; k < facePosts.getModel().getSize(); k++) {
-			if (facePosts.getModel().getElementAt(k).getDate().getDay()==day
-					&& facePosts.getModel().getElementAt(k).getDate().getMonth()==month-1
-					&& facePosts.getModel().getElementAt(k).getDate().getYear()==year-1900) {
+			long date=facePosts.getModel().getElementAt(k).getDate().getTime()/(1000 * 60 * 60 * 24);
+			if (time==date) {
 				f.addElement(facePosts.getModel().getElementAt(k));
 			}
 		}
@@ -101,6 +107,7 @@ public class DateFilter extends JFrame {
 		emails.setModel(e);
 		facePosts.setModel(f);
 		tweets.setModel(t);
+		this.dispose();
 	}
 
 }

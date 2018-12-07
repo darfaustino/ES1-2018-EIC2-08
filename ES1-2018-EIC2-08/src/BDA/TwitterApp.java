@@ -33,6 +33,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import twitter4j.Paging;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -91,11 +92,15 @@ public final class TwitterApp {
 	 */
 	public DefaultListModel<T> getTimeline() throws TwitterException {
 		tweets.clear();
+		Paging paging = new Paging();
+		paging.setCount(200);
 		twitter=tf.getInstance();
-		List<Status> statuses = twitter.getHomeTimeline();
+		List<Status> statuses = twitter.getHomeTimeline(paging);
 		for (Status status : statuses) {
-			T x = new T(status.getUser().getName(), status.getText(), status.getCreatedAt());
+			if(status.getUser().getScreenName()!=""){
+			T x = new T(status.getUser().getScreenName(), status.getText(), status.getCreatedAt());
 			tweets.addElement(x);
+			}
 		}
 
 		return tweets;

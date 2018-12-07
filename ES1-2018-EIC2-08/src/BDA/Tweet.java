@@ -61,6 +61,46 @@ public class Tweet {
 		background.setPreferredSize(new Dimension(800,600));
 
 		GridBagConstraints c=new GridBagConstraints();
+		c.gridx=0;
+		c.gridy=0;
+		c.gridheight=2;
+		c.insets=new Insets(80, 0, 0, 0);
+		
+		JPanel text=new JPanel(new GridBagLayout());
+		text.setPreferredSize(new Dimension(730,380));
+		text.setOpaque(false);
+		background.add(text, c);
+		
+		GridBagConstraints g=new GridBagConstraints();
+		g.gridx=0;
+		g.gridy=0;
+		g.gridwidth=3;
+		JTextPane info=new JTextPane();
+		info.setOpaque(false);
+		info.setPreferredSize(new Dimension(720,100));
+		info.setEditable(false);
+		info.setContentType("text/html");
+		info.setText("From: "+ t.getName()+ "<br/>Date:"+t.getDate().toString());
+		text.add(info, g);
+		
+		JTextPane area=new JTextPane();
+		
+		area.setContentType("text/html");
+		area.setEditable(false);
+		area.setPreferredSize(new Dimension(720,200));
+		
+		area.setText("<html>"+ t.getText());
+		
+		JScrollPane scroll =new JScrollPane(area);
+		scroll.setPreferredSize(new Dimension(720,200));
+		g.gridy=1;
+		g.gridx=0;
+		g.gridheight=2;
+		text.add(scroll, g);
+		
+		text.add(scroll,g);
+	
+		background.add(text,c);
 		
 		JLabel r=new JLabel(new ImageIcon("images/btnret.png"));
 		r.setPreferredSize(new Dimension(300,70));
@@ -107,24 +147,6 @@ public class Tweet {
 				
 			}
 		});
-		
-		JPanel tweet= new JPanel();
-		tweet.setPreferredSize(new Dimension(730,380));
-	 	c.gridx=0;
-	 	c.gridy=0;
-	 	c.gridheight=2;
-	 	c.insets=new Insets(80, 0,0,0);
-		tweet.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNewLabel = new JLabel(t.getName());
-		tweet.add(lblNewLabel, BorderLayout.NORTH);
-		
-		JTextArea text = new JTextArea();
-		text.append(t.getText());
-		text.setEditable(false);
-		tweet.add(text, BorderLayout.CENTER);
-	
-		background.add(tweet,c);
 
 		launcher.add(background);
 		launcher.setSize(800, 600);
