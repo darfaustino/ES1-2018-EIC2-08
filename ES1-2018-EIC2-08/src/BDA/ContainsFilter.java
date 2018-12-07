@@ -27,6 +27,9 @@ public class ContainsFilter extends JFrame {
 	
 	/**
 	 * Create the frame.
+	 * @param tweets 
+	 * @param emails 
+	 * @param facePosts 
 	 */
 	public ContainsFilter(JList<FacePost> facePosts, JList<Email> emails, JList<T> tweets) {
 		this.facePosts=facePosts;

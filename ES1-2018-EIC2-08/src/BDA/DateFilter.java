@@ -28,6 +28,9 @@ public class DateFilter extends JFrame {
 	
 	/**
 	 * Create the frame.
+	 * @param tweets 
+	 * @param emails 
+	 * @param facePosts 
 	 */
 	public DateFilter(JList<FacePost> facePosts, JList<Email> emails, JList<T> tweets) {
 		this.facePosts=facePosts;

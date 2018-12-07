@@ -1,5 +1,6 @@
 package BDA;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -82,6 +83,8 @@ public class UserFilter extends JFrame {
 		facePosts.setModel(f);
 		tweets.setModel(t);
 	}
+
+	
 
 }
 
